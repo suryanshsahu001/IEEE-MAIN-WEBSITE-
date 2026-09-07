@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Scoutie+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Scoutie Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Scoutie Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-tan-50: #fdf3f4;
+  --color-tan-100: #fbe5e8;
+  --color-tan-200: #f5c9ce;
+  --color-tan-300: #ec9fa9;
+  --color-tan-400: #df6c7d;
+  --color-tan-500: #c73d52;
+  --color-tan-600: #a51c30;
+  --color-tan-700: #8a1728;
+  --color-tan-800: #6d1220;
+  --color-tan-900: #4a0c15;
+
+  --animate-fadeIn: fadeIn 0.25s ease-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
