@@ -230,7 +230,7 @@ export const team = [
     role: "PRESIDENT",
     designation: "President - IEEE ADYPU Student Branch",
     domain: "Executive Leadership",
-    photo: "/members/new_swap.jpeg",
+    photo: "/members/swapnil_final.png",
     bio: "Leading overall vision, strategic initiatives, industrial collaborations, and branch governance.",
     socials: {
       email: "mailto:SWAPNIL.PATIL@ADYPU.EDU.IN",
@@ -258,7 +258,7 @@ export const team = [
     role: "SECRETARY",
     designation: "Secretary - IEEE ADYPU Student Branch",
     domain: "Executive Leadership",
-    photo: "/members/jd.png",
+    photo: "/members/jaideep_final.png",
     bio: "Overseeing branch documentation, official communications, events schedule, and IEEE reporting.",
     socials: {
       email: "mailto:JAIDEEP.KAMBLE@ADYPU.EDU.IN",

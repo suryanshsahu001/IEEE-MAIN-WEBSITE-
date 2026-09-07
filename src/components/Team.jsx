@@ -20,11 +20,16 @@ export default function Team() {
               key={member.id}
               className="group overflow-hidden border border-zinc-200 bg-zinc-50"
             >
-              <div className="relative overflow-hidden aspect-square bg-zinc-100">
+              <div className="relative overflow-hidden aspect-[4/5] bg-white">
                 <img
                   src={member.photo}
                   alt={member.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-center"
+                  style={
+                    member.id === "cm-1"
+                      ? { transform: "scale(1.35) translateY(18%)" }
+                      : {}
+                  }
                   loading="lazy"
                 />
               </div>
