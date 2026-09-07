@@ -23,9 +23,7 @@ export default function Footer() {
                 </div>
               </div>
             </a>
-            <p className="text-xs text-zinc-400 max-w-sm leading-relaxed mb-6">
-              {siteConfig.tagline}
-            </p>
+
             <div className="flex items-center gap-3">
               <a
                 href={siteConfig.socials.linkedin}
