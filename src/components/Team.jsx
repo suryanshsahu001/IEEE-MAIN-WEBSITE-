@@ -10,7 +10,7 @@ export default function Team() {
       <section className="bg-zinc-50 font-sans py-14 border-t border-zinc-100">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           {/* Header row */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <div className="flex items-center gap-4 mb-3">
                 <div className="h-0.5 w-10" style={{ background: "#A51C30" }} />
@@ -27,7 +27,7 @@ export default function Team() {
             <button
               onClick={() => setMentorsOpen((prev) => !prev)}
               aria-expanded={mentorsOpen}
-              className="flex items-center gap-2 px-5 py-3 border-2 font-mono font-bold text-xs tracking-[0.15em] uppercase transition-all duration-200"
+              className="flex items-center gap-2 px-5 py-3 border-2 font-mono font-bold text-xs tracking-[0.15em] uppercase transition-all duration-200 self-start sm:self-auto"
               style={{
                 borderColor: "#A51C30",
                 color: mentorsOpen ? "#fff" : "#A51C30",
@@ -58,33 +58,35 @@ export default function Team() {
           {/* Collapsible mentor cards */}
           <div
             style={{
-              maxHeight: mentorsOpen ? "600px" : "0px",
+              maxHeight: mentorsOpen ? "1200px" : "0px",
               overflow: "hidden",
-              transition: "max-height 0.5s cubic-bezier(0.4,0,0.2,1)",
+              transition: "max-height 0.6s cubic-bezier(0.4,0,0.2,1)",
             }}
           >
-            <div className="grid sm:grid-cols-2 gap-6 mt-10 max-w-2xl">
+            <div className="grid grid-cols-2 gap-4 sm:gap-6 mt-10 max-w-2xl">
               {mentors.map((mentor) => (
                 <div
                   key={mentor.id}
                   className="group overflow-hidden border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-300"
                 >
-                  <div className="relative overflow-hidden aspect-[4/5] bg-zinc-100">
+                  <div className="relative overflow-hidden bg-zinc-100" style={{ aspectRatio: "3/4" }}>
                     <img
                       src={mentor.photo}
                       alt={mentor.name}
-                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
+                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                      loading="eager"
+                      decoding="async"
+                      style={{ display: "block", width: "100%", height: "100%" }}
                     />
                   </div>
-                  <div className="p-5 border-t-2" style={{ borderColor: "#A51C30" }}>
+                  <div className="p-3 sm:p-5 border-t-2" style={{ borderColor: "#A51C30" }}>
                     <div
-                      className="text-[11px] font-mono font-bold tracking-[0.18em] uppercase mb-1"
+                      className="text-[9px] sm:text-[11px] font-mono font-bold tracking-[0.15em] uppercase mb-1"
                       style={{ color: "#A51C30" }}
                     >
                       Faculty Mentor
                     </div>
-                    <h3 className="text-base font-extrabold text-zinc-900 uppercase tracking-wide">
+                    <h3 className="text-xs sm:text-base font-extrabold text-zinc-900 uppercase tracking-wide leading-tight">
                       {mentor.name}
                     </h3>
                   </div>
