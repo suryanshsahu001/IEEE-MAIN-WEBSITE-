@@ -294,32 +294,17 @@ export const team = [
         "https://www.linkedin.com/in/adypu-ieee-student-branch-120373238/",
     },
   },
+];
+
+export const mentors = [
   {
-    id: "cm-6",
-    name: "Prathamesh Sakhare",
-    role: "YP President",
-    designation: "YP President - Young Professionals ADYPU",
-    domain: "Young Professionals",
-    photo: "/members/pm.jpeg",
-    bio: "Leading the Young Professionals affinity group, alumni networks, and industry transition mentorship.",
-    socials: {
-      email: "mailto:ieee@adypu.edu.in",
-      linkedin:
-        "https://www.linkedin.com/in/adypu-ieee-student-branch-120373238/",
-    },
+    id: "mentor-1",
+    name: "DR. RANJIT KUMAR",
+    photo: "/members/ranjit_sir.jpeg",
   },
   {
-    id: "cm-7",
-    name: "Aryan Vaidya",
-    role: "YP Vice President",
-    designation: "YP Vice President - Young Professionals ADYPU",
-    domain: "Young Professionals",
-    photo: "/members/aryan.png",
-    bio: "Co-leading Young Professionals events, networking meets, and career acceleration webinars.",
-    socials: {
-      email: "mailto:ieee@adypu.edu.in",
-      linkedin:
-        "https://www.linkedin.com/in/adypu-ieee-student-branch-120373238/",
-    },
+    id: "mentor-2",
+    name: "DR. VISHAL SHIRSATH",
+    photo: "/members/vishal_shirsath.jpeg",
   },
 ];
