@@ -15,10 +15,10 @@ export const siteConfig = {
   joinEmail: "ieee@adypu.edu.in",
   recapVideoUrl: "/videos/intro-video.mp4",
   stats: [
-    { label: "Active Members", value: "480+" },
-    { label: "Workshops & Events", value: "65+" },
-    { label: "National IEEE Awards", value: "12" },
-    { label: "Specialty Chapters", value: "5" },
+    { label: "Active Members", value: "50+" },
+    { label: "Workshops & Events", value: "10+" },
+    { label: "National IEEE Awards", value: "20+" },
+    { label: "Conferences", value: "2" },
   ],
   socials: {
     linkedin:
