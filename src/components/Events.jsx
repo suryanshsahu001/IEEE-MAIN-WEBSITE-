@@ -79,12 +79,15 @@ export default function Events() {
                       </div>
                     </div>
                     {event.registrationOpen && (
-                      <span
-                        className="inline-flex items-center gap-1 text-xs font-mono font-bold tracking-widest uppercase whitespace-nowrap"
+                      <a
+                        href="https://docs.google.com/forms/d/e/1FAIpQLScLbWDK-yv6k8avB69VknoTwUq7y2hUxL5unjteCaASlu4aMw/viewform"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-mono font-bold tracking-widest uppercase whitespace-nowrap hover:underline"
                         style={{ color: "#A51C30" }}
                       >
                         Register <ArrowUpRight className="w-3.5 h-3.5" />
-                      </span>
+                      </a>
                     )}
                   </div>
                 </div>

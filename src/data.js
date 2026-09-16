@@ -18,7 +18,7 @@ export const siteConfig = {
     { label: "Active Members", value: "50+" },
     { label: "Workshops & Events", value: "10+" },
     { label: "National IEEE Awards", value: "20+" },
-    { label: "Conferences", value: "2" },
+    { label: "Conferences", value: "3" },
   ],
   socials: {
     linkedin:

@@ -42,7 +42,13 @@ export default function VideoModal({ video, onClose }) {
           >
             <source
               src={url}
-              type={url.endsWith(".webm") ? "video/webm" : "video/mp4"}
+              type={
+                url.endsWith(".webm")
+                  ? "video/webm"
+                  : url.endsWith(".mov")
+                  ? "video/mp4"
+                  : "video/mp4"
+              }
             />
             Your browser does not support video playback.
           </video>

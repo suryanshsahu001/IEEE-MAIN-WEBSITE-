@@ -10,6 +10,7 @@ import Team from "./components/Team.jsx";
 import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
 import VideoModal from "./components/VideoModal.jsx";
+import RegistrationPopup from "./components/RegistrationPopup.jsx";
 
 export default function App() {
   const [video, setVideo] = useState(null);
@@ -31,6 +32,7 @@ export default function App() {
       </main>
       <Footer />
       <VideoModal video={video} onClose={() => setVideo(null)} />
+      <RegistrationPopup />
     </div>
   );
 }
