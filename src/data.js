@@ -107,8 +107,7 @@ export const events = [
     description:
       "Celebrate IEEE Day 2026 — a global celebration of the day IEEE members first united to advance technology for humanity. Join us for talks, networking, and recognition of outstanding members.",
     tags: ["IEEE Day", "Networking", "Celebration"],
-    registrationOpen: true,
-    capacity: "200 Attendees",
+    registrationOpen: false,
   },
 ];
 

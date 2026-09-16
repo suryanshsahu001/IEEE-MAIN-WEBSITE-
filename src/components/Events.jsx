@@ -1,4 +1,4 @@
-import { Calendar, MapPin, Users, ArrowUpRight } from "lucide-react";
+import { Calendar, Users, ArrowUpRight } from "lucide-react";
 import { events } from "../data.js";
 
 const statusStyles = {
@@ -55,14 +55,12 @@ export default function Events() {
                       <Calendar className="w-4 h-4 shrink-0" style={{ color: "#A51C30" }} />
                       <span>{event.date}</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 shrink-0" style={{ color: "#A51C30" }} />
-                      <span>{event.venue}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4 shrink-0" style={{ color: "#A51C30" }} />
-                      <span>{event.capacity}</span>
-                    </div>
+                    {event.capacity && (
+                      <div className="flex items-center gap-2">
+                        <Users className="w-4 h-4 shrink-0" style={{ color: "#A51C30" }} />
+                        <span>{event.capacity}</span>
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex items-center justify-between gap-4 mt-auto">
