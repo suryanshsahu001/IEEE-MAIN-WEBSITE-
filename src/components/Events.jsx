@@ -1,4 +1,4 @@
-import { Calendar, Clock, MapPin, Users, ArrowUpRight } from "lucide-react";
+import { Calendar, MapPin, Users, ArrowUpRight } from "lucide-react";
 import { events } from "../data.js";
 
 const statusStyles = {
@@ -54,10 +54,6 @@ export default function Events() {
                     <div className="flex items-center gap-2">
                       <Calendar className="w-4 h-4 shrink-0" style={{ color: "#A51C30" }} />
                       <span>{event.date}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 shrink-0" style={{ color: "#A51C30" }} />
-                      <span>{event.time}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <MapPin className="w-4 h-4 shrink-0" style={{ color: "#A51C30" }} />
