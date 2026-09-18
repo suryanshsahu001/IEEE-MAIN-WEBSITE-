@@ -54,10 +54,6 @@ export default function Highlights({ onOpenVideo }) {
             <p className="text-zinc-400 text-sm leading-relaxed mb-8">
               Get ready to innovate! The Tech4Life Hackathon is approaching fast. Join us to build solutions that improve daily life using cutting-edge technology.
             </p>
-            
-            <button className="text-white font-bold py-3.5 px-6 rounded-full flex items-center gap-2 text-sm transition-all hover:bg-opacity-90" style={{ backgroundColor: '#A51C30', boxShadow: '0 0 20px rgba(165, 28, 48, 0.3)' }}>
-              View Event <ArrowRight className="w-4 h-4" />
-            </button>
           </div>
 
           {/* Middle Column: Large Video */}
