@@ -9,13 +9,15 @@ export default function Notification() {
     let hideTimer;
 
     const cycle = () => {
+      // Wait 30 seconds, then show
       showTimer = setTimeout(() => {
         setIsVisible(true);
+        // Stay visible for 3 seconds, then hide and repeat
         hideTimer = setTimeout(() => {
           setIsVisible(false);
           cycle();
-        }, 5000);
-      }, 3000); // TESTING: reduced to 3s (normally 30s)
+        }, 3000);
+      }, 30000);
     };
 
     cycle();
@@ -43,7 +45,7 @@ export default function Notification() {
             ⚡ IEEE Day Is Coming Soon!
           </p>
           <p className="text-[10px] text-zinc-400 leading-snug mb-1">
-            Exciting celebration of technology & community.
+            Exciting celebration of technology &amp; community.
           </p>
           <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: '#A51C30' }}>
             Stay Tuned!

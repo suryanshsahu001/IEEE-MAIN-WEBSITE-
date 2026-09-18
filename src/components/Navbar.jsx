@@ -141,7 +141,9 @@ export default function Navbar({ onOpenChapters }) {
       {/* Mobile drawer */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-t border-zinc-200 animate-fadeIn">
-          <div className="max-w-7xl mx-auto px-6 py-4 space-y-0">
+          <div className="max-w-7xl mx-auto px-6 py-4">
+
+            {/* Regular nav links */}
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -153,9 +155,9 @@ export default function Navbar({ onOpenChapters }) {
                 <span style={{ color: '#A51C30' }}>→</span>
               </a>
             ))}
-          {/* Mobile More Options */}
-          <div className="border-t border-zinc-200 mt-1 pt-1">
-            <p className="text-[9px] font-mono font-bold tracking-[0.2em] text-zinc-400 uppercase px-0 py-2">More</p>
+
+            {/* MORE section */}
+            <p className="text-[9px] font-mono font-bold tracking-[0.2em] text-zinc-400 uppercase pt-4 pb-1">More</p>
             <a
               href="https://forms.gle/JSebyPxB8KsE5btm7"
               target="_blank"
@@ -176,6 +178,7 @@ export default function Navbar({ onOpenChapters }) {
               CHAPTERS &amp; SOCIETIES
               <span style={{ color: '#A51C30' }}>→</span>
             </button>
+
           </div>
         </div>
       )}
