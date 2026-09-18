@@ -4,6 +4,15 @@ import { Play, Calendar, Star, ArrowRight } from 'lucide-react';
 export default function Highlights({ onOpenVideo }) {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 1023px)');
+    setIsMobile(mq.matches);
+    const handler = (e) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -74,7 +83,7 @@ export default function Highlights({ onOpenVideo }) {
               className="relative aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden group cursor-pointer border border-white/10 shadow-2xl"
               onClick={() => onOpenVideo && onOpenVideo('/gallery/highlights-main.mp4', 'Tech4Life Hackathon')}
             >
-              {isVisible && (
+              {isVisible && !isMobile ? (
                 <video 
                   src="/gallery/highlights-main.mp4" 
                   autoPlay 
@@ -84,6 +93,15 @@ export default function Highlights({ onOpenVideo }) {
                   preload="none"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-zinc-800 via-zinc-900 to-black flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="w-16 h-16 mx-auto mb-3 rounded-full border-2 border-white/20 flex items-center justify-center" style={{ backgroundColor: 'rgba(165, 28, 48, 0.4)' }}>
+                      <Play className="w-7 h-7 fill-white text-white ml-0.5" />
+                    </div>
+                    <p className="text-white/60 text-xs font-mono font-bold tracking-widest uppercase">Tap to Watch</p>
+                  </div>
+                </div>
               )}
               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors pointer-events-none" />
               <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-2 text-white/90 text-xs font-mono font-bold">
