@@ -15,7 +15,7 @@ export default function Notification() {
           setIsVisible(false);
           cycle();
         }, 5000);
-      }, 30000);
+      }, 3000); // TESTING: reduced to 3s (normally 30s)
     };
 
     cycle();

@@ -153,6 +153,29 @@ export default function Navbar({ onOpenChapters }) {
                 <span style={{ color: '#A51C30' }}>→</span>
               </a>
             ))}
+          {/* Mobile More Options */}
+          <div className="border-t border-zinc-200 mt-1 pt-1">
+            <p className="text-[9px] font-mono font-bold tracking-[0.2em] text-zinc-400 uppercase px-0 py-2">More</p>
+            <a
+              href="https://forms.gle/JSebyPxB8KsE5btm7"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center justify-between py-3 border-b border-zinc-100 text-[11px] font-mono font-bold tracking-[0.18em] text-zinc-600 hover:text-zinc-900 transition-colors"
+            >
+              EXPLORE MEMBERSHIP
+              <span style={{ color: '#A51C30' }}>→</span>
+            </a>
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                if (onOpenChapters) onOpenChapters();
+              }}
+              className="w-full flex items-center justify-between py-3 border-b border-zinc-100 text-[11px] font-mono font-bold tracking-[0.18em] text-zinc-600 hover:text-zinc-900 transition-colors"
+            >
+              CHAPTERS &amp; SOCIETIES
+              <span style={{ color: '#A51C30' }}>→</span>
+            </button>
           </div>
         </div>
       )}
