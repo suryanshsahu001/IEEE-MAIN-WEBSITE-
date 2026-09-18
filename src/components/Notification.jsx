@@ -29,18 +29,18 @@ export default function Notification() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed top-24 right-6 z-[100] w-80 bg-zinc-900 border-l-4 shadow-2xl p-5 flex items-start gap-4 animate-fadeIn" style={{ borderColor: '#A51C30' }}>
+    <div className="fixed top-20 right-3 sm:top-24 sm:right-6 z-[100] w-64 sm:w-80 bg-zinc-900 border-l-4 shadow-2xl p-3 sm:p-5 flex items-start gap-3 sm:gap-4 animate-fadeIn" style={{ borderColor: '#A51C30' }}>
       <div className="flex-shrink-0 mt-0.5">
-        <Zap className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+        <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-yellow-400" />
       </div>
       <div className="flex-1">
-        <h4 className="text-sm font-extrabold text-white tracking-wide uppercase mb-1">
+        <h4 className="text-xs sm:text-sm font-extrabold text-white tracking-wide uppercase mb-1">
           IEEE Day Is Coming Soon!
         </h4>
-        <p className="text-xs text-zinc-300 leading-relaxed mb-2">
-          Get ready for an exciting celebration of technology, innovation & community.
+        <p className="text-[10px] sm:text-xs text-zinc-300 leading-relaxed mb-1 sm:mb-2">
+          Get ready for an exciting celebration of technology, innovation &amp; community.
         </p>
-        <span className="text-[10px] font-mono font-bold tracking-widest uppercase" style={{ color: '#A51C30' }}>
+        <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-widest uppercase" style={{ color: '#A51C30' }}>
           Stay Tuned!
         </span>
       </div>
@@ -48,7 +48,7 @@ export default function Notification() {
         onClick={() => setIsVisible(false)}
         className="flex-shrink-0 text-zinc-500 hover:text-white transition-colors"
       >
-        <X className="w-4 h-4" />
+        <X className="w-3 h-3 sm:w-4 sm:h-4" />
       </button>
     </div>
   );
