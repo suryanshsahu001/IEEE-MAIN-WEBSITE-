@@ -210,7 +210,7 @@ export const gallery = [
     id: "gal-7",
     title: "ICICS 2026",
     category: "Events",
-    url: "/gallery/conference.jpg",
+    url: "/gallery/icics-cover.jpg",
     video: "/gallery/icics-2026.mp4",
     date: "2026",
     description: "Capturing Campus Moments at ICICS 2026.",
@@ -250,6 +250,14 @@ export const extraMoments = [
     url: "/gallery/moments-4.jpg",
     date: "2026",
     description: "Candid shots capturing the team in action.",
+  },
+  {
+    id: "em-5",
+    title: "IEEE EU-REKA 2026",
+    category: "Achievement",
+    url: "/gallery/eu-reka-2026.jpg",
+    date: "2026",
+    description: "A moment of immense pride for Ajeenkya DY Patil University.",
   },
 ];
 

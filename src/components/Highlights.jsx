@@ -98,15 +98,35 @@ export default function Highlights({ onOpenVideo }) {
           {/* Right Column: Video Grid */}
           <div className="lg:col-span-3 flex flex-row lg:flex-col gap-4 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 order-3 snap-x">
             {[
-              { id: 1, duration: '0:32' },
+              { id: 1, duration: '0:32', videoUrl: '/gallery/video-1.mp4' },
               { id: 2, duration: '0:28' },
               { id: 3, duration: '0:41' }
             ].map((vid) => (
-              <div key={vid.id} className="relative aspect-video lg:aspect-[16/9] w-64 lg:w-full flex-shrink-0 rounded-xl overflow-hidden group cursor-pointer border border-white/10 snap-start">
-                <div className="absolute inset-0 bg-zinc-800 flex items-center justify-center text-zinc-600 font-mono text-xs">
-                  VIDEO {vid.id}
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+              <div 
+                key={vid.id} 
+                className="relative aspect-video lg:aspect-[16/9] w-64 lg:w-full flex-shrink-0 rounded-xl overflow-hidden group cursor-pointer border border-white/10 snap-start"
+                onClick={() => {
+                  if (vid.videoUrl && onOpenVideo) {
+                    onOpenVideo(vid.videoUrl, 'Discover What’s Next - Video ' + vid.id);
+                  }
+                }}
+              >
+                {vid.videoUrl ? (
+                  <video 
+                    src={vid.videoUrl} 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-zinc-800 flex items-center justify-center text-zinc-600 font-mono text-xs transition-transform duration-700 group-hover:scale-105">
+                    VIDEO {vid.id}
+                  </div>
+                )}
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                 <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1.5 text-white/90 text-[10px] font-mono font-bold transition-colors group-hover:bg-[#A51C30]">
                   <Play className="w-3 h-3 fill-white" /> {vid.duration}
                 </div>
