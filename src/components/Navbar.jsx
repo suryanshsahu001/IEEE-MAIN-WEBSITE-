@@ -140,7 +140,7 @@ export default function Navbar({ onOpenChapters }) {
 
       {/* Mobile drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-zinc-200 animate-fadeIn">
+        <div className="lg:hidden bg-white border-t border-zinc-200 animate-fadeIn overflow-y-auto" style={{ maxHeight: 'calc(100vh - 4rem)' }}>
           <div className="max-w-7xl mx-auto px-6 py-4">
 
             {/* Regular nav links */}
