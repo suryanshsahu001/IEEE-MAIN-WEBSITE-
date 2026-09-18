@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Play, Calendar, Star, ArrowRight } from 'lucide-react';
 
 export default function Highlights({ onOpenVideo }) {
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+      { rootMargin: '200px' }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="bg-zinc-900 text-white font-sans py-24 border-t border-zinc-800 relative overflow-hidden">
+    <section ref={sectionRef} className="bg-zinc-900 text-white font-sans py-24 border-t border-zinc-800 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-800 to-zinc-900 z-0" />
       
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
@@ -62,14 +74,17 @@ export default function Highlights({ onOpenVideo }) {
               className="relative aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden group cursor-pointer border border-white/10 shadow-2xl"
               onClick={() => onOpenVideo && onOpenVideo('/gallery/highlights-main.mp4', 'Tech4Life Hackathon')}
             >
-              <video 
-                src="/gallery/highlights-main.mp4" 
-                autoPlay 
-                loop 
-                muted 
-                playsInline
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+              {isVisible && (
+                <video 
+                  src="/gallery/highlights-main.mp4" 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                  preload="none"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              )}
               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors pointer-events-none" />
               <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-2 text-white/90 text-xs font-mono font-bold">
                 <Play className="w-3 h-3 fill-white" /> 0:45
@@ -105,13 +120,14 @@ export default function Highlights({ onOpenVideo }) {
                   }
                 }}
               >
-                {vid.videoUrl ? (
+                {vid.videoUrl && isVisible ? (
                   <video 
                     src={vid.videoUrl} 
                     autoPlay 
                     loop 
                     muted 
                     playsInline
+                    preload="none"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 ) : (

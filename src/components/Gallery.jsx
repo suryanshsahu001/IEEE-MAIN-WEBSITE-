@@ -150,9 +150,12 @@ export default function Gallery({ onOpenVideo }) {
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                       {selectedEvent.report.photos.map((photo, i) => (
                         <div key={i} className="aspect-square bg-zinc-200 border border-zinc-300 relative overflow-hidden group">
-                          <div className="absolute inset-0 flex items-center justify-center text-xs font-mono font-bold text-zinc-400">
-                            PHOTO {i + 1}
-                          </div>
+                          <img
+                            src={photo}
+                            alt={`${selectedEvent.title} Photo ${i + 1}`}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            loading="lazy"
+                          />
                         </div>
                       ))}
                     </div>

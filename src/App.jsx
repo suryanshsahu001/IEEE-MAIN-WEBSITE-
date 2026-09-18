@@ -1,24 +1,26 @@
-import { useState } from "react";
+import { useState, useCallback, lazy, Suspense } from "react";
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
 import About from "./components/About.jsx";
-import Highlights from "./components/Highlights.jsx";
-import Chapters from "./components/Chapters.jsx";
-import Events from "./components/Events.jsx";
-import Gallery from "./components/Gallery.jsx";
-import ExtraMoments from "./components/ExtraMoments.jsx";
-import Team from "./components/Team.jsx";
-import Contact from "./components/Contact.jsx";
-import Footer from "./components/Footer.jsx";
-import VideoModal from "./components/VideoModal.jsx";
-import RegistrationPopup from "./components/RegistrationPopup.jsx";
 import Notification from "./components/Notification.jsx";
+
+// Lazy-load below-fold components
+const Highlights = lazy(() => import("./components/Highlights.jsx"));
+const Events = lazy(() => import("./components/Events.jsx"));
+const Gallery = lazy(() => import("./components/Gallery.jsx"));
+const ExtraMoments = lazy(() => import("./components/ExtraMoments.jsx"));
+const Team = lazy(() => import("./components/Team.jsx"));
+const Contact = lazy(() => import("./components/Contact.jsx"));
+const Footer = lazy(() => import("./components/Footer.jsx"));
+const VideoModal = lazy(() => import("./components/VideoModal.jsx"));
+const RegistrationPopup = lazy(() => import("./components/RegistrationPopup.jsx"));
+const Chapters = lazy(() => import("./components/Chapters.jsx"));
 
 export default function App() {
   const [video, setVideo] = useState(null);
   const [chaptersOpen, setChaptersOpen] = useState(false);
 
-  const openVideo = (url, title) => setVideo({ url, title });
+  const openVideo = useCallback((url, title) => setVideo({ url, title }), []);
 
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900 selection:bg-tan-500 selection:text-white font-sans relative">
@@ -27,19 +29,21 @@ export default function App() {
       <main>
         <Hero onOpenVideo={openVideo} />
         <About />
-        <Highlights onOpenVideo={openVideo} />
-        <Events />
-        <Gallery onOpenVideo={openVideo} />
-        <ExtraMoments onOpenVideo={openVideo} />
-        <Team />
-        <Contact />
+        <Suspense fallback={<div className="h-96" />}>
+          <Highlights onOpenVideo={openVideo} />
+          <Events />
+          <Gallery onOpenVideo={openVideo} />
+          <ExtraMoments onOpenVideo={openVideo} />
+          <Team />
+          <Contact />
+        </Suspense>
       </main>
-      <Footer />
-      
-      {/* Modals */}
-      <VideoModal video={video} onClose={() => setVideo(null)} />
-      <RegistrationPopup />
-      {chaptersOpen && <Chapters onClose={() => setChaptersOpen(false)} />}
+      <Suspense fallback={null}>
+        <Footer />
+        <VideoModal video={video} onClose={() => setVideo(null)} />
+        <RegistrationPopup />
+        {chaptersOpen && <Chapters onClose={() => setChaptersOpen(false)} />}
+      </Suspense>
     </div>
   );
 }
