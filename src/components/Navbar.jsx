@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
-export default function Navbar() {
+export default function Navbar({ onOpenChapters }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [moreMenuOpen, setMoreMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -76,6 +86,45 @@ export default function Navbar() {
                 />
               </a>
             ))}
+
+            {/* Small Dropdown for More Options */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setMoreMenuOpen(true)}
+              onMouseLeave={() => setMoreMenuOpen(false)}
+            >
+              <button
+                className="text-[11px] font-mono font-bold tracking-[0.18em] text-zinc-500 hover:text-zinc-900 transition-colors relative group py-1 flex items-center gap-1"
+              >
+                MORE
+                <span
+                  className="absolute bottom-0 left-0 right-0 h-0.5 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-200"
+                  style={{ background: '#A51C30' }}
+                />
+              </button>
+              
+              {moreMenuOpen && (
+                <div className="absolute top-full right-0 mt-0 w-56 bg-white border border-zinc-200 shadow-xl py-2 animate-fadeIn z-50">
+                  <a 
+                    href="https://forms.gle/JSebyPxB8KsE5btm7" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block px-4 py-2 text-[11px] font-mono font-bold tracking-[0.18em] text-zinc-600 hover:text-[#A51C30] hover:bg-zinc-50 transition-colors"
+                  >
+                    EXPLORE MEMBERSHIP
+                  </a>
+                  <button 
+                    onClick={() => {
+                      setMoreMenuOpen(false);
+                      if (onOpenChapters) onOpenChapters();
+                    }}
+                    className="w-full text-left block px-4 py-2 text-[11px] font-mono font-bold tracking-[0.18em] text-zinc-600 hover:text-[#A51C30] hover:bg-zinc-50 transition-colors"
+                  >
+                    CHAPTERS & SOCIETIES
+                  </button>
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* Mobile toggle */}

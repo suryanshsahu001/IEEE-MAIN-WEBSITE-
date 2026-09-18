@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { X } from "lucide-react";
 import { team, mentors } from "../data.js";
 
 export default function Team() {
   const [mentorsOpen, setMentorsOpen] = useState(false);
+  const [ourCommunityOpen, setOurCommunityOpen] = useState(false);
 
   return (
     <>
@@ -74,7 +76,7 @@ export default function Team() {
                       src={mentor.photo}
                       alt={mentor.name}
                       className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                      loading="eager"
+                      loading="lazy"
                       decoding="async"
                       style={{ display: "block", width: "100%", height: "100%" }}
                     />
@@ -144,8 +146,59 @@ export default function Team() {
               </div>
             ))}
           </div>
+          
+          {/* Our Community Button */}
+          <div className="mt-16 flex justify-center">
+            <button
+              onClick={() => setOurCommunityOpen(true)}
+              className="px-8 py-4 border-2 font-mono font-bold text-sm tracking-[0.15em] uppercase transition-all duration-200 hover:bg-zinc-900 hover:text-white hover:border-zinc-900"
+              style={{
+                borderColor: "#A51C30",
+                color: "#A51C30",
+              }}
+            >
+              Our Community
+            </button>
+          </div>
         </div>
       </section>
+
+      {/* Our Community Full Screen Modal */}
+      {ourCommunityOpen && (
+        <div className="fixed inset-0 z-[100] bg-white overflow-y-auto animate-fadeIn font-sans">
+          <div className="max-w-7xl mx-auto px-6 py-12">
+            <button
+              onClick={() => setOurCommunityOpen(false)}
+              className="mb-8 flex items-center gap-2 text-sm font-bold text-zinc-500 hover:text-zinc-900 transition-colors uppercase tracking-wider"
+            >
+              <X className="w-5 h-5" /> Back to Team
+            </button>
+            <div className="flex items-center gap-4 mb-3">
+              <div className="h-0.5 w-10" style={{ background: "#A51C30" }} />
+              <span className="text-xs font-mono font-bold tracking-[0.2em] uppercase text-zinc-500">
+                Community Members
+              </span>
+            </div>
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-zinc-900 mb-10 tracking-tight uppercase">
+              Our Community
+            </h1>
+            
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+              {[...Array(10)].map((_, i) => (
+                <div key={i} className="group overflow-hidden border border-zinc-200 bg-zinc-50 flex flex-col">
+                  <div className="aspect-[3/4] bg-zinc-200 flex items-center justify-center relative">
+                    <div className="text-xs font-mono font-bold text-zinc-400">PHOTO {i+1}</div>
+                  </div>
+                  <div className="p-4 text-center border-t border-zinc-200">
+                    <h3 className="text-sm font-bold text-zinc-900 uppercase">Community Member {i+1}</h3>
+                    <div className="text-[10px] font-mono tracking-widest uppercase text-zinc-500 mt-1">Volunteer</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

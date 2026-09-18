@@ -158,6 +158,23 @@ export const gallery = [
     date: "2025",
     description:
       "International Conference on Intelligent Computing and Information Systems 2025 hosted at ADYPU.",
+    report: {
+      introduction: "The School of Engineering, Ajeenkya DY Patil University (ADYPU), Pune successfully organized a Pre-Workshop on “AI Tools & Techniques for Research” on 9th and 10th September 2025 as part of the ICICIS 2025 Conference. The workshop aimed to introduce participants to the growing role of Artificial Intelligence in academic research and to provide hands-on exposure to modern AI-powered tools.",
+      objectives: [
+        "To introduce participants to AI-powered tools used in academic research",
+        "To provide hands-on exposure to modern AI technologies",
+        "To explore AI-based approaches for data analysis and predictive modelling",
+        "To promote innovation and interdisciplinary research practices among participants"
+      ],
+      speakers: "Dr. Preeti Muley conducted highly engaging and practical sessions focused on the application of Artificial Intelligence tools in research activities.",
+      impact: "The workshop witnessed active participation from more than 200 participants, including students, scholars, and faculty. It successfully achieved its objective of introducing participants to AI-driven research tools and techniques.",
+      photos: [
+        "/gallery/placeholder-1.jpg",
+        "/gallery/placeholder-2.jpg",
+        "/gallery/placeholder-3.jpg",
+        "/gallery/placeholder-4.jpg"
+      ]
+    }
   },
   {
     id: "gal-6",
@@ -167,6 +184,36 @@ export const gallery = [
     date: "2025",
     description:
       "AI for Health 2025 — exploring AI-driven solutions for healthcare challenges.",
+    report: {
+      introduction: "A Two-Day Practical Workshop on “AI for Health: Machine Learning & Generative AI in Medical Research” was successfully organized on 9th and 10th February 2026 at Ajeenkya DY Patil University (ADYPU), Pune. The workshop served as a platform to explore the transformative impact of Artificial Intelligence, Machine Learning, and Generative AI in the healthcare and medical research domain.",
+      objectives: [
+        "To provide participants with practical exposure to Artificial Intelligence in healthcare",
+        "To introduce students and researchers to Machine Learning techniques in medical diagnostics",
+        "To explore the role of Generative AI in drug discovery and medical research",
+        "To promote interdisciplinary learning between technology and healthcare"
+      ],
+      speakers: "Dr. Venkateswarlu Gonuguntla (Symbiosis International University), Dr. Deepak Mane (Vishwakarma University), and Mr. Mohammad Qazi.",
+      impact: "The workshop successfully enhanced technical understanding of AI in healthcare, provided hands-on experience in Machine Learning and Generative AI tools, and encouraged research and innovation among participants.",
+      photos: [
+        "/gallery/ai-health/image1.png",
+        "/gallery/ai-health/image2.jpeg",
+        "/gallery/ai-health/image3.jpeg",
+        "/gallery/ai-health/image4.jpeg",
+        "/gallery/ai-health/image5.jpeg",
+        "/gallery/ai-health/image6.jpeg",
+        "/gallery/ai-health/image7.jpeg",
+        "/gallery/ai-health/image8.jpeg"
+      ]
+    }
+  },
+  {
+    id: "gal-7",
+    title: "ICICS 2026",
+    category: "Events",
+    url: "/gallery/conference.jpg",
+    video: "/gallery/icics-2026.mp4",
+    date: "2026",
+    description: "Capturing Campus Moments at ICICS 2026.",
   },
 ];
 

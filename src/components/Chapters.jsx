@@ -1,24 +1,27 @@
-import { Cpu, Users, Bot, Activity } from "lucide-react";
+import { Cpu, Users, Bot, Activity, X } from "lucide-react";
 import { chapters } from "../data.js";
 
 const iconMap = { cpu: Cpu, users: Users, bot: Bot, activity: Activity };
 
-export default function Chapters() {
+export default function Chapters({ onClose }) {
   return (
-    <section
-      id="chapters"
-      className="border-t border-zinc-200 bg-zinc-50 font-sans"
-    >
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
+    <div className="fixed inset-0 z-[100] bg-white overflow-y-auto animate-fadeIn font-sans">
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <button
+          onClick={onClose}
+          className="mb-8 flex items-center gap-2 text-sm font-bold text-zinc-500 hover:text-zinc-900 transition-colors uppercase tracking-wider"
+        >
+          <X className="w-5 h-5" /> Back
+        </button>
         <div className="flex items-center gap-4 mb-3">
           <div className="h-0.5 w-10" style={{ background: "#A51C30" }} />
           <span className="text-xs font-mono font-bold tracking-[0.2em] uppercase text-zinc-500">
             Technical Societies
           </span>
         </div>
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-900 uppercase tracking-tight mb-10">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-zinc-900 uppercase tracking-tight mb-10">
           Student Branch Chapters
-        </h2>
+        </h1>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {chapters.map((chapter) => {
@@ -51,6 +54,6 @@ export default function Chapters() {
           })}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

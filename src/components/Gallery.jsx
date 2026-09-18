@@ -115,9 +115,52 @@ export default function Gallery({ onOpenVideo }) {
             <h1 className="text-4xl sm:text-5xl font-extrabold text-zinc-900 mb-6 tracking-tight">
               {selectedEvent.title}
             </h1>
-            <p className="text-lg text-zinc-600 leading-relaxed">
+            <p className="text-lg text-zinc-600 leading-relaxed mb-6">
               {selectedEvent.description}
             </p>
+
+            {/* Render extra report data if available */}
+            {selectedEvent.report && (
+              <div className="mt-12 pt-8 border-t border-zinc-200">
+                <h2 className="text-2xl font-bold text-zinc-900 mb-4 uppercase">Workshop Report</h2>
+                <div className="space-y-8 text-zinc-700">
+                  <section>
+                    <h3 className="text-lg font-bold text-zinc-900 mb-2" style={{ color: "#A51C30" }}>Introduction</h3>
+                    <p className="leading-relaxed">{selectedEvent.report.introduction}</p>
+                  </section>
+                  <section>
+                    <h3 className="text-lg font-bold text-zinc-900 mb-2" style={{ color: "#A51C30" }}>Objectives</h3>
+                    <ul className="list-disc list-inside space-y-1">
+                      {selectedEvent.report.objectives.map((obj, i) => (
+                        <li key={i} className="leading-relaxed">{obj}</li>
+                      ))}
+                    </ul>
+                  </section>
+                  <section>
+                    <h3 className="text-lg font-bold text-zinc-900 mb-2" style={{ color: "#A51C30" }}>Speakers</h3>
+                    <p className="leading-relaxed">{selectedEvent.report.speakers}</p>
+                  </section>
+                  <section>
+                    <h3 className="text-lg font-bold text-zinc-900 mb-2" style={{ color: "#A51C30" }}>Impact & Outcomes</h3>
+                    <p className="leading-relaxed">{selectedEvent.report.impact}</p>
+                  </section>
+                  
+                  <section>
+                    <h3 className="text-lg font-bold text-zinc-900 mb-4" style={{ color: "#A51C30" }}>Event Photos</h3>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                      {selectedEvent.report.photos.map((photo, i) => (
+                        <div key={i} className="aspect-square bg-zinc-200 border border-zinc-300 relative overflow-hidden group">
+                          <div className="absolute inset-0 flex items-center justify-center text-xs font-mono font-bold text-zinc-400">
+                            PHOTO {i + 1}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                </div>
+              </div>
+            )}
+
             {selectedEvent.video && (
               <div className="mt-10">
                 <button
