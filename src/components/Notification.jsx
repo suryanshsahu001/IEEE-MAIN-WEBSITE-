@@ -31,26 +31,29 @@ export default function Notification() {
   return (
     <div
       className="fixed z-[100] animate-fadeIn"
-      style={{ bottom: '1.25rem', right: '0.75rem', maxWidth: '210px' }}
+      style={{ top: '5rem', right: '0.75rem', width: '260px' }}
     >
       <div
-        className="bg-zinc-900 border-l-4 shadow-xl flex items-center gap-2 px-3 py-2 rounded-r-lg"
+        className="bg-zinc-900 border-l-4 shadow-2xl px-4 py-3 rounded-r-xl flex items-start gap-3"
         style={{ borderColor: '#A51C30' }}
       >
-        <Zap className="w-3 h-3 text-yellow-400 fill-yellow-400 flex-shrink-0" />
+        <Zap className="w-4 h-4 text-yellow-400 fill-yellow-400 flex-shrink-0 mt-0.5" />
         <div className="flex-1 min-w-0">
-          <p className="text-[10px] font-extrabold text-white uppercase tracking-wide leading-tight">
-            IEEE Day Coming Soon!
+          <p className="text-[11px] font-extrabold text-white uppercase tracking-wide leading-tight mb-1">
+            ⚡ IEEE Day Is Coming Soon!
           </p>
-          <p className="text-[9px] font-bold leading-tight mt-0.5" style={{ color: '#A51C30' }}>
+          <p className="text-[10px] text-zinc-400 leading-snug mb-1">
+            Exciting celebration of technology & community.
+          </p>
+          <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: '#A51C30' }}>
             Stay Tuned!
-          </p>
+          </span>
         </div>
         <button
           onClick={() => setIsVisible(false)}
-          className="flex-shrink-0 text-zinc-500 hover:text-white transition-colors ml-1"
+          className="flex-shrink-0 text-zinc-500 hover:text-white transition-colors"
         >
-          <X className="w-3 h-3" />
+          <X className="w-3.5 h-3.5" />
         </button>
       </div>
     </div>
