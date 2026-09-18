@@ -98,9 +98,7 @@ export default function Highlights({ onOpenVideo }) {
           {/* Right Column: Video Grid */}
           <div className="lg:col-span-3 flex flex-row lg:flex-col gap-4 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 order-3 snap-x">
             {[
-              { id: 1, duration: '0:32', videoUrl: '/gallery/video-1.mp4' },
-              { id: 2, duration: '0:28' },
-              { id: 3, duration: '0:41' }
+              { id: 1, duration: '0:32', videoUrl: '/gallery/video-1.mp4' }
             ].map((vid) => (
               <div 
                 key={vid.id} 
