@@ -60,10 +60,10 @@ export default function Highlights({ onOpenVideo }) {
           <div className="lg:col-span-6 order-1 lg:order-2">
             <div 
               className="relative aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden group cursor-pointer border border-white/10 shadow-2xl"
-              onClick={() => onOpenVideo && onOpenVideo('/gallery/coming-soon.mp4', 'Tech4Life Hackathon')}
+              onClick={() => onOpenVideo && onOpenVideo('/gallery/highlights-main.mp4', 'Tech4Life Hackathon')}
             >
               <video 
-                src="/gallery/coming-soon.mp4" 
+                src="/gallery/highlights-main.mp4" 
                 autoPlay 
                 loop 
                 muted 
