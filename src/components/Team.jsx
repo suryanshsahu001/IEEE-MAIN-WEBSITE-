@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-import { team, mentors } from "../data.js";
+import { team, mentors, communityMembers } from "../data.js";
 
 export default function Team() {
   const [mentorsOpen, setMentorsOpen] = useState(false);
@@ -183,15 +183,21 @@ export default function Team() {
               Our Community
             </h1>
             
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-              {[...Array(10)].map((_, i) => (
-                <div key={i} className="group overflow-hidden border border-zinc-200 bg-zinc-50 flex flex-col">
-                  <div className="aspect-[3/4] bg-zinc-200 flex items-center justify-center relative">
-                    <div className="text-xs font-mono font-bold text-zinc-400">PHOTO {i+1}</div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+              {communityMembers.map((member, i) => (
+                <div key={i} className="group overflow-hidden border border-zinc-200 bg-zinc-50 flex flex-col rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                  <div className="aspect-square bg-zinc-200 flex items-center justify-center relative overflow-hidden">
+                    <img 
+                      src={member.photo} 
+                      alt={member.name}
+                      className="w-full h-[130%] object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                      style={{ objectPosition: "50% 0%" }}
+                      loading="lazy"
+                    />
                   </div>
-                  <div className="p-4 text-center border-t border-zinc-200">
-                    <h3 className="text-sm font-bold text-zinc-900 uppercase">Community Member {i+1}</h3>
-                    <div className="text-[10px] font-mono tracking-widest uppercase text-zinc-500 mt-1">Volunteer</div>
+                  <div className="p-4 text-center border-t border-zinc-200 bg-white">
+                    <h3 className="text-xs font-bold text-zinc-900 uppercase tracking-wide">{member.name}</h3>
+                    <div className="text-[9px] font-mono font-bold tracking-widest uppercase text-red-700 mt-1">{member.role}</div>
                   </div>
                 </div>
               ))}

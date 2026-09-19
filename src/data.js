@@ -124,13 +124,34 @@ export const gallery = [
   },
   {
     id: "gal-2",
-    title: "Next Gen 2026",
+    title: "NEXT GEN CONNECT 2026",
     category: "Events",
     url: "/gallery/next-gen.jpg",
     video: "/gallery/next-gen.mp4",
     date: "2026",
     description:
-      "Next Gen 2026 — showcasing the innovative projects and talents of the next generation of engineers.",
+      "NEXT GEN CONNECT 2026 — showcasing the innovative projects and talents of the next generation of engineers.",
+    report: {
+      introduction: "Next Gen Connect 2026 was organized by IEEE Student Branch ADYPU to provide students with clarity on academic vision and opportunities. The event included keynote addresses, panel discussions, and a guided campus and lab tour.",
+      objectives: [
+        "To support the professional and academic orientation of prospective engineering students",
+        "To provide networking opportunities with IEEE members, faculty, and industry experts",
+        "To encourage early engagement with the IEEE Student Branch ecosystem",
+        "To bridge the gap between school-level learning and higher-education expectations"
+      ],
+      speakers: "Dr. Rakesh Kumar Jain (Vice Chancellor, ADYPU), Dr. Sunny Thomas (Dean), Dr. Ranjit Kumar, and Dr. Deepa Joshi, along with special guest panel.",
+      impact: "The program successfully created a platform where academic knowledge, industry exposure, and student networking came together in a single engaging day, with an interactive valedictory quiz and lab tour.",
+      photos: [
+        "/gallery/next-gen/image1.jpg",
+        "/gallery/next-gen/image2.jpg",
+        "/gallery/next-gen/image3.jpg",
+        "/gallery/next-gen/image4.jpg",
+        "/gallery/next-gen/image5.jpg",
+        "/gallery/next-gen/image6.jpg",
+        "/gallery/next-gen/image7.jpg",
+        "/gallery/next-gen/image8.jpg"
+      ]
+    }
   },
   {
     id: "gal-3",
@@ -169,10 +190,15 @@ export const gallery = [
       speakers: "Dr. Preeti Muley conducted highly engaging and practical sessions focused on the application of Artificial Intelligence tools in research activities.",
       impact: "The workshop witnessed active participation from more than 200 participants, including students, scholars, and faculty. It successfully achieved its objective of introducing participants to AI-driven research tools and techniques.",
       photos: [
-        "/gallery/placeholder-1.jpg",
-        "/gallery/placeholder-2.jpg",
-        "/gallery/placeholder-3.jpg",
-        "/gallery/placeholder-4.jpg"
+        "/gallery/icicis/image1.png",
+        "/gallery/icicis/image2.png",
+        "/gallery/icicis/image3.png",
+        "/gallery/icicis/image4.jpeg",
+        "/gallery/icicis/image5.png",
+        "/gallery/icicis/image6.jpeg",
+        "/gallery/icicis/image7.png",
+        "/gallery/icicis/image8.png",
+        "/gallery/icicis/image9.jpeg"
       ]
     }
   },
@@ -208,16 +234,24 @@ export const gallery = [
   },
   {
     id: "gal-7",
-    title: "ICICS 2026",
+    title: "ICICIS 2026",
     category: "Events",
     url: "/gallery/icics-cover.jpg",
     video: "/gallery/icics-2026.mp4",
     date: "2026",
-    description: "Capturing Campus Moments at ICICS 2026.",
+    description: "Capturing Campus Moments at ICICIS 2026.",
   },
 ];
 
 export const extraMoments = [
+  {
+    id: "em-5",
+    title: "IEEE EU-REKA 2026",
+    category: "Achievement",
+    url: "/gallery/eu-reka-2026.jpg",
+    date: "2026",
+    description: "A moment of immense pride for Ajeenkya DY Patil University.",
+  },
   {
     id: "em-1",
     title: "Bloopers & Fun Moments",
@@ -250,14 +284,6 @@ export const extraMoments = [
     url: "/gallery/moments-4.jpg",
     date: "2026",
     description: "Candid shots capturing the team in action.",
-  },
-  {
-    id: "em-5",
-    title: "IEEE EU-REKA 2026",
-    category: "Achievement",
-    url: "/gallery/eu-reka-2026.jpg",
-    date: "2026",
-    description: "A moment of immense pride for Ajeenkya DY Patil University.",
   },
 ];
 
@@ -346,3 +372,29 @@ export const mentors = [
     photo: "/members/vishal_shirsath.jpeg",
   },
 ];
+
+export const communityMembers = [
+  { name: "PRATHMESH SAKHARE", role: "YP PRESIDENT", photo: "/members/community/34.png" },
+  { name: "Unknown", role: "YP VICE PRESIDENT", photo: "/members/community/32.png" },
+  { name: "YASHRAJ SHARMA", role: "CSE CHAIR", photo: "/members/community/26.png" },
+  { name: "SHRUTI POTAWAR", role: "WOMEN'S CHAIR", photo: "/members/community/10.png" },
+  { name: "PRATIKSHA WARULE", role: "EMBS CHAIR", photo: "/members/community/27.png" },
+  { name: "Unknown", role: "Volunteer", photo: "/members/community/33.png" },
+  { name: "VINAY VERMA", role: "AIDS CHAIR", photo: "/members/community/17.png" },
+  { name: "SURYANSH SAHU", role: "WEB MASTER LEAD", photo: "/members/community/18.png" },
+  { name: "RAKSHIT AGARWAL", role: "MANAGEMENT LEAD", photo: "/members/community/21.png" },
+  { name: "VEDANT WAGHUNDE", role: "MEDIA LEAD", photo: "/members/community/15.png" },
+  { name: "SUMIT SHAH", role: "DESIGN LEAD", photo: "/members/community/14.png" },
+  { name: "PRAJAKTA PASHTE", role: "MEMBERSHIP'S LEAD", photo: "/members/community/13.png" },
+  { name: "ISHITA THULKAR", role: "WOMEN'S VICE CHAIR", photo: "/members/community/25.png" },
+  { name: "AYUSH THAKUR", role: "CSE VICE CHAIR", photo: "/members/community/24.png" },
+  { name: "MAHI KESHARWANI", role: "AIDS VICE CHAIR", photo: "/members/community/19.png" },
+  { name: "MEGHNA AYACH", role: "EVENT COORDINATOR", photo: "/members/community/20.png" },
+  { name: "SHAKTI SHARMA", role: "EVENT COORDINATOR", photo: "/members/community/30.png" },
+  { name: "ATHARVA VADGULE", role: "WEBMASTER CO LEAD", photo: "/members/community/16.png" },
+  { name: "SHREYA MULE", role: "IEEE MEMBER", photo: "/members/community/12.png" },
+  { name: "MAYANK SAINI", role: "IEEE MEMBER", photo: "/members/community/22.png" },
+  { name: "VIRAJ GAWADE", role: "IEEE MEMBER", photo: "/members/community/23.png" },
+  { name: "VIBHA PAWAR", role: "IEEE MEMBER", photo: "/members/community/9.png" },
+  { name: "JAYATI SINHA", role: "IEEE MEMBER", photo: "/members/community/7.png" },
+];
