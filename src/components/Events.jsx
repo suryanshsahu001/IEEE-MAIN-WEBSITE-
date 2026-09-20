@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Calendar, Users, ArrowUpRight, X, Play } from "lucide-react";
 import { events } from "../data.js";
 
@@ -10,6 +10,15 @@ const statusStyles = {
 
 export default function Events() {
   const [selectedEvent, setSelectedEvent] = useState(null);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventId = urlParams.get('event');
+    if (eventId) {
+      const event = events.find(e => e.id === eventId);
+      if (event) setSelectedEvent(event);
+    }
+  }, []);
 
   return (
     <>
@@ -31,7 +40,7 @@ export default function Events() {
             return (
               <div
                 key={event.id}
-                onClick={() => setSelectedEvent(event)}
+                onClick={() => window.open(window.location.pathname + '?event=' + event.id, '_blank')}
                 className="group relative flex flex-col border border-zinc-200 bg-white hover:border-zinc-400 transition-all duration-300 overflow-hidden cursor-pointer hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 rounded-xl"
               >
                 <div className="h-48 sm:h-56 w-full relative overflow-hidden bg-zinc-100">
@@ -108,7 +117,10 @@ export default function Events() {
       <div className="fixed inset-0 z-[100] bg-white overflow-y-auto animate-fadeIn font-sans">
         <div className="max-w-5xl mx-auto px-6 py-12">
           <button
-            onClick={() => setSelectedEvent(null)}
+            onClick={() => {
+              setSelectedEvent(null);
+              window.history.pushState({}, '', window.location.pathname);
+            }}
             className="mb-8 flex items-center gap-2 text-sm font-bold text-zinc-500 hover:text-zinc-900 transition-colors uppercase tracking-wider"
           >
             <X className="w-5 h-5" /> Back to Events

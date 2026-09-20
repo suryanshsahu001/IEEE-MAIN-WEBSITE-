@@ -190,7 +190,7 @@ export default function Team() {
                     <img 
                       src={member.photo} 
                       alt={member.name}
-                      className="w-full h-[130%] object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                       style={{ objectPosition: "50% 0%" }}
                       loading="lazy"
                     />

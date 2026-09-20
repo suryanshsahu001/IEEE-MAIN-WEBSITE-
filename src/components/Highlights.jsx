@@ -81,11 +81,11 @@ export default function Highlights({ onOpenVideo }) {
           <div className="lg:col-span-6 order-1 lg:order-2">
             <div 
               className="relative aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden group cursor-pointer border border-white/10 shadow-2xl"
-              onClick={() => onOpenVideo && onOpenVideo('/gallery/highlights-main.mp4', 'Tech4Life Hackathon')}
+              onClick={() => onOpenVideo && onOpenVideo('./gallery/highlights-main.mp4', 'Tech4Life Hackathon')}
             >
               {isVisible && !isMobile ? (
                 <video 
-                  src="/gallery/highlights-main.mp4" 
+                  src="./gallery/highlights-main.mp4" 
                   autoPlay 
                   loop 
                   muted 
@@ -127,7 +127,8 @@ export default function Highlights({ onOpenVideo }) {
           {/* Right Column: Video Grid */}
           <div className="lg:col-span-3 flex flex-row lg:flex-col gap-4 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 order-3 snap-x">
             {[
-              { id: 1, duration: '0:32', videoUrl: '/gallery/video-1.mp4' }
+              { id: 1, duration: '0:32', videoUrl: './gallery/video-1.mp4' },
+              { id: 2, duration: 'New', videoUrl: './videos/PV.mp4' }
             ].map((vid) => (
               <div 
                 key={vid.id} 

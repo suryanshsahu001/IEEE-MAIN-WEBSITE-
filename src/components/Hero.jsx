@@ -13,7 +13,7 @@ export default function Hero({ onOpenVideo }) {
           style={{ height: "56vw", minHeight: "210px", maxHeight: "300px" }}
         >
           <img
-            src="/hero-bg.jpeg"
+            src="./hero-bg.jpeg"
             alt="Ajeenkya DY Patil University Campus"
             className="w-full h-full object-cover"
             style={{ objectPosition: "center 30%" }}
@@ -87,7 +87,7 @@ export default function Hero({ onOpenVideo }) {
       >
         <div className="absolute inset-0 z-0">
           <img
-            src="/hero-bg.jpeg"
+            src="./hero-bg.jpeg"
             alt="Ajeenkya DY Patil University Campus"
             className="w-full h-full object-cover"
             style={{ objectPosition: "center 30%" }}
