@@ -1,15 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Scoutie+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 @import "tailwindcss";
 
-html {
-  scroll-behavior: smooth;
-}
-
-body.scroll-lock {
-  overflow: hidden;
-  overscroll-behavior: none;
-}
-
 @theme {
   --font-sans: "Scoutie Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Scoutie Sans", ui-sans-serif, system-ui, sans-serif;

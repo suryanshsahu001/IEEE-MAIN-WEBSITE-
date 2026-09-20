@@ -29,7 +29,7 @@ export default function App() {
       <main>
         <Hero onOpenVideo={openVideo} />
         <About />
-        <Suspense fallback={<div className="min-h-[50dvh]" />}>
+        <Suspense fallback={<div className="h-96" />}>
           <Highlights onOpenVideo={openVideo} />
           <Events />
           <Gallery onOpenVideo={openVideo} />

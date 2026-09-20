@@ -1,5 +1,5 @@
 import { X, Loader } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function isVideoUrl(url) {
   if (!url) return false;
@@ -15,15 +15,6 @@ function isVideoUrl(url) {
 export default function VideoModal({ video, onClose }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-
-  useEffect(() => {
-    if (video) {
-      document.body.classList.add("scroll-lock");
-    } else {
-      document.body.classList.remove("scroll-lock");
-    }
-    return () => document.body.classList.remove("scroll-lock");
-  }, [video]);
 
   if (!video) return null;
 
@@ -65,19 +56,17 @@ export default function VideoModal({ video, onClose }) {
               </div>
             )}
             <video
-              src={url}
               controls
               autoPlay
               playsInline
               preload="auto"
               className="absolute inset-0 w-full h-full object-contain bg-black"
-              onLoadedData={() => setLoading(false)}
-              onError={(e) => { 
-                console.error("Video play error:", e);
-                setLoading(false); 
-                setError(true); 
-              }}
+              onCanPlay={() => setLoading(false)}
+              onError={() => { setLoading(false); setError(true); }}
             >
+              <source
+                src={url}
+              />
               Your browser does not support video playback.
             </video>
           </div>

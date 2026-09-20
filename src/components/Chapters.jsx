@@ -1,15 +1,9 @@
 import { Cpu, Users, Bot, Activity, X } from "lucide-react";
-import { useEffect } from "react";
 import { chapters } from "../data.js";
 
 const iconMap = { cpu: Cpu, users: Users, bot: Bot, activity: Activity };
 
 export default function Chapters({ onClose }) {
-  useEffect(() => {
-    document.body.classList.add("scroll-lock");
-    return () => document.body.classList.remove("scroll-lock");
-  }, []);
-
   return (
     <div className="fixed inset-0 z-[100] bg-white overflow-y-auto animate-fadeIn font-sans">
       <div className="max-w-7xl mx-auto px-6 py-12">
