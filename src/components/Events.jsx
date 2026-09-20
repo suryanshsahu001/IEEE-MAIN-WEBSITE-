@@ -44,7 +44,7 @@ export default function Events() {
                 className="group relative flex flex-col border border-zinc-200 bg-white hover:border-zinc-400 transition-all duration-300 overflow-hidden cursor-pointer hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 rounded-xl"
               >
                 <div className="h-48 sm:h-56 w-full relative overflow-hidden bg-zinc-100">
-                  <img src={event.image || '/gallery/ieee-day.jpg'} alt={event.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <img src={event.image || './gallery/ieee-day.jpg'} alt={event.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute top-4 right-4">
                     <span

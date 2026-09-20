@@ -83,14 +83,14 @@ export default function Highlights({ onOpenVideo }) {
               className="relative aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden group cursor-pointer border border-white/10 shadow-2xl"
               onClick={() => onOpenVideo && onOpenVideo('./gallery/highlights-main.mp4', 'Tech4Life Hackathon')}
             >
-              {isVisible && !isMobile ? (
+              {isVisible ? (
                 <video 
                   src="./gallery/highlights-main.mp4" 
-                  autoPlay 
+                  autoPlay={!isMobile}
                   loop 
                   muted 
                   playsInline
-                  preload="none"
+                  preload="metadata"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               ) : (
@@ -142,11 +142,11 @@ export default function Highlights({ onOpenVideo }) {
                 {vid.videoUrl && isVisible ? (
                   <video 
                     src={vid.videoUrl} 
-                    autoPlay 
+                    autoPlay={!isMobile}
                     loop 
                     muted 
                     playsInline
-                    preload="none"
+                    preload="metadata"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 ) : (

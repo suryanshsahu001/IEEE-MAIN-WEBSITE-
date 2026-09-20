@@ -1,11 +1,13 @@
 import { X } from "lucide-react";
 
 function isVideoUrl(url) {
+  if (!url) return false;
   return (
     url.endsWith(".mov") ||
     url.endsWith(".mp4") ||
     url.endsWith(".webm") ||
-    url.startsWith("/videos")
+    url.includes("/videos/") ||
+    url.includes("videos/")
   );
 }
 

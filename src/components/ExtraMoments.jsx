@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Play, X, ZoomIn } from "lucide-react";
 import { extraMoments } from "../data.js";
 
 export default function ExtraMoments({ onOpenVideo }) {
   const [selected, setSelected] = useState(null);
 
-  const close = () => setSelected(null);
+  const close = useCallback(() => setSelected(null), []);
 
   return (
     <section
@@ -16,7 +16,7 @@ export default function ExtraMoments({ onOpenVideo }) {
         <div className="flex items-center gap-4 mb-3">
           <div className="h-0.5 w-10" style={{ background: "#A51C30" }} />
           <span className="text-xs font-mono font-bold tracking-[0.2em] uppercase text-zinc-500">
-            Bloopers & Achievements
+            Bloopers &amp; Achievements
           </span>
         </div>
         <h2 className="text-4xl sm:text-5xl font-extrabold text-zinc-900 uppercase tracking-tight leading-none mb-10">
@@ -25,47 +25,56 @@ export default function ExtraMoments({ onOpenVideo }) {
           <span style={{ color: "#A51C30" }}>Moments</span>
         </h2>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {extraMoments.map((item) => (
             <div
               key={item.id}
-              className="group relative overflow-hidden bg-zinc-100 border border-zinc-200 flex flex-col"
+              className="group relative overflow-hidden bg-zinc-100 border border-zinc-200 flex flex-col rounded-lg hover:shadow-md transition-shadow duration-300"
             >
-              <div className="relative overflow-hidden">
+              <div className="relative overflow-hidden aspect-[4/3]">
                 {item.video ? (
                   <button
                     onClick={() => onOpenVideo(item.video, item.title)}
-                    className="block w-full cursor-pointer"
+                    className="block w-full h-full cursor-pointer"
                     aria-label={`Play ${item.title}`}
                   >
                     <img
                       src={item.url}
                       alt={item.title}
-                      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
+                      decoding="async"
                     />
                   </button>
                 ) : (
                   <button
                     onClick={() => setSelected(item)}
-                    className="block w-full cursor-pointer"
+                    className="block w-full h-full cursor-pointer"
                     aria-label={`View ${item.title}`}
                   >
                     <img
                       src={item.url}
                       alt={item.title}
-                      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
+                      decoding="async"
                     />
                   </button>
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
                 {item.video ? (
-                  <div className="absolute top-0 left-0">
-                    <span className="inline-block bg-white/95 px-3 py-1 text-[11px] font-mono font-bold tracking-widest uppercase">
-                      Video
-                    </span>
-                  </div>
+                  <>
+                    <div className="absolute top-3 left-3">
+                      <span className="inline-block bg-white/95 backdrop-blur-sm px-2.5 py-1 text-[10px] font-mono font-bold tracking-widest uppercase rounded-sm shadow-sm">
+                        Video
+                      </span>
+                    </div>
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <span className="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center shadow-xl border border-zinc-200 group-hover:scale-110 transition-transform duration-300">
+                        <Play className="w-5 h-5 ml-0.5 fill-zinc-900 text-zinc-900" />
+                      </span>
+                    </div>
+                  </>
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                     <span className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-xl border border-zinc-200">
@@ -73,24 +82,17 @@ export default function ExtraMoments({ onOpenVideo }) {
                     </span>
                   </div>
                 )}
-                {item.video && (
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <span className="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center shadow-xl border border-zinc-200">
-                      <Play className="w-5 h-5 ml-0.5 fill-zinc-900 text-zinc-900" />
-                    </span>
-                  </div>
-                )}
               </div>
 
-              <div className="p-5 flex-1 flex flex-col justify-between">
+              <div className="p-4 flex-1 flex flex-col justify-between bg-white">
                 <div>
-                  <div className="text-[11px] font-mono font-bold tracking-[0.18em] uppercase text-zinc-400 mb-2">
+                  <div className="text-[10px] font-mono font-bold tracking-[0.18em] uppercase text-zinc-400 mb-1.5">
                     {item.category} · {item.date}
                   </div>
-                  <h3 className="text-base font-bold text-zinc-900 mb-2">
+                  <h3 className="text-sm font-bold text-zinc-900 mb-1 leading-snug">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-zinc-500 leading-relaxed">
+                  <p className="text-xs text-zinc-500 leading-relaxed line-clamp-2">
                     {item.description}
                   </p>
                 </div>
@@ -112,7 +114,7 @@ export default function ExtraMoments({ onOpenVideo }) {
           >
             <button
               onClick={close}
-              className="absolute top-3 right-3 z-20 p-2 rounded-full bg-black/70 text-white hover:bg-tan-600 transition-colors"
+              className="absolute top-3 right-3 z-20 p-2 rounded-full bg-black/70 text-white hover:bg-red-700 transition-colors"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
@@ -120,7 +122,8 @@ export default function ExtraMoments({ onOpenVideo }) {
             <img
               src={selected.url}
               alt={selected.title}
-              className="w-full max-h-[85vh] object-contain bg-zinc-900"
+              className="w-full max-h-[85vh] object-contain bg-zinc-900 rounded-lg"
+              decoding="async"
             />
             <div className="pt-3 pb-1 text-center">
               <div className="text-base font-bold text-white">

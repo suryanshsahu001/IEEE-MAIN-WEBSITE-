@@ -71,7 +71,7 @@ export default function Team() {
                   key={mentor.id}
                   className="group overflow-hidden border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-300"
                 >
-                  <div className="relative overflow-hidden bg-zinc-100" style={{ aspectRatio: "3/4" }}>
+                <div className="relative overflow-hidden bg-zinc-100" style={{ aspectRatio: "3/4" }}>
                     <img
                       src={mentor.photo}
                       alt={mentor.name}
@@ -122,13 +122,9 @@ export default function Team() {
                   <img
                     src={member.photo}
                     alt={member.name}
-                    className="w-full h-full object-cover object-center"
-                    style={
-                      member.id === "cm-1"
-                        ? { transform: "scale(1.35) translateY(18%)" }
-                        : {}
-                    }
+                    className="w-full h-full object-cover object-top"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
 
@@ -186,13 +182,13 @@ export default function Team() {
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
               {communityMembers.map((member, i) => (
                 <div key={i} className="group overflow-hidden border border-zinc-200 bg-zinc-50 flex flex-col rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                  <div className="aspect-square bg-zinc-200 flex items-center justify-center relative overflow-hidden">
+                  <div className="aspect-square bg-zinc-100 flex items-center justify-center relative overflow-hidden">
                     <img 
                       src={member.photo} 
                       alt={member.name}
-                      className="w-full h-[130%] object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                      style={{ objectPosition: "50% 0%" }}
+                      className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   <div className="p-4 text-center border-t border-zinc-200 bg-white">

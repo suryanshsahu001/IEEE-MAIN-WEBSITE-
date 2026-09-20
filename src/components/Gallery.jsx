@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Play, X } from "lucide-react";
 import { gallery } from "../data.js";
 
 export default function Gallery({ onOpenVideo }) {
   const [selectedEvent, setSelectedEvent] = useState(null);
+
+  const openEvent = useCallback((item) => setSelectedEvent(item), []);
+  const closeEvent = useCallback(() => setSelectedEvent(null), []);
 
   return (
     <>
@@ -15,7 +18,7 @@ export default function Gallery({ onOpenVideo }) {
           <div className="flex items-center gap-4 mb-3">
             <div className="h-0.5 w-10" style={{ background: "#A51C30" }} />
             <span className="text-xs font-mono font-bold tracking-[0.2em] uppercase text-zinc-500">
-              Photos & Videos
+              Photos &amp; Videos
             </span>
           </div>
           <h2 className="text-4xl sm:text-5xl font-extrabold text-zinc-900 uppercase tracking-tight leading-none mb-10">
@@ -28,20 +31,21 @@ export default function Gallery({ onOpenVideo }) {
             {gallery.map((item) => (
               <div
                 key={item.id}
-                className="group relative overflow-hidden bg-zinc-100 border border-zinc-200 flex flex-col cursor-pointer"
-                onClick={() => setSelectedEvent(item)}
+                className="group relative overflow-hidden bg-zinc-100 border border-zinc-200 flex flex-col cursor-pointer rounded-lg hover:shadow-lg transition-shadow duration-300"
+                onClick={() => openEvent(item)}
               >
-                <div className="relative overflow-hidden">
+                <div className="relative overflow-hidden aspect-[4/3]">
                   <img
                     src={item.url}
                     alt={item.title}
-                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
+                    decoding="async"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   {item.video && (
-                    <div className="absolute top-0 left-0">
-                      <span className="inline-block bg-white/95 px-3 py-1 text-[11px] font-mono font-bold tracking-widest uppercase">
+                    <div className="absolute top-3 left-3">
+                      <span className="inline-block bg-white/95 backdrop-blur-sm px-2.5 py-1 text-[10px] font-mono font-bold tracking-widest uppercase rounded-sm shadow-sm">
                         Video
                       </span>
                     </div>
@@ -60,20 +64,34 @@ export default function Gallery({ onOpenVideo }) {
                       </span>
                     </button>
                   )}
+                  {/* Hover overlay for non-video items */}
+                  {!item.video && (
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  )}
                 </div>
 
-                <div className="p-5 flex-1 flex flex-col justify-between">
+                <div className="p-4 flex-1 flex flex-col justify-between bg-white">
                   <div>
-                    <div className="text-[11px] font-mono font-bold tracking-[0.18em] uppercase text-zinc-400 mb-2">
+                    <div className="text-[10px] font-mono font-bold tracking-[0.18em] uppercase text-zinc-400 mb-1.5">
                       {item.category} · {item.date}
                     </div>
-                    <h3 className="text-base font-bold text-zinc-900 mb-2">
+                    <h3 className="text-sm font-bold text-zinc-900 mb-1.5 leading-snug">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-zinc-500 leading-relaxed line-clamp-2">
+                    <p className="text-xs text-zinc-500 leading-relaxed line-clamp-2">
                       {item.description}
                     </p>
                   </div>
+                  {(item.report || item.video) && (
+                    <div className="mt-3 pt-3 border-t border-zinc-100">
+                      <span
+                        className="text-[10px] font-mono font-bold tracking-widest uppercase"
+                        style={{ color: "#A51C30" }}
+                      >
+                        {item.report ? "View Report →" : "Watch Video →"}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -81,21 +99,23 @@ export default function Gallery({ onOpenVideo }) {
         </div>
       </section>
 
-      {/* Full Screen Details Modal ("New Page") */}
+      {/* Full Screen Details Modal */}
       {selectedEvent && (
         <div className="fixed inset-0 z-[100] bg-white overflow-y-auto animate-fadeIn font-sans">
           <div className="max-w-4xl mx-auto px-6 py-12">
             <button
-              onClick={() => setSelectedEvent(null)}
+              onClick={closeEvent}
               className="mb-8 flex items-center gap-2 text-sm font-bold text-zinc-500 hover:text-zinc-900 transition-colors uppercase tracking-wider"
             >
               <X className="w-5 h-5" /> Back to Gallery
             </button>
-            <div className="aspect-video w-full overflow-hidden bg-zinc-100 mb-8 border border-zinc-200 shadow-sm">
+            <div className="aspect-video w-full overflow-hidden bg-zinc-100 mb-8 border border-zinc-200 shadow-sm rounded-lg">
               <img
                 src={selectedEvent.url}
                 alt={selectedEvent.title}
                 className="w-full h-full object-cover"
+                loading="eager"
+                decoding="async"
               />
             </div>
             <div className="flex items-center gap-4 mb-4">
@@ -119,17 +139,16 @@ export default function Gallery({ onOpenVideo }) {
               {selectedEvent.description}
             </p>
 
-            {/* Render extra report data if available */}
             {selectedEvent.report && (
               <div className="mt-12 pt-8 border-t border-zinc-200">
                 <h2 className="text-2xl font-bold text-zinc-900 mb-4 uppercase">Workshop Report</h2>
                 <div className="space-y-8 text-zinc-700">
                   <section>
-                    <h3 className="text-lg font-bold text-zinc-900 mb-2" style={{ color: "#A51C30" }}>Introduction</h3>
+                    <h3 className="text-lg font-bold mb-2" style={{ color: "#A51C30" }}>Introduction</h3>
                     <p className="leading-relaxed">{selectedEvent.report.introduction}</p>
                   </section>
                   <section>
-                    <h3 className="text-lg font-bold text-zinc-900 mb-2" style={{ color: "#A51C30" }}>Objectives</h3>
+                    <h3 className="text-lg font-bold mb-2" style={{ color: "#A51C30" }}>Objectives</h3>
                     <ul className="list-disc list-inside space-y-1">
                       {selectedEvent.report.objectives.map((obj, i) => (
                         <li key={i} className="leading-relaxed">{obj}</li>
@@ -137,24 +156,24 @@ export default function Gallery({ onOpenVideo }) {
                     </ul>
                   </section>
                   <section>
-                    <h3 className="text-lg font-bold text-zinc-900 mb-2" style={{ color: "#A51C30" }}>Speakers</h3>
+                    <h3 className="text-lg font-bold mb-2" style={{ color: "#A51C30" }}>Speakers</h3>
                     <p className="leading-relaxed">{selectedEvent.report.speakers}</p>
                   </section>
                   <section>
-                    <h3 className="text-lg font-bold text-zinc-900 mb-2" style={{ color: "#A51C30" }}>Impact & Outcomes</h3>
+                    <h3 className="text-lg font-bold mb-2" style={{ color: "#A51C30" }}>Impact &amp; Outcomes</h3>
                     <p className="leading-relaxed">{selectedEvent.report.impact}</p>
                   </section>
-                  
                   <section>
-                    <h3 className="text-lg font-bold text-zinc-900 mb-4" style={{ color: "#A51C30" }}>Event Photos</h3>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <h3 className="text-lg font-bold mb-4" style={{ color: "#A51C30" }}>Event Photos</h3>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {selectedEvent.report.photos.map((photo, i) => (
-                        <div key={i} className="aspect-square bg-zinc-200 border border-zinc-300 relative overflow-hidden group">
+                        <div key={i} className="aspect-square bg-zinc-200 border border-zinc-300 relative overflow-hidden group rounded-md">
                           <img
                             src={photo}
                             alt={`${selectedEvent.title} Photo ${i + 1}`}
                             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                             loading="lazy"
+                            decoding="async"
                           />
                         </div>
                       ))}
@@ -167,10 +186,8 @@ export default function Gallery({ onOpenVideo }) {
             {selectedEvent.video && (
               <div className="mt-10">
                 <button
-                  onClick={() =>
-                    onOpenVideo(selectedEvent.video, selectedEvent.title)
-                  }
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-zinc-900 text-white font-mono font-bold text-sm hover:bg-zinc-800 transition-colors tracking-widest uppercase shadow-md"
+                  onClick={() => onOpenVideo(selectedEvent.video, selectedEvent.title)}
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-zinc-900 text-white font-mono font-bold text-sm hover:bg-zinc-800 transition-colors tracking-widest uppercase shadow-md rounded-md"
                 >
                   <Play className="w-4 h-4 fill-white" /> Watch Video
                 </button>

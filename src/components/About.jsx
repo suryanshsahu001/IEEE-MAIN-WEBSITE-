@@ -32,7 +32,7 @@ export default function About() {
             {siteConfig.stats.map((stat) => (
               <div
                 key={stat.label}
-                className="p-8 border border-zinc-200 bg-zinc-50"
+                className="p-8 border border-zinc-200 bg-zinc-50 hover:bg-white hover:shadow-sm transition-all duration-300"
               >
                 <div className="text-4xl sm:text-5xl font-extrabold text-zinc-900 mb-2">
                   {stat.value}
