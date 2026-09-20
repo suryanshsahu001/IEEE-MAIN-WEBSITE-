@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="lg:col-span-4">
             <a href="#home" className="flex items-center gap-4 mb-4">
               <img
-                src="/logos/ieee-stb-logo.png"
+                src="./logos/ieee-stb-logo.png"
                 alt="IEEE STB Logo"
                 className="h-10 w-auto object-contain"
               />
