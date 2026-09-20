@@ -221,15 +221,18 @@ export default function Team() {
                     <img
                       src={member.photo}
                       alt={member.name}
-                      className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       loading="eager"
                       decoding="async"
                       fetchPriority={i < 12 ? "high" : "low"}
                       onLoad={(e) => {
-                        // Fade in once loaded, hiding the skeleton
                         e.currentTarget.style.opacity = "1";
                       }}
-                      style={{ opacity: imagesPreloaded ? "1" : "0", transition: "opacity 0.3s ease" }}
+                      style={{ 
+                        opacity: imagesPreloaded ? "1" : "0", 
+                        transition: "opacity 0.3s ease",
+                        objectPosition: "center 15%" 
+                      }}
                     />
                   </div>
                   <div className="p-3 text-center border-t border-zinc-200 bg-white">
