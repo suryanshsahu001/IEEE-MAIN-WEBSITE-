@@ -221,7 +221,7 @@ export default function Team() {
                     <img
                       src={member.photo}
                       alt={member.name}
-                      className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                      className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
                       loading="eager"
                       decoding="async"
                       fetchPriority={i < 12 ? "high" : "low"}
