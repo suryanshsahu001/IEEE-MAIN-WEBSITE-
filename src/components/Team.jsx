@@ -1,10 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { X } from "lucide-react";
 import { team, mentors, communityMembers } from "../data.js";
+
+// Preload community images in the background when browser is idle
+function preloadCommunityImages() {
+  const load = () => {
+    communityMembers.forEach((member) => {
+      const img = new Image();
+      img.src = member.photo;
+    });
+  };
+  if ("requestIdleCallback" in window) {
+    requestIdleCallback(load, { timeout: 3000 });
+  } else {
+    setTimeout(load, 2000);
+  }
+}
 
 export default function Team() {
   const [mentorsOpen, setMentorsOpen] = useState(false);
   const [ourCommunityOpen, setOurCommunityOpen] = useState(false);
+  const [imagesPreloaded, setImagesPreloaded] = useState(false);
+
+  // Start preloading community images 2s after page loads
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      preloadCommunityImages();
+      setImagesPreloaded(true);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const openCommunity = useCallback(() => setOurCommunityOpen(true), []);
+  const closeCommunity = useCallback(() => setOurCommunityOpen(false), []);
 
   return (
     <>
@@ -25,7 +53,6 @@ export default function Team() {
               </h2>
             </div>
 
-            {/* Dropdown toggle button */}
             <button
               onClick={() => setMentorsOpen((prev) => !prev)}
               aria-expanded={mentorsOpen}
@@ -71,7 +98,7 @@ export default function Team() {
                   key={mentor.id}
                   className="group overflow-hidden border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-300"
                 >
-                <div className="relative overflow-hidden bg-zinc-100" style={{ aspectRatio: "3/4" }}>
+                  <div className="relative overflow-hidden bg-zinc-100" style={{ aspectRatio: "3/4" }}>
                     <img
                       src={mentor.photo}
                       alt={mentor.name}
@@ -142,11 +169,11 @@ export default function Team() {
               </div>
             ))}
           </div>
-          
+
           {/* Our Community Button */}
           <div className="mt-16 flex justify-center">
             <button
-              onClick={() => setOurCommunityOpen(true)}
+              onClick={openCommunity}
               className="px-8 py-4 border-2 font-mono font-bold text-sm tracking-[0.15em] uppercase transition-all duration-200 hover:bg-zinc-900 hover:text-white hover:border-zinc-900"
               style={{
                 borderColor: "#A51C30",
@@ -164,7 +191,7 @@ export default function Team() {
         <div className="fixed inset-0 z-[100] bg-white overflow-y-auto animate-fadeIn font-sans">
           <div className="max-w-7xl mx-auto px-6 py-12">
             <button
-              onClick={() => setOurCommunityOpen(false)}
+              onClick={closeCommunity}
               className="mb-8 flex items-center gap-2 text-sm font-bold text-zinc-500 hover:text-zinc-900 transition-colors uppercase tracking-wider"
             >
               <X className="w-5 h-5" /> Back to Team
@@ -178,22 +205,40 @@ export default function Team() {
             <h1 className="text-4xl sm:text-5xl font-extrabold text-zinc-900 mb-10 tracking-tight uppercase">
               Our Community
             </h1>
-            
+
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
               {communityMembers.map((member, i) => (
-                <div key={i} className="group overflow-hidden border border-zinc-200 bg-zinc-50 flex flex-col rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                  <div className="aspect-square bg-zinc-100 flex items-center justify-center relative overflow-hidden">
-                    <img 
-                      src={member.photo} 
+                <div
+                  key={i}
+                  className="group overflow-hidden border border-zinc-200 bg-zinc-50 flex flex-col rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div className="aspect-square bg-zinc-100 relative overflow-hidden">
+                    {/* Skeleton shimmer shown while image loads */}
+                    <div
+                      className="absolute inset-0 bg-gradient-to-r from-zinc-200 via-zinc-100 to-zinc-200 animate-pulse"
+                      aria-hidden="true"
+                    />
+                    <img
+                      src={member.photo}
                       alt={member.name}
-                      className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                      loading="eager"
                       decoding="async"
+                      fetchPriority={i < 12 ? "high" : "low"}
+                      onLoad={(e) => {
+                        // Fade in once loaded, hiding the skeleton
+                        e.currentTarget.style.opacity = "1";
+                      }}
+                      style={{ opacity: imagesPreloaded ? "1" : "0", transition: "opacity 0.3s ease" }}
                     />
                   </div>
-                  <div className="p-4 text-center border-t border-zinc-200 bg-white">
-                    <h3 className="text-xs font-bold text-zinc-900 uppercase tracking-wide">{member.name}</h3>
-                    <div className="text-[9px] font-mono font-bold tracking-widest uppercase text-red-700 mt-1">{member.role}</div>
+                  <div className="p-3 text-center border-t border-zinc-200 bg-white">
+                    <h3 className="text-[10px] font-bold text-zinc-900 uppercase tracking-wide leading-tight">
+                      {member.name}
+                    </h3>
+                    <div className="text-[8px] font-mono font-bold tracking-widest uppercase text-red-700 mt-1">
+                      {member.role}
+                    </div>
                   </div>
                 </div>
               ))}
