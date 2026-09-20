@@ -56,17 +56,19 @@ export default function VideoModal({ video, onClose }) {
               </div>
             )}
             <video
+              src={url}
               controls
               autoPlay
               playsInline
-              preload="auto"
-              className="absolute inset-0 w-full h-full object-contain bg-black"
-              onCanPlay={() => setLoading(false)}
-              onError={() => { setLoading(false); setError(true); }}
+              preload="metadata"
+              className="absolute inset-0 w-full h-full object-contain bg-black transform-gpu will-change-transform"
+              onLoadedData={() => setLoading(false)}
+              onError={(e) => { 
+                console.error("Video load error:", e);
+                setLoading(false); 
+                setError(true); 
+              }}
             >
-              <source
-                src={url}
-              />
               Your browser does not support video playback.
             </video>
           </div>
