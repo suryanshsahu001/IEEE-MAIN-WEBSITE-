@@ -10,7 +10,7 @@ export default function ExtraMoments({ onOpenVideo }) {
   return (
     <section
       id="extra-moments"
-      className="bg-white font-sans py-20 border-t border-zinc-100"
+      className="bg-white font-sans py-12 md:py-20 border-t border-zinc-100"
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         <div className="flex items-center gap-4 mb-3">
@@ -25,7 +25,7 @@ export default function ExtraMoments({ onOpenVideo }) {
           <span style={{ color: "#A51C30" }}>Moments</span>
         </h2>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
           {extraMoments.map((item) => (
             <div
               key={item.id}
@@ -84,15 +84,15 @@ export default function ExtraMoments({ onOpenVideo }) {
                 )}
               </div>
 
-              <div className="p-4 flex-1 flex flex-col justify-between bg-white">
+              <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between bg-white">
                 <div>
-                  <div className="text-[10px] font-mono font-bold tracking-[0.18em] uppercase text-zinc-400 mb-1.5">
+                  <div className="text-[8px] sm:text-[10px] font-mono font-bold tracking-[0.18em] uppercase text-zinc-400 mb-1.5">
                     {item.category} · {item.date}
                   </div>
-                  <h3 className="text-sm font-bold text-zinc-900 mb-1 leading-snug">
+                  <h3 className="text-xs sm:text-sm font-bold text-zinc-900 mb-1 leading-snug">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-zinc-500 leading-relaxed line-clamp-2">
+                  <p className="hidden sm:block text-xs text-zinc-500 leading-relaxed line-clamp-2">
                     {item.description}
                   </p>
                 </div>

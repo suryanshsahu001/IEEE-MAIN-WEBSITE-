@@ -14,7 +14,7 @@ export default function Gallery({ onOpenVideo }) {
         id="gallery"
         className="bg-zinc-50 font-sans border-t border-zinc-200"
       >
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-10 lg:px-16 py-12 md:py-20">
           <div className="flex items-center gap-4 mb-3">
             <div className="h-0.5 w-10" style={{ background: "#A51C30" }} />
             <span className="text-xs font-mono font-bold tracking-[0.2em] uppercase text-zinc-500">
@@ -27,7 +27,7 @@ export default function Gallery({ onOpenVideo }) {
             <span style={{ color: "#A51C30" }}>Campus Moments</span>
           </h2>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {gallery.map((item) => (
               <div
                 key={item.id}
@@ -70,15 +70,15 @@ export default function Gallery({ onOpenVideo }) {
                   )}
                 </div>
 
-                <div className="p-4 flex-1 flex flex-col justify-between bg-white">
+                <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between bg-white">
                   <div>
-                    <div className="text-[10px] font-mono font-bold tracking-[0.18em] uppercase text-zinc-400 mb-1.5">
+                    <div className="text-[8px] sm:text-[10px] font-mono font-bold tracking-[0.18em] uppercase text-zinc-400 mb-1.5">
                       {item.category} · {item.date}
                     </div>
-                    <h3 className="text-sm font-bold text-zinc-900 mb-1.5 leading-snug">
+                    <h3 className="text-xs sm:text-sm font-bold text-zinc-900 mb-1.5 leading-snug">
                       {item.title}
                     </h3>
-                    <p className="text-xs text-zinc-500 leading-relaxed line-clamp-2">
+                    <p className="hidden sm:block text-xs text-zinc-500 leading-relaxed line-clamp-2">
                       {item.description}
                     </p>
                   </div>
@@ -102,7 +102,7 @@ export default function Gallery({ onOpenVideo }) {
       {/* Full Screen Details Modal */}
       {selectedEvent && (
         <div className="fixed inset-0 z-[100] bg-white overflow-y-auto animate-fadeIn font-sans">
-          <div className="max-w-4xl mx-auto px-6 py-12">
+          <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 sm:py-12">
             <button
               onClick={closeEvent}
               className="mb-8 flex items-center gap-2 text-sm font-bold text-zinc-500 hover:text-zinc-900 transition-colors uppercase tracking-wider"

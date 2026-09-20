@@ -7,16 +7,17 @@ export default function Hero({ onOpenVideo }) {
 
       {/* ── MOBILE LAYOUT (hidden on md+) ── */}
       <div className="md:hidden flex flex-col">
-        {/* Image panel — constrained height so full landscape image shows beautifully */}
+        {/* Image panel — better aspect ratio constraint for modern phones */}
         <div
-          className="relative w-full overflow-hidden"
-          style={{ height: "56vw", minHeight: "210px", maxHeight: "300px" }}
+          className="relative w-full overflow-hidden aspect-[4/3] max-h-[45vh]"
         >
           <img
             src="./hero-bg.jpeg"
             alt="Ajeenkya DY Patil University Campus"
             className="w-full h-full object-cover"
             style={{ objectPosition: "center 30%" }}
+            fetchPriority="high"
+            decoding="async"
           />
           {/* bottom fade into dark content panel */}
           <div
@@ -49,11 +50,11 @@ export default function Hero({ onOpenVideo }) {
             </span>
           </div>
 
-          <h1 className="text-5xl font-extrabold tracking-tighter leading-none font-sans uppercase mb-5 text-white">
+          <h1 className="text-[2.75rem] leading-[1.1] font-extrabold tracking-tight font-sans uppercase mb-4 text-white">
             IEEE ADYPU
           </h1>
 
-          <p className="text-sm text-zinc-400 font-normal leading-relaxed mb-8 max-w-sm">
+          <p className="text-[13px] text-zinc-400 font-normal leading-relaxed mb-8 max-w-sm">
             {siteConfig.tagline}
           </p>
 
@@ -91,6 +92,8 @@ export default function Hero({ onOpenVideo }) {
             alt="Ajeenkya DY Patil University Campus"
             className="w-full h-full object-cover"
             style={{ objectPosition: "center 30%" }}
+            fetchPriority="high"
+            decoding="async"
           />
           <div
             className="absolute inset-0"

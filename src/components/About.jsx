@@ -2,7 +2,7 @@ import { siteConfig } from "../data.js";
 
 export default function About() {
   return (
-    <section id="about" className="bg-white font-sans py-20 border-t border-zinc-100">
+    <section id="about" className="bg-white font-sans py-12 md:py-20 border-t border-zinc-100">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
@@ -34,10 +34,10 @@ export default function About() {
                 key={stat.label}
                 className="p-8 border border-zinc-200 bg-zinc-50 hover:bg-white hover:shadow-sm transition-all duration-300"
               >
-                <div className="text-4xl sm:text-5xl font-extrabold text-zinc-900 mb-2">
+                <div className="text-3xl sm:text-5xl font-extrabold text-zinc-900 mb-2">
                   {stat.value}
                 </div>
-                <div className="text-[11px] font-mono font-bold tracking-[0.18em] uppercase text-zinc-500">
+                <div className="text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.18em] uppercase text-zinc-500">
                   {stat.label}
                 </div>
               </div>
