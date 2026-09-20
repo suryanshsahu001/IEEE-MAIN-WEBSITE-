@@ -20,6 +20,15 @@ export default function Events() {
     }
   }, []);
 
+  useEffect(() => {
+    if (selectedEvent) {
+      document.body.classList.add("scroll-lock");
+    } else {
+      document.body.classList.remove("scroll-lock");
+    }
+    return () => document.body.classList.remove("scroll-lock");
+  }, [selectedEvent]);
+
   return (
     <>
     <section id="events" className="bg-white font-sans py-12 md:py-20 border-t border-zinc-100">
@@ -41,10 +50,10 @@ export default function Events() {
               <div
                 key={event.id}
                 onClick={() => window.open(window.location.pathname + '?event=' + event.id, '_blank')}
-                className="group relative flex flex-col border border-zinc-200 bg-white hover:border-zinc-400 transition-all duration-300 overflow-hidden cursor-pointer hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 rounded-xl"
+                className="group relative flex flex-col border border-zinc-200 bg-white hover:border-zinc-400 transition-all duration-300 overflow-hidden cursor-pointer transform-gpu will-change-transform hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 rounded-xl"
               >
                 <div className="h-48 sm:h-56 w-full relative overflow-hidden bg-zinc-100">
-                  <img src={event.image || './gallery/ieee-day.jpg'} alt={event.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" />
+                  <img src={event.image || './gallery/ieee-day.jpg'} alt={event.title} className="w-full h-full object-cover transition-transform duration-700 transform-gpu will-change-transform group-hover:scale-105" loading="lazy" decoding="async" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute top-4 right-4">
                     <span

@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Play, X } from "lucide-react";
 import { gallery } from "../data.js";
 
@@ -7,6 +7,15 @@ export default function Gallery({ onOpenVideo }) {
 
   const openEvent = useCallback((item) => setSelectedEvent(item), []);
   const closeEvent = useCallback(() => setSelectedEvent(null), []);
+
+  useEffect(() => {
+    if (selectedEvent) {
+      document.body.classList.add("scroll-lock");
+    } else {
+      document.body.classList.remove("scroll-lock");
+    }
+    return () => document.body.classList.remove("scroll-lock");
+  }, [selectedEvent]);
 
   return (
     <>
@@ -38,7 +47,7 @@ export default function Gallery({ onOpenVideo }) {
                   <img
                     src={item.url}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 transform-gpu will-change-transform group-hover:scale-105"
                     loading="lazy"
                     decoding="async"
                   />
@@ -59,7 +68,7 @@ export default function Gallery({ onOpenVideo }) {
                       className="absolute inset-0 flex items-center justify-center"
                       aria-label={`Play ${item.title}`}
                     >
-                      <span className="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center shadow-xl hover:scale-110 transition-transform border border-zinc-200">
+                      <span className="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center shadow-xl transform-gpu will-change-transform hover:scale-110 transition-transform border border-zinc-200">
                         <Play className="w-5 h-5 ml-0.5 fill-zinc-900 text-zinc-900" />
                       </span>
                     </button>

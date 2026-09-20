@@ -91,7 +91,7 @@ export default function Highlights({ onOpenVideo }) {
                   muted 
                   playsInline
                   preload="metadata"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-700 transform-gpu will-change-transform group-hover:scale-105"
                 />
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-zinc-800 via-zinc-900 to-black flex items-center justify-center">
@@ -108,7 +108,7 @@ export default function Highlights({ onOpenVideo }) {
                 <Play className="w-3 h-3 fill-white" /> 0:45
               </div>
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 flex items-center justify-center group-hover:scale-110 transition-all" style={{ backgroundColor: 'rgba(165, 28, 48, 0.5)' }}>
+                <div className="w-20 h-20 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 flex items-center justify-center transform-gpu will-change-transform group-hover:scale-110 transition-all" style={{ backgroundColor: 'rgba(165, 28, 48, 0.5)' }}>
                   <Play className="w-8 h-8 fill-white text-white ml-1" />
                 </div>
               </div>
@@ -147,7 +147,7 @@ export default function Highlights({ onOpenVideo }) {
                     muted 
                     playsInline
                     preload="metadata"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 transform-gpu will-change-transform group-hover:scale-105"
                   />
                 ) : (
                   <div className="absolute inset-0 bg-zinc-800 flex items-center justify-center text-zinc-600 font-mono text-xs transition-transform duration-700 group-hover:scale-105">

@@ -84,7 +84,7 @@ export default function Hero({ onOpenVideo }) {
       {/* ── DESKTOP LAYOUT (hidden below md) — completely unchanged ── */}
       <div
         className="hidden md:block relative overflow-hidden"
-        style={{ minHeight: "100vh" }}
+        style={{ minHeight: "100dvh" }}
       >
         <div className="absolute inset-0 z-0">
           <img
@@ -114,7 +114,7 @@ export default function Hero({ onOpenVideo }) {
 
         <div
           className="relative z-10 h-full flex flex-col justify-end"
-          style={{ minHeight: "100vh" }}
+          style={{ minHeight: "100dvh" }}
         >
           <div className="max-w-7xl mx-auto px-10 lg:px-16 pb-24 pt-40 lg:pt-52 w-full">
             <div className="mb-5">

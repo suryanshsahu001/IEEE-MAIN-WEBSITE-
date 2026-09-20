@@ -31,6 +31,15 @@ export default function Team() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (ourCommunityOpen) {
+      document.body.classList.add("scroll-lock");
+    } else {
+      document.body.classList.remove("scroll-lock");
+    }
+    return () => document.body.classList.remove("scroll-lock");
+  }, [ourCommunityOpen]);
+
   const openCommunity = useCallback(() => setOurCommunityOpen(true), []);
   const closeCommunity = useCallback(() => setOurCommunityOpen(false), []);
 
@@ -102,7 +111,7 @@ export default function Team() {
                     <img
                       src={mentor.photo}
                       alt={mentor.name}
-                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover object-center transition-transform duration-500 transform-gpu will-change-transform group-hover:scale-105"
                       loading="lazy"
                       decoding="async"
                       style={{ display: "block", width: "100%", height: "100%" }}
@@ -221,7 +230,7 @@ export default function Team() {
                     <img
                       src={member.photo}
                       alt={member.name}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 transform-gpu will-change-transform group-hover:scale-105"
                       loading="eager"
                       decoding="async"
                       fetchPriority={i < 12 ? "high" : "low"}

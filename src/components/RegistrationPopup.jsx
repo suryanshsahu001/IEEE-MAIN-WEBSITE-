@@ -16,6 +16,15 @@ export default function RegistrationPopup() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (visible) {
+      document.body.classList.add("scroll-lock");
+    } else {
+      document.body.classList.remove("scroll-lock");
+    }
+    return () => document.body.classList.remove("scroll-lock");
+  }, [visible]);
+
   const close = () => {
     setAnimating(false);
     setTimeout(() => setVisible(false), 300);
