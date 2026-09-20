@@ -48,26 +48,14 @@ export default function VideoModal({ video, onClose }) {
                 <p className="text-zinc-500 text-xs font-mono tracking-widest uppercase">Loading video…</p>
               </div>
             )}
-            {/* Error state */}
-            {error && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-zinc-900 z-10 px-6 text-center">
-                <p className="text-zinc-300 font-bold text-lg mb-2">Unable to play video</p>
-                <p className="text-zinc-500 text-sm">The video file could not be loaded. Please check the file exists on the server.</p>
-              </div>
-            )}
             <video
               src={url}
               controls
               autoPlay
               playsInline
               preload="metadata"
-              className="absolute inset-0 w-full h-full object-contain bg-black transform-gpu will-change-transform"
+              className="absolute inset-0 w-full h-full object-contain bg-black"
               onLoadedData={() => setLoading(false)}
-              onError={(e) => { 
-                console.error("Video load error:", e);
-                setLoading(false); 
-                setError(true); 
-              }}
             >
               Your browser does not support video playback.
             </video>
