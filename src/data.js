@@ -375,7 +375,7 @@ export const mentors = [
 
 export const communityMembers = [
   { name: "PRATHMESH SAKHARE", role: "YP PRESIDENT", photo: "./members/community/PRATHMESH SAKHARE.png" },
-  { name: "ARYAN VAIDHYA", role: "YP VICE PRESIDENT", photo: "./members/community/ARYAN VAIDHYA.png" },
+  { name: "ARYAN VAIDYA", role: "YP VICE PRESIDENT", photo: "./members/community/ARYAN VAIDYA.png" },
   { name: "YASHRAJ SHARMA", role: "CSE CHAIR", photo: "./members/community/YASHRAJ SHARMA.png" },
   { name: "SHRUTI POTAWAR", role: "WOMEN'S CHAIR", photo: "./members/community/SHRUTI POTAWAR.png" },
   { name: "PRATIKSHA WARULE", role: "EMBS CHAIR", photo: "./members/community/PRATIKSHA WARULE.png" },
