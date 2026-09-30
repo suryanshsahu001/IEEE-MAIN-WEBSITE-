@@ -22,7 +22,7 @@ export default function VideoModal({ video, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/90 backdrop-blur-md animate-fadeIn"
+      className="fixed inset-0 z-[500] flex items-center justify-center p-4 bg-zinc-950/90 backdrop-blur-md animate-fadeIn"
       onClick={onClose}
     >
       <div

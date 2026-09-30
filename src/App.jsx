@@ -41,7 +41,6 @@ export default function App() {
       <Suspense fallback={null}>
         <Footer />
         <VideoModal video={video} onClose={() => setVideo(null)} />
-        <RegistrationPopup />
         {chaptersOpen && <Chapters onClose={() => setChaptersOpen(false)} />}
       </Suspense>
     </div>

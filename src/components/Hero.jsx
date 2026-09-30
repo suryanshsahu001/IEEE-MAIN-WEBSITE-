@@ -17,7 +17,8 @@ export default function Hero({ onOpenVideo }) {
             className="w-full h-full object-cover"
             style={{ objectPosition: "center 30%" }}
             fetchPriority="high"
-            decoding="async"
+            loading="eager"
+            decoding="sync"
           />
           {/* bottom fade into dark content panel */}
           <div
@@ -93,7 +94,8 @@ export default function Hero({ onOpenVideo }) {
             className="w-full h-full object-cover"
             style={{ objectPosition: "center 30%" }}
             fetchPriority="high"
-            decoding="async"
+            loading="eager"
+            decoding="sync"
           />
           <div
             className="absolute inset-0"

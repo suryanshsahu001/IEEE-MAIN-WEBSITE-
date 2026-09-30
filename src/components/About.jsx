@@ -44,6 +44,33 @@ export default function About() {
             ))}
           </div>
         </div>
+
+        <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <a
+            href="https://ieeemaharashtra.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center px-6 py-4 border-2 border-zinc-200 text-zinc-900 font-mono font-bold text-xs tracking-[0.1em] uppercase hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all text-center"
+          >
+            IEEE Maharashtra
+          </a>
+          <a
+            href="https://ieeeindiacouncil.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center px-6 py-4 border-2 border-zinc-200 text-zinc-900 font-mono font-bold text-xs tracking-[0.1em] uppercase hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all text-center"
+          >
+            IEEE India Council
+          </a>
+          <a
+            href="https://www.ieee.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center px-6 py-4 border-2 border-zinc-200 text-zinc-900 font-mono font-bold text-xs tracking-[0.1em] uppercase hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all text-center"
+          >
+            IEEE Global
+          </a>
+        </div>
       </div>
     </section>
   );

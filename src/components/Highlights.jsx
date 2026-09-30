@@ -39,7 +39,7 @@ export default function Highlights({ onOpenVideo }) {
             <div className="h-px w-8 bg-tan-500/50" style={{ backgroundColor: 'rgba(165, 28, 48, 0.5)' }} />
           </div>
           <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Discover <span style={{ color: '#A51C30' }}>What’s Next</span>
+            Explore the <span style={{ color: '#A51C30' }}>Highlights</span>
           </h2>
           <p className="mt-4 text-zinc-400 text-sm">
             Relive the energy, people and moments captured by the IEEE ADYPU team.
@@ -64,16 +64,11 @@ export default function Highlights({ onOpenVideo }) {
             </div>
             
             <h3 className="text-3xl sm:text-4xl font-extrabold text-white mb-4 tracking-tight">
-              Tech4Life Hackathon
+              MEDHA TECH4LIFE 2026
             </h3>
             
-            <div className="flex items-center gap-2 text-zinc-400 mb-6 text-sm font-medium">
-              <Calendar className="w-4 h-4" />
-              <span>Coming Soon</span>
-            </div>
-            
-            <p className="text-zinc-400 text-sm leading-relaxed mb-8">
-              Get ready to innovate! The Tech4Life Hackathon is approaching fast. Join us to build solutions that improve daily life using cutting-edge technology.
+            <p className="text-zinc-400 text-sm leading-relaxed mb-8 mt-4">
+              A look back at MEDHA TECH4LIFE 2026 — bringing together students, ideas, technology, and problem-solving for a meaningful impact.
             </p>
           </div>
 
@@ -81,16 +76,16 @@ export default function Highlights({ onOpenVideo }) {
           <div className="lg:col-span-6 order-1 lg:order-2">
             <div 
               className="relative aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden group cursor-pointer border border-white/10 shadow-2xl"
-              onClick={() => onOpenVideo && onOpenVideo('./gallery/highlights-main.mp4', 'Tech4Life Hackathon')}
+              onClick={() => onOpenVideo && onOpenVideo('./gallery/medha-2026.mp4', 'MEDHA TECH4LIFE 2026')}
             >
               {isVisible ? (
                 <video 
-                  src="./gallery/highlights-main.mp4" 
+                  src="./gallery/medha-2026.mp4" 
                   autoPlay={!isMobile}
                   loop 
                   muted 
                   playsInline
-                  preload="metadata"
+                  preload="none"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               ) : (
@@ -146,7 +141,7 @@ export default function Highlights({ onOpenVideo }) {
                     loop 
                     muted 
                     playsInline
-                    preload="metadata"
+                    preload="none"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 ) : (

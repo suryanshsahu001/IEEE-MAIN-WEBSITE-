@@ -2,34 +2,10 @@ import { useState, useEffect, useCallback } from "react";
 import { X } from "lucide-react";
 import { team, mentors, communityMembers } from "../data.js";
 
-// Preload community images in the background when browser is idle
-function preloadCommunityImages() {
-  const load = () => {
-    communityMembers.forEach((member) => {
-      const img = new Image();
-      img.src = member.photo;
-    });
-  };
-  if ("requestIdleCallback" in window) {
-    requestIdleCallback(load, { timeout: 3000 });
-  } else {
-    setTimeout(load, 2000);
-  }
-}
-
 export default function Team() {
   const [mentorsOpen, setMentorsOpen] = useState(false);
   const [ourCommunityOpen, setOurCommunityOpen] = useState(false);
-  const [imagesPreloaded, setImagesPreloaded] = useState(false);
-
-  // Start preloading community images 2s after page loads
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      preloadCommunityImages();
-      setImagesPreloaded(true);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
+  const [imagesPreloaded, setImagesPreloaded] = useState(true); // default to true since we'll rely on native lazy loading
 
   const openCommunity = useCallback(() => setOurCommunityOpen(true), []);
   const closeCommunity = useCallback(() => setOurCommunityOpen(false), []);
@@ -222,9 +198,9 @@ export default function Team() {
                       src={member.photo}
                       alt={member.name}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      loading="eager"
+                      loading="lazy"
                       decoding="async"
-                      fetchPriority={i < 12 ? "high" : "low"}
+                      fetchPriority="low"
                       onLoad={(e) => {
                         e.currentTarget.style.opacity = "1";
                       }}

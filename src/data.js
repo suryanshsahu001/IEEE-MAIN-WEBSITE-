@@ -79,22 +79,6 @@ export const chapters = [
 
 export const events = [
   {
-    id: "evt-202",
-    title: "Tech4Life Hackathon",
-    category: "Hackathon",
-    status: "upcoming",
-    date: "22nd – 23rd September 2026",
-    time: "",
-    venue: "ADYPU Incubation & Innovation Hub",
-    speaker: "IEEE ADYPU Student Branch",
-    speakerTitle: "Industry Mentors & Tech Leads",
-    description:
-      "A 36-hour hackathon where student teams build technology-driven solutions for real-life problems across healthcare, education, mobility, and sustainability.",
-    tags: ["Hackathon", "AI", "IoT"],
-    registrationOpen: true,
-    capacity: "300 Teams",
-  },
-  {
     id: "evt-204",
     title: "IEEE Day 2026",
     category: "Celebration",
@@ -112,6 +96,15 @@ export const events = [
 ];
 
 export const gallery = [
+  {
+    id: "gal-8",
+    title: "MEDHA TECH4LIFE 2026",
+    category: "Events",
+    url: "./gallery/medha-2026-cover.jpg",
+    video: "./gallery/medha-2026.mp4",
+    date: "2026",
+    description: "Capturing Campus Moments at MEDHA TECH4LIFE 2026.",
+  },
   {
     id: "gal-1",
     title: "Diksharambh 2026",
@@ -152,6 +145,15 @@ export const gallery = [
         "./gallery/next-gen/image8.jpg"
       ]
     }
+  },
+  {
+    id: "gal-7",
+    title: "ICICIS 2026",
+    category: "Events",
+    url: "./gallery/icics-cover.jpg",
+    video: "./gallery/icics-2026.mp4",
+    date: "2026",
+    description: "Capturing Campus Moments at ICICIS 2026.",
   },
   {
     id: "gal-3",
@@ -231,15 +233,6 @@ export const gallery = [
         "./gallery/ai-health/image8.jpeg"
       ]
     }
-  },
-  {
-    id: "gal-7",
-    title: "ICICIS 2026",
-    category: "Events",
-    url: "./gallery/icics-cover.jpg",
-    video: "./gallery/icics-2026.mp4",
-    date: "2026",
-    description: "Capturing Campus Moments at ICICIS 2026.",
   },
 ];
 

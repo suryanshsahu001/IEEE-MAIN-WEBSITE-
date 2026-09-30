@@ -4,6 +4,7 @@ import { gallery } from "../data.js";
 
 export default function Gallery({ onOpenVideo }) {
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [showAll, setShowAll] = useState(false);
 
   const openEvent = useCallback((item) => setSelectedEvent(item), []);
   const closeEvent = useCallback(() => setSelectedEvent(null), []);
@@ -28,7 +29,7 @@ export default function Gallery({ onOpenVideo }) {
           </h2>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            {gallery.map((item) => (
+            {gallery.slice(0, 4).map((item) => (
               <div
                 key={item.id}
                 className="group relative overflow-hidden bg-zinc-100 border border-zinc-200 flex flex-col cursor-pointer rounded-lg hover:shadow-lg transition-shadow duration-300"
@@ -96,12 +97,22 @@ export default function Gallery({ onOpenVideo }) {
               </div>
             ))}
           </div>
+
+          <div className="mt-12 flex justify-center">
+            <button
+              onClick={() => setShowAll(true)}
+              className="px-8 py-4 border-2 font-mono font-bold text-sm tracking-[0.15em] uppercase transition-all duration-200 hover:bg-zinc-900 hover:text-white hover:border-zinc-900"
+              style={{ borderColor: "#A51C30", color: "#A51C30" }}
+            >
+              MORE
+            </button>
+          </div>
         </div>
       </section>
 
       {/* Full Screen Details Modal */}
       {selectedEvent && (
-        <div className="fixed inset-0 z-[100] bg-white overflow-y-auto animate-fadeIn font-sans">
+        <div className="fixed inset-0 z-[300] bg-white overflow-y-auto animate-fadeIn font-sans">
           <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 sm:py-12">
             <button
               onClick={closeEvent}
@@ -193,6 +204,91 @@ export default function Gallery({ onOpenVideo }) {
                 </button>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Full Screen All Events Page (Modal) */}
+      {showAll && (
+        <div className="fixed inset-0 z-[200] bg-zinc-50 overflow-y-auto animate-fadeIn font-sans">
+          <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-16 md:py-20">
+            <button
+              onClick={() => setShowAll(false)}
+              className="mb-8 flex items-center gap-2 text-sm font-bold text-zinc-500 hover:text-zinc-900 transition-colors uppercase tracking-wider"
+            >
+              <X className="w-5 h-5" /> Back to Home
+            </button>
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-zinc-900 uppercase tracking-tight leading-none mb-10">
+              All Campus <span style={{ color: "#A51C30" }}>Moments</span>
+            </h1>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              {gallery.map((item) => (
+                <div
+                  key={item.id}
+                  className="group relative overflow-hidden bg-zinc-100 border border-zinc-200 flex flex-col cursor-pointer rounded-lg hover:shadow-lg transition-shadow duration-300"
+                  onClick={() => openEvent(item)}
+                >
+                  <div className="relative overflow-hidden aspect-[4/3]">
+                    <img
+                      src={item.url}
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    {item.video && (
+                      <div className="absolute top-3 left-3">
+                        <span className="inline-block bg-white/95 backdrop-blur-sm px-2.5 py-1 text-[10px] font-mono font-bold tracking-widest uppercase rounded-sm shadow-sm">
+                          Video
+                        </span>
+                      </div>
+                    )}
+                    {item.video && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onOpenVideo(item.video, item.title);
+                        }}
+                        className="absolute inset-0 flex items-center justify-center"
+                        aria-label={`Play ${item.title}`}
+                      >
+                        <span className="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center shadow-xl hover:scale-110 transition-transform border border-zinc-200">
+                          <Play className="w-5 h-5 ml-0.5 fill-zinc-900 text-zinc-900" />
+                        </span>
+                      </button>
+                    )}
+                    {!item.video && (
+                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    )}
+                  </div>
+
+                  <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between bg-white">
+                    <div>
+                      <div className="text-[8px] sm:text-[10px] font-mono font-bold tracking-[0.18em] uppercase text-zinc-400 mb-1.5">
+                        {item.category} · {item.date}
+                      </div>
+                      <h3 className="text-xs sm:text-sm font-bold text-zinc-900 mb-1.5 leading-snug">
+                        {item.title}
+                      </h3>
+                      <p className="hidden sm:block text-xs text-zinc-500 leading-relaxed line-clamp-2">
+                        {item.description}
+                      </p>
+                    </div>
+                    {(item.report || item.video) && (
+                      <div className="mt-3 pt-3 border-t border-zinc-100">
+                        <span
+                          className="text-[10px] font-mono font-bold tracking-widest uppercase"
+                          style={{ color: "#A51C30" }}
+                        >
+                          {item.report ? "View Report →" : "Watch Video →"}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}
