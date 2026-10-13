@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { X } from "lucide-react";
 import { team, mentors, communityMembers } from "../data.js";
 
@@ -169,31 +169,15 @@ export default function Team() {
 }
 
 function TeamMemberCard({ member }) {
-  const [loaded, setLoaded] = useState(false);
-
   return (
     <div className="group overflow-hidden border border-zinc-200 bg-zinc-50 flex flex-col">
       <div className="relative overflow-hidden aspect-[4/5] bg-zinc-100">
-        <div
-          className={`absolute inset-0 bg-gradient-to-r from-zinc-200 via-zinc-100 to-zinc-200 animate-pulse transition-opacity duration-300 ${
-            loaded ? "opacity-0 pointer-events-none" : "opacity-100"
-          }`}
-          aria-hidden="true"
-        />
         <img
-          ref={(el) => {
-            if (el && el.complete && !loaded) {
-              setLoaded(true);
-            }
-          }}
           src={member.photo}
           alt={member.name}
-          className={`w-full h-full object-cover object-top transition-opacity duration-300 ${
-            loaded ? "opacity-100" : "opacity-0"
-          }`}
+          className="w-full h-full object-cover object-top"
           loading="lazy"
           decoding="async"
-          onLoad={() => setLoaded(true)}
         />
       </div>
 
@@ -213,32 +197,15 @@ function TeamMemberCard({ member }) {
 }
 
 function CommunityMemberCard({ member }) {
-  const [loaded, setLoaded] = useState(false);
-
   return (
     <div className="group overflow-hidden border border-zinc-200 bg-zinc-50 flex flex-col rounded-lg shadow-sm hover:shadow-md transition-shadow">
       <div className="aspect-square bg-zinc-100 relative overflow-hidden">
-        {/* Skeleton shimmer shown until image fully completes loading */}
-        <div
-          className={`absolute inset-0 bg-gradient-to-r from-zinc-200 via-zinc-100 to-zinc-200 animate-pulse transition-opacity duration-300 ${
-            loaded ? "opacity-0 pointer-events-none" : "opacity-100"
-          }`}
-          aria-hidden="true"
-        />
         <img
-          ref={(el) => {
-            if (el && el.complete && !loaded) {
-              setLoaded(true);
-            }
-          }}
           src={member.photo}
           alt={member.name}
-          className={`absolute inset-0 w-full h-full object-cover transition-all duration-300 group-hover:scale-105 ${
-            loaded ? "opacity-100" : "opacity-0"
-          }`}
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           loading="lazy"
           decoding="async"
-          onLoad={() => setLoaded(true)}
           style={{
             objectPosition: "center 15%",
           }}

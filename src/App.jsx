@@ -3,17 +3,16 @@ import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
 import JoinMembership from "./components/JoinMembership.jsx";
 import About from "./components/About.jsx";
+import Highlights from "./components/Highlights.jsx";
+import Events from "./components/Events.jsx";
+import Gallery from "./components/Gallery.jsx";
+import ExtraMoments from "./components/ExtraMoments.jsx";
+import Team from "./components/Team.jsx";
+import Contact from "./components/Contact.jsx";
+import Footer from "./components/Footer.jsx";
 
-// Lazy-load below-fold components
-const Highlights = lazy(() => import("./components/Highlights.jsx"));
-const Events = lazy(() => import("./components/Events.jsx"));
-const Gallery = lazy(() => import("./components/Gallery.jsx"));
-const ExtraMoments = lazy(() => import("./components/ExtraMoments.jsx"));
-const Team = lazy(() => import("./components/Team.jsx"));
-const Contact = lazy(() => import("./components/Contact.jsx"));
-const Footer = lazy(() => import("./components/Footer.jsx"));
+// Lazy-load interactive modals only when opened
 const VideoModal = lazy(() => import("./components/VideoModal.jsx"));
-const RegistrationPopup = lazy(() => import("./components/RegistrationPopup.jsx"));
 const Chapters = lazy(() => import("./components/Chapters.jsx"));
 
 export default function App() {
@@ -29,17 +28,15 @@ export default function App() {
         <Hero onOpenVideo={openVideo} />
         <JoinMembership />
         <About />
-        <Suspense fallback={<div className="h-96" />}>
-          <Highlights onOpenVideo={openVideo} />
-          <Events />
-          <Gallery onOpenVideo={openVideo} />
-          <ExtraMoments onOpenVideo={openVideo} />
-          <Team />
-          <Contact />
-        </Suspense>
+        <Highlights onOpenVideo={openVideo} />
+        <Events />
+        <Gallery onOpenVideo={openVideo} />
+        <ExtraMoments onOpenVideo={openVideo} />
+        <Team />
+        <Contact />
       </main>
+      <Footer />
       <Suspense fallback={null}>
-        <Footer />
         <VideoModal video={video} onClose={() => setVideo(null)} />
         {chaptersOpen && <Chapters onClose={() => setChaptersOpen(false)} />}
       </Suspense>

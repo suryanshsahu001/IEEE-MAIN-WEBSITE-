@@ -16,18 +16,13 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="IEEE Student Branch | ADYPU" />
     <meta name="twitter:description" content="Welcome to the IEEE Student Branch at Ajeenkya DY Patil University." />
-    <link rel="preload" as="image" href="/hero-bg.jpeg" fetchpriority="high">
+    <link rel="preload" as="image" href="./hero-bg.jpeg" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Scoutie+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
-    <script>
-      window.addEventListener('error', function(e) {
-        document.body.innerHTML = '<div style="color:red; font-family:monospace; padding: 20px;">' + e.error.stack.replace(/\n/g, '<br>') + '</div>';
-      });
-    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

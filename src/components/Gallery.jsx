@@ -2,38 +2,6 @@ import { useState, useCallback } from "react";
 import { Play, X } from "lucide-react";
 import { gallery } from "../data.js";
 
-function GalleryImg({ src, alt, className }) {
-  const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(false);
-
-  return (
-    <div className="relative w-full h-full bg-zinc-200 overflow-hidden">
-      {!loaded && !error && (
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-zinc-200 via-zinc-100 to-zinc-200 animate-pulse pointer-events-none"
-          aria-hidden="true"
-        />
-      )}
-      <img
-        ref={(el) => {
-          if (el && el.complete && el.naturalWidth > 0 && !loaded) {
-            setLoaded(true);
-          }
-        }}
-        src={src}
-        alt={alt}
-        className={`${className} transition-opacity duration-300 ${
-          loaded ? "opacity-100" : "opacity-0"
-        }`}
-        loading="lazy"
-        decoding="async"
-        onLoad={() => setLoaded(true)}
-        onError={() => setError(true)}
-      />
-    </div>
-  );
-}
-
 export default function Gallery({ onOpenVideo }) {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showAll, setShowAll] = useState(false);
@@ -67,13 +35,15 @@ export default function Gallery({ onOpenVideo }) {
                 className="group relative overflow-hidden bg-zinc-100 border border-zinc-200 flex flex-col cursor-pointer rounded-lg hover:shadow-lg transition-shadow duration-300"
                 onClick={() => openEvent(item)}
               >
-                <div className="relative overflow-hidden aspect-[4/3] bg-zinc-200">
-                  <GalleryImg
+                <div className="relative overflow-hidden aspect-[4/3] bg-zinc-100">
+                  <img
                     src={item.url}
                     alt={item.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
                   {item.video && (
                     <div className="absolute top-3 left-3">
                       <span className="inline-block bg-white/95 backdrop-blur-sm px-2.5 py-1 text-[10px] font-mono font-bold tracking-widest uppercase rounded-sm shadow-sm">
