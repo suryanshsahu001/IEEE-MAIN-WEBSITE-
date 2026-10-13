@@ -13,6 +13,7 @@ export const siteConfig = {
     "E25B000362@ADYPU.EDU.IN",
   ],
   joinEmail: "ieee@adypu.edu.in",
+  membershipFormUrl: "https://forms.gle/VKpRn85RU4tz7vsc8",
   recapVideoUrl: "./videos/intro-video.mp4",
   stats: [
     { label: "Active Members", value: "50+" },
@@ -77,23 +78,7 @@ export const chapters = [
   },
 ];
 
-export const events = [
-  {
-    id: "evt-204",
-    title: "IEEE Day 2026",
-    category: "Celebration",
-    status: "upcoming",
-    date: "Date To Be Announced",
-    time: "",
-    venue: "Ajeenkya DY Patil University, Pune",
-    speaker: "IEEE ADYPU Student Branch",
-    speakerTitle: "IEEE Members & Faculty",
-    description:
-      "Celebrate IEEE Day 2026 — a global celebration of the day IEEE members first united to advance technology for humanity. Join us for talks, networking, and recognition of outstanding members.",
-    tags: ["IEEE Day", "Networking", "Celebration"],
-    registrationOpen: false,
-  },
-];
+export const events = [];
 
 export const gallery = [
   {

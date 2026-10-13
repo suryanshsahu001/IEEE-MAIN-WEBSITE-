@@ -5,7 +5,6 @@ import { team, mentors, communityMembers } from "../data.js";
 export default function Team() {
   const [mentorsOpen, setMentorsOpen] = useState(false);
   const [ourCommunityOpen, setOurCommunityOpen] = useState(false);
-  const [imagesPreloaded, setImagesPreloaded] = useState(true); // default to true since we'll rely on native lazy loading
 
   const openCommunity = useCallback(() => setOurCommunityOpen(true), []);
   const closeCommunity = useCallback(() => setOurCommunityOpen(false), []);
@@ -184,42 +183,7 @@ export default function Team() {
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
               {communityMembers.map((member, i) => (
-                <div
-                  key={i}
-                  className="group overflow-hidden border border-zinc-200 bg-zinc-50 flex flex-col rounded-lg shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <div className="aspect-square bg-zinc-100 relative overflow-hidden">
-                    {/* Skeleton shimmer shown while image loads */}
-                    <div
-                      className="absolute inset-0 bg-gradient-to-r from-zinc-200 via-zinc-100 to-zinc-200 animate-pulse"
-                      aria-hidden="true"
-                    />
-                    <img
-                      src={member.photo}
-                      alt={member.name}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
-                      fetchPriority="low"
-                      onLoad={(e) => {
-                        e.currentTarget.style.opacity = "1";
-                      }}
-                      style={{ 
-                        opacity: imagesPreloaded ? "1" : "0", 
-                        transition: "opacity 0.3s ease",
-                        objectPosition: "center 15%" 
-                      }}
-                    />
-                  </div>
-                  <div className="p-3 text-center border-t border-zinc-200 bg-white">
-                    <h3 className="text-[10px] font-bold text-zinc-900 uppercase tracking-wide leading-tight">
-                      {member.name}
-                    </h3>
-                    <div className="text-[8px] font-mono font-bold tracking-widest uppercase text-red-700 mt-1">
-                      {member.role}
-                    </div>
-                  </div>
-                </div>
+                <CommunityMemberCard key={i} member={member} />
               ))}
             </div>
           </div>
@@ -228,3 +192,42 @@ export default function Team() {
     </>
   );
 }
+
+function CommunityMemberCard({ member }) {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div className="group overflow-hidden border border-zinc-200 bg-zinc-50 flex flex-col rounded-lg shadow-sm hover:shadow-md transition-shadow">
+      <div className="aspect-square bg-zinc-100 relative overflow-hidden">
+        {/* Skeleton shimmer shown until image fully completes loading */}
+        <div
+          className={`absolute inset-0 bg-gradient-to-r from-zinc-200 via-zinc-100 to-zinc-200 animate-pulse transition-opacity duration-300 ${
+            loaded ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
+          aria-hidden="true"
+        />
+        <img
+          src={member.photo}
+          alt={member.name}
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-300 group-hover:scale-105 ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
+          loading="eager"
+          decoding="sync"
+          onLoad={() => setLoaded(true)}
+          style={{
+            objectPosition: "center 15%",
+          }}
+        />
+      </div>
+      <div className="p-3 text-center border-t border-zinc-200 bg-white">
+        <h3 className="text-[10px] font-bold text-zinc-900 uppercase tracking-wide leading-tight">
+          {member.name}
+        </h3>
+        <div className="text-[8px] font-mono font-bold tracking-widest uppercase text-red-700 mt-1">
+          {member.role}
+        </div>
+      </div>
+    </div>
+  );
+}

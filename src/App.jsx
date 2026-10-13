@@ -1,8 +1,8 @@
 import { useState, useCallback, lazy, Suspense } from "react";
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
+import JoinMembership from "./components/JoinMembership.jsx";
 import About from "./components/About.jsx";
-import Notification from "./components/Notification.jsx";
 
 // Lazy-load below-fold components
 const Highlights = lazy(() => import("./components/Highlights.jsx"));
@@ -25,9 +25,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900 selection:bg-tan-500 selection:text-white font-sans relative">
       <Navbar onOpenChapters={() => setChaptersOpen(true)} />
-      <Notification />
       <main>
         <Hero onOpenVideo={openVideo} />
+        <JoinMembership />
         <About />
         <Suspense fallback={<div className="h-96" />}>
           <Highlights onOpenVideo={openVideo} />

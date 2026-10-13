@@ -1,4 +1,4 @@
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, UserPlus } from "lucide-react";
 import { siteConfig } from "../data.js";
 
 export default function Hero({ onOpenVideo }) {
@@ -67,17 +67,15 @@ export default function Hero({ onOpenVideo }) {
               <span>EXPLORE EVENTS</span>
               <ArrowRight className="w-4 h-4" />
             </a>
-            <button
-              onClick={() =>
-                onOpenVideo(siteConfig.recapVideoUrl, "IEEE ADYPU Official Intro Video")
-              }
-              className="inline-flex items-center justify-center space-x-2 px-6 py-3.5 rounded-full bg-zinc-800/80 border border-white/15 text-zinc-200 text-xs font-mono font-semibold tracking-wider hover:bg-zinc-700/90 hover:text-white transition-all"
+            <a
+              href="https://forms.gle/VKpRn85RU4tz7vsc8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center space-x-2 px-6 py-3.5 rounded-full bg-zinc-800/80 border border-white/15 text-zinc-200 text-xs font-mono font-bold tracking-wider hover:bg-[#A51C30] hover:border-[#A51C30] hover:text-white transition-all shadow-md group"
             >
-              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white text-zinc-900">
-                <Play className="w-3 h-3 ml-0.5 fill-current" />
-              </span>
-              <span>WATCH INTRO</span>
-            </button>
+              <UserPlus className="w-4 h-4 text-zinc-300 group-hover:text-white transition-colors" />
+              <span>JOIN MEMBERSHIP</span>
+            </a>
           </div>
         </div>
       </div>
@@ -144,17 +142,15 @@ export default function Hero({ onOpenVideo }) {
                 <span>EXPLORE EVENTS</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
-              <button
-                onClick={() =>
-                  onOpenVideo(siteConfig.recapVideoUrl, "IEEE ADYPU Official Intro Video")
-                }
-                className="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-zinc-900/70 border border-white/20 text-zinc-200 text-xs font-mono font-semibold tracking-wider hover:bg-zinc-800/90 hover:text-white transition-all"
+              <a
+                href="https://forms.gle/VKpRn85RU4tz7vsc8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-zinc-900/70 border border-white/20 text-zinc-200 text-xs font-mono font-bold tracking-wider hover:bg-[#A51C30] hover:border-[#A51C30] hover:text-white transition-all shadow-md group"
               >
-                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white text-zinc-900">
-                  <Play className="w-3 h-3 ml-0.5 fill-current" />
-                </span>
-                <span>WATCH INTRO</span>
-              </button>
+                <UserPlus className="w-4 h-4 text-zinc-300 group-hover:text-white transition-colors" />
+                <span>JOIN MEMBERSHIP</span>
+              </a>
             </div>
           </div>
         </div>

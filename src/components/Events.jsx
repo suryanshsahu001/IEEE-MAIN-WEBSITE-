@@ -34,81 +34,92 @@ export default function Events() {
           Featured Events
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-4">
-          {events.map((event) => {
-            const status = statusStyles[event.status] || statusStyles.completed;
-            return (
-              <div
-                key={event.id}
-                onClick={() => window.open(window.location.pathname + '?event=' + event.id, '_blank')}
-                className="group relative flex flex-col border border-zinc-200 bg-white hover:border-zinc-400 transition-all duration-300 overflow-hidden cursor-pointer hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 rounded-xl"
-              >
-                <div className="h-48 sm:h-56 w-full relative overflow-hidden bg-zinc-100">
-                  <img src={event.image || './gallery/ieee-day.jpg'} alt={event.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  <div className="absolute top-4 right-4">
-                    <span
-                      className="text-[10px] font-mono font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full border border-white/20 backdrop-blur-md"
-                      style={{ backgroundColor: status.color, color: 'white' }}
-                    >
-                      {status.label}
-                    </span>
-                  </div>
-                  <div className="absolute bottom-4 left-4">
-                    <span className="text-[10px] font-mono font-bold tracking-[0.18em] uppercase text-white/90">
-                      {event.category}
-                    </span>
-                  </div>
-                </div>
-                
-                <div className="flex flex-col flex-1 p-6 sm:p-8 bg-white">
-
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-zinc-900 uppercase tracking-tight mb-3">
-                    {event.title}
-                  </h3>
-                  <p className="text-sm text-zinc-500 leading-relaxed mb-6">
-                    {event.description}
-                  </p>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-sm text-zinc-600">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4 shrink-0" style={{ color: "#A51C30" }} />
-                      <span>{event.date}</span>
-                    </div>
-                    {event.capacity && (
-                      <div className="flex items-center gap-2">
-                        <Users className="w-4 h-4 shrink-0" style={{ color: "#A51C30" }} />
-                        <span>{event.capacity}</span>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="flex items-center justify-between gap-4 mt-auto">
-                    <div>
-                      <div className="text-sm font-bold text-zinc-900">
-                        {event.speaker}
-                      </div>
-                      <div className="text-[11px] font-mono tracking-wider uppercase text-zinc-400">
-                        {event.speakerTitle}
-                      </div>
-                    </div>
-                    {event.registrationOpen && (
-                      <a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLScLbWDK-yv6k8avB69VknoTwUq7y2hUxL5unjteCaASlu4aMw/viewform"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-mono font-bold tracking-widest uppercase whitespace-nowrap hover:underline"
-                        style={{ color: "#A51C30" }}
+        {events && events.length > 0 ? (
+          <div className="grid md:grid-cols-2 gap-4">
+            {events.map((event) => {
+              const status = statusStyles[event.status] || statusStyles.completed;
+              return (
+                <div
+                  key={event.id}
+                  onClick={() => window.open(window.location.pathname + '?event=' + event.id, '_blank')}
+                  className="group relative flex flex-col border border-zinc-200 bg-white hover:border-zinc-400 transition-all duration-300 overflow-hidden cursor-pointer hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 rounded-xl"
+                >
+                  <div className="h-48 sm:h-56 w-full relative overflow-hidden bg-zinc-100">
+                    <img src={event.image || './gallery/ieee-day.jpg'} alt={event.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute top-4 right-4">
+                      <span
+                        className="text-[10px] font-mono font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full border border-white/20 backdrop-blur-md"
+                        style={{ backgroundColor: status.color, color: 'white' }}
                       >
-                        Register <ArrowUpRight className="w-3.5 h-3.5" />
-                      </a>
-                    )}
+                        {status.label}
+                      </span>
+                    </div>
+                    <div className="absolute bottom-4 left-4">
+                      <span className="text-[10px] font-mono font-bold tracking-[0.18em] uppercase text-white/90">
+                        {event.category}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex flex-col flex-1 p-6 sm:p-8 bg-white">
+
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-zinc-900 uppercase tracking-tight mb-3">
+                      {event.title}
+                    </h3>
+                    <p className="text-sm text-zinc-500 leading-relaxed mb-6">
+                      {event.description}
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-sm text-zinc-600">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4 shrink-0" style={{ color: "#A51C30" }} />
+                        <span>{event.date}</span>
+                      </div>
+                      {event.capacity && (
+                        <div className="flex items-center gap-2">
+                          <Users className="w-4 h-4 shrink-0" style={{ color: "#A51C30" }} />
+                          <span>{event.capacity}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex items-center justify-between gap-4 mt-auto">
+                      <div>
+                        <div className="text-sm font-bold text-zinc-900">
+                          {event.speaker}
+                        </div>
+                        <div className="text-[11px] font-mono tracking-wider uppercase text-zinc-400">
+                          {event.speakerTitle}
+                        </div>
+                      </div>
+                      {event.registrationOpen && (
+                        <a
+                          href="https://docs.google.com/forms/d/e/1FAIpQLScLbWDK-yv6k8avB69VknoTwUq7y2hUxL5unjteCaASlu4aMw/viewform"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-mono font-bold tracking-widest uppercase whitespace-nowrap hover:underline"
+                          style={{ color: "#A51C30" }}
+                        >
+                          Register <ArrowUpRight className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="rounded-2xl border border-dashed border-zinc-300 bg-zinc-50/70 p-8 sm:p-12 text-center">
+            <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-red-50 flex items-center justify-center" style={{ color: "#A51C30" }}>
+              <Calendar className="w-6 h-6" />
+            </div>
+            <p className="text-sm sm:text-base text-zinc-600 max-w-xl mx-auto leading-relaxed">
+              There are currently no upcoming events scheduled. Please check back soon for updates on upcoming IEEE events and activities.
+            </p>
+          </div>
+        )}
       </div>
     </section>
 

@@ -45,3 +45,7 @@ Desktop.ini
 # Large video files (exceed GitHub 100MB limit - host on YouTube/Drive instead)
 public/videos/intro-video.mov
 public/videos/intro-video.mp4
+
+# Temporary backups & scratch
+public/members/community_backup/
+scratch/

@@ -1,22 +1,63 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Play, Calendar, Star, ArrowRight } from 'lucide-react';
+import { Play, Star } from 'lucide-react';
+
+function RunningVideo({ src, poster, className }) {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Set DOM properties directly to ensure mobile browsers permit autoplay
+    video.muted = true;
+    video.defaultMuted = true;
+
+    const playVideo = () => {
+      const promise = video.play();
+      if (promise !== undefined) {
+        promise.catch(() => {
+          // Handled gracefully if browser policy requires interaction
+        });
+      }
+    };
+
+    playVideo();
+    video.addEventListener('loadeddata', playVideo);
+    video.addEventListener('canplay', playVideo);
+
+    return () => {
+      video.removeEventListener('loadeddata', playVideo);
+      video.removeEventListener('canplay', playVideo);
+    };
+  }, [src]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      poster={poster}
+      autoPlay
+      loop
+      muted
+      playsInline
+      webkit-playsinline="true"
+      preload="auto"
+      className={className}
+    />
+  );
+}
 
 export default function Highlights({ onOpenVideo }) {
   const sectionRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia('(max-width: 1023px)');
-    setIsMobile(mq.matches);
-    const handler = (e) => setIsMobile(e.matches);
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
-  }, []);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
       { rootMargin: '200px' }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -79,13 +120,9 @@ export default function Highlights({ onOpenVideo }) {
               onClick={() => onOpenVideo && onOpenVideo('./gallery/medha-2026.mp4', 'MEDHA TECH4LIFE 2026')}
             >
               {isVisible ? (
-                <video 
+                <RunningVideo 
                   src="./gallery/medha-2026.mp4" 
-                  autoPlay={!isMobile}
-                  loop 
-                  muted 
-                  playsInline
-                  preload="none"
+                  poster="./gallery/medha-2026-cover.jpg"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               ) : (
@@ -135,13 +172,8 @@ export default function Highlights({ onOpenVideo }) {
                 }}
               >
                 {vid.videoUrl && isVisible ? (
-                  <video 
+                  <RunningVideo 
                     src={vid.videoUrl} 
-                    autoPlay={!isMobile}
-                    loop 
-                    muted 
-                    playsInline
-                    preload="none"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 ) : (

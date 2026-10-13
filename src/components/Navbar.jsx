@@ -106,7 +106,7 @@ export default function Navbar({ onOpenChapters }) {
               {moreMenuOpen && (
                 <div className="absolute top-full right-0 mt-0 w-56 bg-white border border-zinc-200 shadow-xl py-2 animate-fadeIn z-50">
                   <a 
-                    href="https://forms.gle/JSebyPxB8KsE5btm7" 
+                    href="https://forms.gle/VKpRn85RU4tz7vsc8" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="block px-4 py-2 text-[11px] font-mono font-bold tracking-[0.18em] text-zinc-600 hover:text-[#A51C30] hover:bg-zinc-50 transition-colors"
@@ -159,7 +159,7 @@ export default function Navbar({ onOpenChapters }) {
             {/* MORE section */}
             <p className="text-[9px] font-mono font-bold tracking-[0.2em] text-zinc-400 uppercase pt-4 pb-1">More</p>
             <a
-              href="https://forms.gle/JSebyPxB8KsE5btm7"
+              href="https://forms.gle/VKpRn85RU4tz7vsc8"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
