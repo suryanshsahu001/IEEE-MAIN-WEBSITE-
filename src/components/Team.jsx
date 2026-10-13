@@ -116,32 +116,7 @@ export default function Team() {
 
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {team.map((member) => (
-              <div
-                key={member.id}
-                className="group overflow-hidden border border-zinc-200 bg-zinc-50"
-              >
-                <div className="relative overflow-hidden aspect-[4/5] bg-white">
-                  <img
-                    src={member.photo}
-                    alt={member.name}
-                    className="w-full h-full object-cover object-top"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-
-                <div className="p-5">
-                  <div className="text-[11px] font-mono font-bold tracking-[0.18em] uppercase text-zinc-400 mb-1">
-                    {member.domain}
-                  </div>
-                  <h3 className="text-lg font-bold text-zinc-900 mb-1 uppercase">
-                    {member.name}
-                  </h3>
-                  <div className="text-sm font-semibold" style={{ color: "#A51C30" }}>
-                    {member.role}
-                  </div>
-                </div>
-              </div>
+              <TeamMemberCard key={member.id} member={member} />
             ))}
           </div>
 
@@ -193,6 +168,50 @@ export default function Team() {
   );
 }
 
+function TeamMemberCard({ member }) {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div className="group overflow-hidden border border-zinc-200 bg-zinc-50 flex flex-col">
+      <div className="relative overflow-hidden aspect-[4/5] bg-zinc-100">
+        <div
+          className={`absolute inset-0 bg-gradient-to-r from-zinc-200 via-zinc-100 to-zinc-200 animate-pulse transition-opacity duration-300 ${
+            loaded ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
+          aria-hidden="true"
+        />
+        <img
+          ref={(el) => {
+            if (el && el.complete && !loaded) {
+              setLoaded(true);
+            }
+          }}
+          src={member.photo}
+          alt={member.name}
+          className={`w-full h-full object-cover object-top transition-opacity duration-300 ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
+          loading="lazy"
+          decoding="async"
+          onLoad={() => setLoaded(true)}
+        />
+      </div>
+
+      <div className="p-5 bg-white flex-1">
+        <div className="text-[11px] font-mono font-bold tracking-[0.18em] uppercase text-zinc-400 mb-1">
+          {member.domain}
+        </div>
+        <h3 className="text-lg font-bold text-zinc-900 mb-1 uppercase">
+          {member.name}
+        </h3>
+        <div className="text-sm font-semibold" style={{ color: "#A51C30" }}>
+          {member.role}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function CommunityMemberCard({ member }) {
   const [loaded, setLoaded] = useState(false);
 
@@ -207,13 +226,18 @@ function CommunityMemberCard({ member }) {
           aria-hidden="true"
         />
         <img
+          ref={(el) => {
+            if (el && el.complete && !loaded) {
+              setLoaded(true);
+            }
+          }}
           src={member.photo}
           alt={member.name}
           className={`absolute inset-0 w-full h-full object-cover transition-all duration-300 group-hover:scale-105 ${
             loaded ? "opacity-100" : "opacity-0"
           }`}
-          loading="eager"
-          decoding="sync"
+          loading="lazy"
+          decoding="async"
           onLoad={() => setLoaded(true)}
           style={{
             objectPosition: "center 15%",

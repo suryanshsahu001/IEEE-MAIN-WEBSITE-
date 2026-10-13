@@ -2,6 +2,38 @@ import { useState, useCallback } from "react";
 import { Play, X, ZoomIn } from "lucide-react";
 import { extraMoments } from "../data.js";
 
+function MomentImg({ src, alt, className }) {
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
+
+  return (
+    <div className="relative w-full h-full bg-zinc-200 overflow-hidden">
+      {!loaded && !error && (
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-zinc-200 via-zinc-100 to-zinc-200 animate-pulse pointer-events-none"
+          aria-hidden="true"
+        />
+      )}
+      <img
+        ref={(el) => {
+          if (el && el.complete && el.naturalWidth > 0 && !loaded) {
+            setLoaded(true);
+          }
+        }}
+        src={src}
+        alt={alt}
+        className={`${className} transition-opacity duration-300 ${
+          loaded ? "opacity-100" : "opacity-0"
+        }`}
+        loading="lazy"
+        decoding="async"
+        onLoad={() => setLoaded(true)}
+        onError={() => setError(true)}
+      />
+    </div>
+  );
+}
+
 export default function ExtraMoments({ onOpenVideo }) {
   const [selected, setSelected] = useState(null);
 
@@ -31,19 +63,17 @@ export default function ExtraMoments({ onOpenVideo }) {
               key={item.id}
               className="group relative overflow-hidden bg-zinc-100 border border-zinc-200 flex flex-col rounded-lg hover:shadow-md transition-shadow duration-300"
             >
-              <div className="relative overflow-hidden aspect-[4/3]">
+              <div className="relative overflow-hidden aspect-[4/3] bg-zinc-200">
                 {item.video ? (
                   <button
                     onClick={() => onOpenVideo(item.video, item.title)}
                     className="block w-full h-full cursor-pointer"
                     aria-label={`Play ${item.title}`}
                   >
-                    <img
+                    <MomentImg
                       src={item.url}
                       alt={item.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
                     />
                   </button>
                 ) : (
@@ -52,12 +82,10 @@ export default function ExtraMoments({ onOpenVideo }) {
                     className="block w-full h-full cursor-pointer"
                     aria-label={`View ${item.title}`}
                   >
-                    <img
+                    <MomentImg
                       src={item.url}
                       alt={item.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
                     />
                   </button>
                 )}

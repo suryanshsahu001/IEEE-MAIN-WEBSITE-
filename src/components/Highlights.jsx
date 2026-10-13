@@ -159,8 +159,8 @@ export default function Highlights({ onOpenVideo }) {
           {/* Right Column: Video Grid */}
           <div className="lg:col-span-3 flex flex-row lg:flex-col gap-4 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 order-3 snap-x">
             {[
-              { id: 1, duration: '0:32', videoUrl: './gallery/video-1.mp4' },
-              { id: 2, duration: 'New', videoUrl: './videos/PV.mp4' }
+              { id: 1, duration: '0:32', videoUrl: './gallery/video-1.mp4', poster: './gallery/video-1-poster.jpg' },
+              { id: 2, duration: 'New', videoUrl: './videos/PV.mp4', poster: './videos/pv-poster.jpg' }
             ].map((vid) => (
               <div 
                 key={vid.id} 
@@ -174,6 +174,7 @@ export default function Highlights({ onOpenVideo }) {
                 {vid.videoUrl && isVisible ? (
                   <RunningVideo 
                     src={vid.videoUrl} 
+                    poster={vid.poster}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 ) : (

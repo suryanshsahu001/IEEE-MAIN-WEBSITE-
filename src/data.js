@@ -234,7 +234,7 @@ export const extraMoments = [
     id: "em-1",
     title: "Bloopers & Fun Moments",
     category: "Video",
-    url: "./gallery/moments-1.mp4",
+    url: "./gallery/moments-1.jpg",
     video: "./gallery/moments-1.mp4",
     date: "2026",
     description: "Behind-the-scenes bloopers and fun moments from our events.",
@@ -272,7 +272,7 @@ export const team = [
     role: "PRESIDENT",
     designation: "President - IEEE ADYPU Student Branch",
     domain: "Executive Leadership",
-    photo: "./members/swapnil_final.png",
+    photo: "./members/swapnil_final.jpeg",
     bio: "Leading overall vision, strategic initiatives, industrial collaborations, and branch governance.",
     socials: {
       email: "mailto:SWAPNIL.PATIL@ADYPU.EDU.IN",
@@ -300,7 +300,7 @@ export const team = [
     role: "SECRETARY",
     designation: "Secretary - IEEE ADYPU Student Branch",
     domain: "Executive Leadership",
-    photo: "./members/jaideep_final.png",
+    photo: "./members/jaideep_final.jpeg",
     bio: "Overseeing branch documentation, official communications, events schedule, and IEEE reporting.",
     socials: {
       email: "mailto:JAIDEEP.KAMBLE@ADYPU.EDU.IN",
