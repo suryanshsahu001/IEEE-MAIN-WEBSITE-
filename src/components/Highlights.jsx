@@ -41,7 +41,7 @@ function RunningVideo({ src, poster, className }) {
       muted
       playsInline
       webkit-playsinline="true"
-      preload="auto"
+      preload="metadata"
       className={className}
     />
   );
@@ -49,7 +49,7 @@ function RunningVideo({ src, poster, className }) {
 
 export default function Highlights({ onOpenVideo }) {
   const sectionRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -58,7 +58,7 @@ export default function Highlights({ onOpenVideo }) {
           setIsVisible(true);
         }
       },
-      { rootMargin: '200px' }
+      { rootMargin: '300px' }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
@@ -122,7 +122,7 @@ export default function Highlights({ onOpenVideo }) {
               {isVisible ? (
                 <RunningVideo 
                   src="./gallery/medha-2026.mp4" 
-                  poster="./gallery/medha-2026-cover.jpg"
+                  poster="./gallery/medha-2026-cover.webp"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               ) : (
@@ -159,8 +159,8 @@ export default function Highlights({ onOpenVideo }) {
           {/* Right Column: Video Grid */}
           <div className="lg:col-span-3 flex flex-row lg:flex-col gap-4 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 order-3 snap-x">
             {[
-              { id: 1, duration: '0:32', videoUrl: './gallery/video-1.mp4', poster: './gallery/video-1-poster.jpg' },
-              { id: 2, duration: 'New', videoUrl: './videos/PV.mp4', poster: './videos/pv-poster.jpg' }
+              { id: 1, duration: '0:32', videoUrl: './gallery/video-1.mp4', poster: './gallery/video-1-poster.webp' },
+              { id: 2, duration: 'New', videoUrl: './videos/PV.mp4', poster: './videos/pv-poster.webp' }
             ].map((vid) => (
               <div 
                 key={vid.id} 

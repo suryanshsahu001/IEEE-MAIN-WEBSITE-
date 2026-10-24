@@ -11,15 +11,19 @@ export default function Hero({ onOpenVideo }) {
         <div
           className="relative w-full overflow-hidden aspect-[4/3] max-h-[45vh]"
         >
-          <img
-            src="./hero-bg.jpeg"
-            alt="Ajeenkya DY Patil University Campus"
-            className="w-full h-full object-cover"
-            style={{ objectPosition: "center 30%" }}
-            fetchPriority="high"
-            loading="eager"
-            decoding="sync"
-          />
+          <picture className="w-full h-full block">
+            <source type="image/avif" srcSet="./hero-bg-sm.avif" />
+            <source type="image/webp" srcSet="./hero-bg-sm.webp" />
+            <img
+              src="./hero-bg-sm.jpeg"
+              alt="Ajeenkya DY Patil University Campus"
+              className="w-full h-full object-cover"
+              style={{ objectPosition: "center 30%" }}
+              fetchPriority="high"
+              loading="eager"
+              decoding="sync"
+            />
+          </picture>
           {/* bottom fade into dark content panel */}
           <div
             className="absolute bottom-0 left-0 right-0"
@@ -86,15 +90,47 @@ export default function Hero({ onOpenVideo }) {
         style={{ minHeight: "100vh" }}
       >
         <div className="absolute inset-0 z-0">
-          <img
-            src="./hero-bg.jpeg"
-            alt="Ajeenkya DY Patil University Campus"
-            className="w-full h-full object-cover"
-            style={{ objectPosition: "center 30%" }}
-            fetchPriority="high"
-            loading="eager"
-            decoding="sync"
-          />
+          <picture className="w-full h-full block">
+            <source
+              type="image/avif"
+              media="(max-width: 640px)"
+              srcSet="./hero-bg-sm.avif"
+            />
+            <source
+              type="image/avif"
+              media="(max-width: 1024px)"
+              srcSet="./hero-bg-md.avif"
+            />
+            <source
+              type="image/avif"
+              srcSet="./hero-bg-lg.avif"
+            />
+            <source
+              type="image/webp"
+              media="(max-width: 640px)"
+              srcSet="./hero-bg-sm.webp"
+            />
+            <source
+              type="image/webp"
+              media="(max-width: 1024px)"
+              srcSet="./hero-bg-md.webp"
+            />
+            <source
+              type="image/webp"
+              srcSet="./hero-bg-lg.webp"
+            />
+            <img
+              src="./hero-bg.jpeg"
+              srcSet="./hero-bg-sm.jpeg 640w, ./hero-bg-md.jpeg 1024w, ./hero-bg-lg.jpeg 1600w"
+              sizes="100vw"
+              alt="Ajeenkya DY Patil University Campus"
+              className="w-full h-full object-cover"
+              style={{ objectPosition: "center 30%" }}
+              fetchPriority="high"
+              loading="eager"
+              decoding="sync"
+            />
+          </picture>
           <div
             className="absolute inset-0"
             style={{

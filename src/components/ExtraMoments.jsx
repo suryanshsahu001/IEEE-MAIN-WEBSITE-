@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { Play, X, ZoomIn } from "lucide-react";
 import { extraMoments } from "../data.js";
+import OptimizedImage from "./OptimizedImage.jsx";
 
 export default function ExtraMoments({ onOpenVideo }) {
   const [selected, setSelected] = useState(null);
@@ -38,12 +39,12 @@ export default function ExtraMoments({ onOpenVideo }) {
                     className="block w-full h-full cursor-pointer"
                     aria-label={`Play ${item.title}`}
                   >
-                    <img
+                    <OptimizedImage
                       src={item.url}
                       alt={item.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
+                      useThumb={true}
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 240px"
                     />
                   </button>
                 ) : (
@@ -52,12 +53,12 @@ export default function ExtraMoments({ onOpenVideo }) {
                     className="block w-full h-full cursor-pointer"
                     aria-label={`View ${item.title}`}
                   >
-                    <img
+                    <OptimizedImage
                       src={item.url}
                       alt={item.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
+                      useThumb={true}
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 240px"
                     />
                   </button>
                 )}
@@ -119,11 +120,12 @@ export default function ExtraMoments({ onOpenVideo }) {
             >
               <X className="w-5 h-5" />
             </button>
-            <img
+            <OptimizedImage
               src={selected.url}
               alt={selected.title}
               className="w-full max-h-[85vh] object-contain bg-zinc-900 rounded-lg"
-              decoding="async"
+              priority={true}
+              sizes="90vw"
             />
             <div className="pt-3 pb-1 text-center">
               <div className="text-base font-bold text-white">

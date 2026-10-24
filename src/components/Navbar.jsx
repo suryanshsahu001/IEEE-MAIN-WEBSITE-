@@ -46,27 +46,48 @@ export default function Navbar({ onOpenChapters }) {
           {/* Logo row */}
           <a href="#home" className="flex items-center justify-start gap-3 sm:gap-5 group mr-auto pr-4 lg:pr-8">
             <div className="flex items-center justify-center flex-shrink-0">
-              <img
-                src="./logos/adypu-logo.png"
-                alt="Ajeenkya DY Patil University Logo"
-                className="h-9 sm:h-11 w-auto object-contain transition-opacity group-hover:opacity-80"
-              />
+              <picture>
+                <source type="image/webp" srcSet="./logos/adypu-logo.webp" />
+                <img
+                  src="./logos/adypu-logo.png"
+                  alt="Ajeenkya DY Patil University Logo"
+                  width="88"
+                  height="44"
+                  className="h-9 sm:h-11 w-auto object-contain transition-opacity group-hover:opacity-80"
+                  loading="eager"
+                  decoding="async"
+                />
+              </picture>
             </div>
             <div className="h-8 w-px bg-zinc-200 hidden sm:block flex-shrink-0" />
             <div className="flex items-center justify-center flex-shrink-0">
-              <img
-                src="./logos/ieee-stb-logo.png"
-                alt="IEEE STB60205406 Logo"
-                className="h-9 sm:h-11 w-auto object-contain mix-blend-multiply transition-opacity group-hover:opacity-80"
-              />
+              <picture>
+                <source type="image/webp" srcSet="./logos/ieee-stb-logo.webp" />
+                <img
+                  src="./logos/ieee-stb-logo.png"
+                  alt="IEEE STB60205406 Logo"
+                  width="66"
+                  height="44"
+                  className="h-9 sm:h-11 w-auto object-contain mix-blend-multiply transition-opacity group-hover:opacity-80"
+                  loading="eager"
+                  decoding="async"
+                />
+              </picture>
             </div>
             <div className="h-8 w-px bg-zinc-200 hidden md:block flex-shrink-0" />
             <div className="hidden md:flex items-center justify-center flex-shrink">
-              <img
-                src="./logos/ieee-maharashtra-logo.png"
-                alt="IEEE Maharashtra Section Logo"
-                className="h-9 sm:h-11 max-w-[180px] lg:max-w-[240px] object-contain mix-blend-multiply transition-opacity group-hover:opacity-80"
-              />
+              <picture>
+                <source type="image/webp" srcSet="./logos/ieee-maharashtra-logo.webp" />
+                <img
+                  src="./logos/ieee-maharashtra-logo.png"
+                  alt="IEEE Maharashtra Section Logo"
+                  width="240"
+                  height="44"
+                  className="h-9 sm:h-11 max-w-[180px] lg:max-w-[240px] object-contain mix-blend-multiply transition-opacity group-hover:opacity-80"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
             </div>
           </a>
 

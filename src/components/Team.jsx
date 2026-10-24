@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { X } from "lucide-react";
 import { team, mentors, communityMembers } from "../data.js";
+import OptimizedImage from "./OptimizedImage.jsx";
 
 export default function Team() {
   const [mentorsOpen, setMentorsOpen] = useState(false);
@@ -74,13 +75,12 @@ export default function Team() {
                   className="group overflow-hidden border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-300"
                 >
                   <div className="relative overflow-hidden bg-zinc-100" style={{ aspectRatio: "3/4" }}>
-                    <img
+                    <OptimizedImage
                       src={mentor.photo}
                       alt={mentor.name}
                       className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
-                      style={{ display: "block", width: "100%", height: "100%" }}
+                      useThumb={true}
+                      sizes="(max-width: 640px) 50vw, 320px"
                     />
                   </div>
                   <div className="p-3 sm:p-5 border-t-2" style={{ borderColor: "#A51C30" }}>
@@ -172,12 +172,12 @@ function TeamMemberCard({ member }) {
   return (
     <div className="group overflow-hidden border border-zinc-200 bg-zinc-50 flex flex-col">
       <div className="relative overflow-hidden aspect-[4/5] bg-zinc-100">
-        <img
+        <OptimizedImage
           src={member.photo}
           alt={member.name}
           className="w-full h-full object-cover object-top"
-          loading="lazy"
-          decoding="async"
+          useThumb={true}
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 280px"
         />
       </div>
 
@@ -200,12 +200,12 @@ function CommunityMemberCard({ member }) {
   return (
     <div className="group overflow-hidden border border-zinc-200 bg-zinc-50 flex flex-col rounded-lg shadow-sm hover:shadow-md transition-shadow">
       <div className="aspect-square bg-zinc-100 relative overflow-hidden">
-        <img
+        <OptimizedImage
           src={member.photo}
           alt={member.name}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-          loading="lazy"
-          decoding="async"
+          useThumb={true}
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 160px"
           style={{
             objectPosition: "center 15%",
           }}

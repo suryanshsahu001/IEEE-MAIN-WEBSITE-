@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { Play, X } from "lucide-react";
 import { gallery } from "../data.js";
+import OptimizedImage from "./OptimizedImage.jsx";
 
 export default function Gallery({ onOpenVideo }) {
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -36,12 +37,12 @@ export default function Gallery({ onOpenVideo }) {
                 onClick={() => openEvent(item)}
               >
                 <div className="relative overflow-hidden aspect-[4/3] bg-zinc-100">
-                  <img
+                  <OptimizedImage
                     src={item.url}
                     alt={item.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                    decoding="async"
+                    useThumb={true}
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 300px"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
                   {item.video && (
@@ -121,12 +122,12 @@ export default function Gallery({ onOpenVideo }) {
               <X className="w-5 h-5" /> Back to Gallery
             </button>
             <div className="aspect-video w-full overflow-hidden bg-zinc-100 mb-8 border border-zinc-200 shadow-sm rounded-lg">
-              <img
+              <OptimizedImage
                 src={selectedEvent.url}
                 alt={selectedEvent.title}
                 className="w-full h-full object-cover"
-                loading="eager"
-                decoding="async"
+                priority={true}
+                sizes="(max-width: 1024px) 100vw, 896px"
               />
             </div>
             <div className="flex items-center gap-4 mb-4">
@@ -179,12 +180,12 @@ export default function Gallery({ onOpenVideo }) {
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {selectedEvent.report.photos.map((photo, i) => (
                         <div key={i} className="aspect-square bg-zinc-200 border border-zinc-300 relative overflow-hidden group rounded-md">
-                          <img
+                          <OptimizedImage
                             src={photo}
                             alt={`${selectedEvent.title} Photo ${i + 1}`}
                             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                            loading="lazy"
-                            decoding="async"
+                            useThumb={true}
+                            sizes="(max-width: 640px) 50vw, 250px"
                           />
                         </div>
                       ))}
@@ -229,12 +230,12 @@ export default function Gallery({ onOpenVideo }) {
                   onClick={() => openEvent(item)}
                 >
                   <div className="relative overflow-hidden aspect-[4/3]">
-                    <img
+                    <OptimizedImage
                       src={item.url}
                       alt={item.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
+                      useThumb={true}
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 300px"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                     {item.video && (

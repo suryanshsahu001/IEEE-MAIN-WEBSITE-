@@ -9,11 +9,18 @@ export default function Footer() {
         <div className="grid lg:grid-cols-12 gap-10 mb-12">
           <div className="lg:col-span-4">
             <a href="#home" className="flex items-center gap-4 mb-4">
-              <img
-                src="./logos/ieee-stb-logo.png"
-                alt="IEEE STB Logo"
-                className="h-10 w-auto object-contain"
-              />
+              <picture>
+                <source type="image/webp" srcSet="./logos/ieee-stb-logo.webp" />
+                <img
+                  src="./logos/ieee-stb-logo.png"
+                  alt="IEEE STB Logo"
+                  width="60"
+                  height="40"
+                  className="h-10 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
               <div>
                 <div className="font-bold text-sm text-white">
                   {siteConfig.subtitle}

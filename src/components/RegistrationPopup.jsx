@@ -59,25 +59,46 @@ export default function RegistrationPopup() {
           {/* Left content */}
           <div className="flex-1 p-4 sm:p-7 md:p-9">
             <div className="flex items-center gap-2 mb-3 sm:mb-5 flex-wrap">
-              <img
-                src="./logos/adypu-logo.png"
-                alt="ADYPU"
-                className="h-7 sm:h-10 object-contain"
-                onError={(e) => { e.target.style.display = "none"; }}
-              />
+              <picture>
+                <source type="image/webp" srcSet="./logos/adypu-logo.webp" />
+                <img
+                  src="./logos/adypu-logo.png"
+                  alt="ADYPU"
+                  width="88"
+                  height="40"
+                  className="h-7 sm:h-10 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => { e.target.style.display = "none"; }}
+                />
+              </picture>
               <div className="h-6 w-px bg-zinc-200" />
-              <img
-                src="./logos/ieee-stb-logo.png"
-                alt="IEEE"
-                className="h-6 sm:h-8 object-contain"
-                onError={(e) => { e.target.style.display = "none"; }}
-              />
-              <img
-                src="./logos/ieee-maharashtra-logo.png"
-                alt="IEEE Maharashtra Section"
-                className="h-5 sm:h-7 object-contain"
-                onError={(e) => { e.target.style.display = "none"; }}
-              />
+              <picture>
+                <source type="image/webp" srcSet="./logos/ieee-stb-logo.webp" />
+                <img
+                  src="./logos/ieee-stb-logo.png"
+                  alt="IEEE"
+                  width="66"
+                  height="32"
+                  className="h-6 sm:h-8 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => { e.target.style.display = "none"; }}
+                />
+              </picture>
+              <picture>
+                <source type="image/webp" srcSet="./logos/ieee-maharashtra-logo.webp" />
+                <img
+                  src="./logos/ieee-maharashtra-logo.png"
+                  alt="IEEE Maharashtra Section"
+                  width="180"
+                  height="28"
+                  className="h-5 sm:h-7 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => { e.target.style.display = "none"; }}
+                />
+              </picture>
             </div>
 
             {/* Tag line */}
