@@ -1,4 +1,4 @@
-import { useState, useCallback, lazy, Suspense } from "react";
+import { useState, useEffect, useCallback, lazy, Suspense } from "react";
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
 import JoinMembership from "./components/JoinMembership.jsx";
@@ -14,10 +14,20 @@ import Footer from "./components/Footer.jsx";
 // Lazy-load interactive modals only when opened
 const VideoModal = lazy(() => import("./components/VideoModal.jsx"));
 const Chapters = lazy(() => import("./components/Chapters.jsx"));
+const CallForChairsModal = lazy(() => import("./components/CallForChairsModal.jsx"));
+import CallForChairsCard from "./components/CallForChairsCard.jsx";
 
 export default function App() {
   const [video, setVideo] = useState(null);
   const [chaptersOpen, setChaptersOpen] = useState(false);
+  const [callForChairsOpen, setCallForChairsOpen] = useState(false);
+
+  // Listen to open-call-for-chairs custom event
+  useEffect(() => {
+    const handleOpen = () => setCallForChairsOpen(true);
+    window.addEventListener("open-call-for-chairs", handleOpen);
+    return () => window.removeEventListener("open-call-for-chairs", handleOpen);
+  }, []);
 
   const openVideo = useCallback((url, title) => setVideo({ url, title }), []);
 
@@ -26,6 +36,7 @@ export default function App() {
       <Navbar onOpenChapters={() => setChaptersOpen(true)} />
       <main>
         <Hero onOpenVideo={openVideo} />
+        <CallForChairsCard onExplore={() => setCallForChairsOpen(true)} />
         <JoinMembership />
         <About />
         <Highlights onOpenVideo={openVideo} />
@@ -39,6 +50,9 @@ export default function App() {
       <Suspense fallback={null}>
         <VideoModal video={video} onClose={() => setVideo(null)} />
         {chaptersOpen && <Chapters onClose={() => setChaptersOpen(false)} />}
+        {callForChairsOpen && (
+          <CallForChairsModal onClose={() => setCallForChairsOpen(false)} />
+        )}
       </Suspense>
     </div>
   );
