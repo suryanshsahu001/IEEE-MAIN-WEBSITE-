@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3001;
 
 // Path to user's Excel file in OneDrive Desktop
 const EXCEL_PATH = 'C:\\Users\\VICTUS\\OneDrive\\Desktop\\IEEE\\STUDENT  DATA.xlsx';
+const BACKUP_QUEUE_PATH = path.join(__dirname, 'submissions_backup.json');
 
 app.use(cors());
 app.use(express.json());
@@ -49,6 +50,40 @@ function readOrCreateWorkbook() {
   return { wb, sheetName };
 }
 
+// Queue helper in case Excel file is locked in desktop Excel app
+function appendToBackupQueue(row) {
+  try {
+    let queue = [];
+    if (fs.existsSync(BACKUP_QUEUE_PATH)) {
+      queue = JSON.parse(fs.readFileSync(BACKUP_QUEUE_PATH, 'utf8') || '[]');
+    }
+    queue.push(row);
+    fs.writeFileSync(BACKUP_QUEUE_PATH, JSON.stringify(queue, null, 2), 'utf8');
+  } catch (e) {
+    console.error('Error saving to backup queue:', e);
+  }
+}
+
+function flushBackupQueue(wb, sheetName) {
+  if (!fs.existsSync(BACKUP_QUEUE_PATH)) return;
+  try {
+    const queue = JSON.parse(fs.readFileSync(BACKUP_QUEUE_PATH, 'utf8') || '[]');
+    if (queue.length === 0) return;
+
+    let rows = XLSX.utils.sheet_to_json(wb.Sheets[sheetName], { header: 1 });
+    if (!rows || rows.length === 0 || !rows[0]) {
+      rows = [HEADERS];
+    }
+
+    queue.forEach(row => rows.push(row));
+    wb.Sheets[sheetName] = XLSX.utils.aoa_to_sheet(rows);
+    fs.unlinkSync(BACKUP_QUEUE_PATH);
+    console.log(`Flushed ${queue.length} pending queued submissions into Excel.`);
+  } catch (e) {
+    console.error('Error flushing queue:', e);
+  }
+}
+
 // Endpoint to append application row to Excel
 app.post('/api/apply', async (req, res) => {
   try {
@@ -71,17 +106,8 @@ app.post('/api/apply', async (req, res) => {
       });
     }
 
-    const { wb, sheetName } = readOrCreateWorkbook();
-    let rows = XLSX.utils.sheet_to_json(wb.Sheets[sheetName], { header: 1 });
-
-    // If empty or headers missing, initialize with standard headers
-    if (!rows || rows.length === 0 || !rows[0] || rows[0].length === 0) {
-      rows = [HEADERS];
-    }
-
     const submissionTime = timestamp || new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
-    // Append new row
     const newRow = [
       submissionTime,
       position,
@@ -94,42 +120,65 @@ app.post('/api/apply', async (req, res) => {
       statement || ''
     ];
 
-    rows.push(newRow);
-
-    // Update sheet and save
-    const updatedSheet = XLSX.utils.aoa_to_sheet(rows);
-    // Set nice column widths
-    updatedSheet['!cols'] = [
-      { wch: 24 }, // Submission Time
-      { wch: 28 }, // Position
-      { wch: 22 }, // Full Name
-      { wch: 28 }, // Email
-      { wch: 16 }, // Phone
-      { wch: 14 }, // Year
-      { wch: 20 }, // Branch
-      { wch: 24 }, // IEEE Member ID
-      { wch: 45 }  // Statement
-    ];
-
-    wb.Sheets[sheetName] = updatedSheet;
-
-    // Retry up to 5 times if Excel or OneDrive momentarily holds a read lock
     let writeSuccess = false;
-    let lastError = null;
-    for (let attempt = 1; attempt <= 5; attempt++) {
+    let attempts = 0;
+
+    // Retry loop (3 attempts)
+    while (!writeSuccess && attempts < 3) {
+      attempts++;
       try {
+        const { wb, sheetName } = readOrCreateWorkbook();
+        flushBackupQueue(wb, sheetName);
+
+        let rows = XLSX.utils.sheet_to_json(wb.Sheets[sheetName], { header: 1 });
+        if (!rows || rows.length === 0 || !rows[0] || rows[0].length === 0) {
+          rows = [HEADERS];
+        }
+
+        rows.push(newRow);
+
+        const updatedSheet = XLSX.utils.aoa_to_sheet(rows);
+        updatedSheet['!cols'] = [
+          { wch: 24 },
+          { wch: 28 },
+          { wch: 22 },
+          { wch: 28 },
+          { wch: 16 },
+          { wch: 14 },
+          { wch: 20 },
+          { wch: 24 },
+          { wch: 45 }
+        ];
+
+        wb.Sheets[sheetName] = updatedSheet;
         XLSX.writeFile(wb, EXCEL_PATH);
         writeSuccess = true;
-        break;
       } catch (err) {
-        lastError = err;
-        // Wait 300ms before retrying
-        await new Promise(r => setTimeout(r, 300));
+        if (err.code === 'EBUSY') {
+          // Wait 400ms before retrying
+          await new Promise(r => setTimeout(r, 400));
+        } else {
+          throw err;
+        }
       }
     }
 
     if (!writeSuccess) {
-      throw lastError || new Error("Failed to write to Excel file.");
+      // If still locked because the user has the workbook open in Microsoft Excel,
+      // save safely into persistent local queue and tell the user politely or auto-sync
+      appendToBackupQueue(newRow);
+      console.log(`[QUEUED] Excel file is currently open in Excel. Appended to queue safely.`);
+
+      return res.status(200).json({
+        success: true,
+        queued: true,
+        message: 'Application recorded safely and queued! (Please close Excel to allow instant synchronization).',
+        data: {
+          position,
+          applicantName,
+          submissionTime
+        }
+      });
     }
 
     console.log(`[${new Date().toISOString()}] Saved application for ${applicantName} (${position}) to Excel.`);
@@ -151,6 +200,20 @@ app.post('/api/apply', async (req, res) => {
     });
   }
 });
+
+// Periodic auto-sync worker to flush queued items whenever Excel is closed
+setInterval(() => {
+  if (fs.existsSync(BACKUP_QUEUE_PATH)) {
+    try {
+      const { wb, sheetName } = readOrCreateWorkbook();
+      flushBackupQueue(wb, sheetName);
+      XLSX.writeFile(wb, EXCEL_PATH);
+      console.log('Auto-sync worker successfully flushed queued submissions to Excel.');
+    } catch {
+      // Still locked, will retry next interval
+    }
+  }
+}, 3000);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
