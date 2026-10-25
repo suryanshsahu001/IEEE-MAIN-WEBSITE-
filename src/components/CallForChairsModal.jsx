@@ -96,10 +96,18 @@ export default function CallForChairsModal({
     setIsSubmitting(true);
 
     try {
-      // Determine endpoint: check environment variable or relative endpoint (via Vite proxy / server)
-      const endpoint =
-        (typeof import.meta !== "undefined" && import.meta.env?.VITE_APPLICATION_API_URL) ||
-        "http://localhost:3001/api/apply";
+      // Determine endpoint:
+      // In production (Vercel) -> relative '/api/apply'
+      // In local development -> '/api/apply' (proxied via Vite) or fallback to 'http://localhost:3001/api/apply'
+      const configuredUrl =
+        typeof import.meta !== "undefined" && import.meta.env?.VITE_APPLICATION_API_URL;
+      
+      const isLocalhost =
+        typeof window !== "undefined" &&
+        (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1");
+
+      const primaryEndpoint =
+        configuredUrl || (isLocalhost ? "http://localhost:3001/api/apply" : "/api/apply");
 
       const payload = {
         applicantName: applicantName.trim(),
@@ -113,19 +121,35 @@ export default function CallForChairsModal({
         timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
       };
 
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      let response;
+      try {
+        response = await fetch(primaryEndpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+      } catch (networkErr) {
+        // If primary fails and we were on localhost, or vice versa, attempt fallback
+        if (primaryEndpoint !== "/api/apply") {
+          response = await fetch("/api/apply", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+        } else {
+          throw networkErr;
+        }
+      }
 
       const result = await response.json().catch(() => ({}));
 
       if (!response.ok || !result.success) {
         throw new Error(
-          result.message || "Failed to record application to the Excel database."
+          result.message || "Failed to record application to the database."
         );
       }
 
