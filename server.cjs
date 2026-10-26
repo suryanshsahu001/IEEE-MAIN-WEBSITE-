@@ -7,8 +7,14 @@ const XLSX = require('xlsx');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Path to user's Excel file in OneDrive Attachments
-const EXCEL_PATH = process.env.EXCEL_FILE_PATH || 'C:\\Users\\VICTUS\\OneDrive\\Attachments\\STUDENT  DATA.xlsx';
+// Paths to user's Excel files in OneDrive (sync across all copies so it shows wherever the user opens it)
+const PRIMARY_EXCEL_PATH = process.env.EXCEL_FILE_PATH || 'C:\\Users\\VICTUS\\OneDrive\\Attachments\\STUDENT  DATA.xlsx';
+const ALL_EXCEL_PATHS = [
+  PRIMARY_EXCEL_PATH,
+  'C:\\Users\\VICTUS\\OneDrive\\Desktop\\STUDENT  DATA.xlsx',
+  'C:\\Users\\VICTUS\\OneDrive\\STUDENT  DATA.xlsx',
+  'C:\\Users\\VICTUS\\OneDrive\\Documents\\STUDENT  DATA.xlsx'
+];
 const BACKUP_QUEUE_PATH = path.join(__dirname, 'submissions_backup.json');
 
 app.use(cors());
@@ -27,11 +33,11 @@ const HEADERS = [
   'Statement / Why Suited'
 ];
 
-function readOrCreateWorkbook() {
+function readOrCreateWorkbook(filePath = PRIMARY_EXCEL_PATH) {
   let wb;
-  if (fs.existsSync(EXCEL_PATH)) {
+  if (fs.existsSync(filePath)) {
     try {
-      wb = XLSX.readFile(EXCEL_PATH);
+      wb = XLSX.readFile(filePath);
     } catch {
       wb = XLSX.utils.book_new();
     }
@@ -48,6 +54,19 @@ function readOrCreateWorkbook() {
   }
 
   return { wb, sheetName };
+}
+
+function saveWorkbookToAllPaths(wb) {
+  let atLeastOneSuccess = false;
+  for (const p of ALL_EXCEL_PATHS) {
+    try {
+      XLSX.writeFile(wb, p);
+      atLeastOneSuccess = true;
+    } catch (err) {
+      // If individual file is open or directory not found, continue to others
+    }
+  }
+  return atLeastOneSuccess;
 }
 
 // Queue helper in case Excel file is locked in desktop Excel app
@@ -176,8 +195,8 @@ app.post('/api/apply', async (req, res) => {
         ];
 
         wb.Sheets[sheetName] = updatedSheet;
-        XLSX.writeFile(wb, EXCEL_PATH);
-        writeSuccess = true;
+        writeSuccess = saveWorkbookToAllPaths(wb);
+        if (writeSuccess) break;
       } catch (err) {
         if (err.code === 'EBUSY') {
           // Wait 400ms before retrying
@@ -232,8 +251,9 @@ setInterval(() => {
     try {
       const { wb, sheetName } = readOrCreateWorkbook();
       flushBackupQueue(wb, sheetName);
-      XLSX.writeFile(wb, EXCEL_PATH);
-      console.log('Auto-sync worker successfully flushed queued submissions to Excel.');
+      if (saveWorkbookToAllPaths(wb)) {
+        console.log('Auto-sync worker successfully flushed queued submissions to Excel.');
+      }
     } catch {
       // Still locked, will retry next interval
     }
@@ -244,12 +264,13 @@ setInterval(() => {
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
-    excelPath: EXCEL_PATH,
-    excelExists: fs.existsSync(EXCEL_PATH)
+    primaryPath: PRIMARY_EXCEL_PATH,
+    allPaths: ALL_EXCEL_PATHS,
+    exists: ALL_EXCEL_PATHS.map(p => ({ path: p, exists: fs.existsSync(p) }))
   });
 });
 
 app.listen(PORT, () => {
   console.log(`IEEE Excel Backend server running on http://localhost:${PORT}`);
-  console.log(`Connected to Excel: ${EXCEL_PATH}`);
+  console.log(`Connected to Excel: ${PRIMARY_EXCEL_PATH}`);
 });
