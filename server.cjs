@@ -7,8 +7,8 @@ const XLSX = require('xlsx');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Path to user's Excel file in OneDrive Desktop
-const EXCEL_PATH = 'C:\\Users\\VICTUS\\OneDrive\\Desktop\\IEEE\\STUDENT  DATA.xlsx';
+// Path to user's Excel file in OneDrive Attachments
+const EXCEL_PATH = process.env.EXCEL_FILE_PATH || 'C:\\Users\\VICTUS\\OneDrive\\Attachments\\STUDENT  DATA.xlsx';
 const BACKUP_QUEUE_PATH = path.join(__dirname, 'submissions_backup.json');
 
 app.use(cors());
@@ -120,6 +120,26 @@ app.post('/api/apply', async (req, res) => {
       statement || ''
     ];
 
+    // Optional Power Automate / Cloud Webhook forwarder
+    const webhookUrl = process.env.POWER_AUTOMATE_WEBHOOK_URL || process.env.EXCEL_WEBHOOK_URL;
+    if (webhookUrl) {
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          SubmissionTime: submissionTime,
+          Position: position,
+          FullName: applicantName,
+          Email: applicantEmail,
+          Phone: applicantPhone || '',
+          AcademicYear: applicantYear || '',
+          Branch: applicantBranch || '',
+          IEEEMembershipID: ieeeMemberId,
+          Statement: statement || ''
+        })
+      }).catch(err => console.error('[Power Automate Forward Error]:', err.message));
+    }
+
     let writeSuccess = false;
     let attempts = 0;
 
@@ -133,6 +153,11 @@ app.post('/api/apply', async (req, res) => {
         let rows = XLSX.utils.sheet_to_json(wb.Sheets[sheetName], { header: 1 });
         if (!rows || rows.length === 0 || !rows[0] || rows[0].length === 0) {
           rows = [HEADERS];
+        }
+
+        // Clean out any trailing empty or corrupt rows
+        while (rows.length > 1 && (!rows[rows.length - 1] || rows[rows.length - 1].length === 0 || rows[rows.length - 1].every(c => c === null || c === undefined || c === ''))) {
+          rows.pop();
         }
 
         rows.push(newRow);

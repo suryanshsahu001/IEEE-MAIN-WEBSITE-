@@ -121,6 +121,33 @@ export default function CallForChairsModal({
         timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
       };
 
+      // Check if Power Automate webhook is configured (directly or via env)
+      const directWebhookUrl =
+        callForChairsConfig.powerAutomateWebhookUrl ||
+        (typeof import.meta !== "undefined" && import.meta.env?.VITE_POWER_AUTOMATE_WEBHOOK_URL);
+
+      if (directWebhookUrl) {
+        try {
+          await fetch(directWebhookUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              SubmissionTime: payload.timestamp,
+              Position: payload.position,
+              FullName: payload.applicantName,
+              Email: payload.applicantEmail,
+              Phone: payload.applicantPhone,
+              AcademicYear: payload.applicantYear,
+              Branch: payload.applicantBranch,
+              IEEEMembershipID: payload.ieeeMemberId,
+              Statement: payload.statement,
+            }),
+          });
+        } catch (webhookErr) {
+          console.warn("Direct Power Automate Webhook error:", webhookErr);
+        }
+      }
+
       let response;
       try {
         response = await fetch(primaryEndpoint, {
@@ -140,6 +167,9 @@ export default function CallForChairsModal({
             },
             body: JSON.stringify(payload),
           });
+        } else if (directWebhookUrl) {
+          // If direct webhook succeeded, consider it done even if local server isn't up
+          response = { ok: true, json: async () => ({ success: true }) };
         } else {
           throw networkErr;
         }

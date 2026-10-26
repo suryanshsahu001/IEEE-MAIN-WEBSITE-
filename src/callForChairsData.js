@@ -13,6 +13,8 @@ export const callForChairsConfig = {
     "Step forward to lead, innovate, and contribute to the growth of the IEEE Student Branch at ADYPU. Explore leadership opportunities, understand the available roles, and submit your application before the deadline.",
   recruitmentFormUrl: "https://forms.gle/VKpRn85RU4tz7vsc8",
   callForChairsFormUrl: "https://forms.gle/VKpRn85RU4tz7vsc8", // configurable URL
+  // Power Automate HTTP Webhook URL (paste your flow HTTP POST URL here or in .env / Vercel):
+  powerAutomateWebhookUrl: "", 
 };
 
 // 1. Primary Leadership Positions (Main Executive Committee Positions)
