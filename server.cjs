@@ -140,7 +140,7 @@ app.post('/api/apply', async (req, res) => {
     ];
 
     // Optional Power Automate / Cloud Webhook forwarder
-    const webhookUrl = process.env.POWER_AUTOMATE_WEBHOOK_URL || process.env.EXCEL_WEBHOOK_URL;
+    const webhookUrl = process.env.POWER_AUTOMATE_WEBHOOK_URL || process.env.EXCEL_WEBHOOK_URL || "https://defaultd1b4b416ddaa4673832736e1d6b764.0a.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/18/workflows/8660ed713fb24f1e83a6fd6cbc05a175/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ZHu5Z9i6bw4Ykm4EgjPl5aQDkS-CNq6UIP99eLOFmHc";
     if (webhookUrl) {
       fetch(webhookUrl, {
         method: 'POST',
