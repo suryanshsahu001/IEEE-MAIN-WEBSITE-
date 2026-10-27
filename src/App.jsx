@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, lazy, Suspense } from "react";
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
-import JoinMembership from "./components/JoinMembership.jsx";
+import WorkshopSection from "./components/WorkshopSection.jsx";
 import About from "./components/About.jsx";
 import Highlights from "./components/Highlights.jsx";
 import Events from "./components/Events.jsx";
@@ -36,8 +36,8 @@ export default function App() {
       <Navbar onOpenChapters={() => setChaptersOpen(true)} />
       <main>
         <Hero onOpenVideo={openVideo} />
+        <WorkshopSection />
         <CallForChairsCard onExplore={() => setCallForChairsOpen(true)} />
-        <JoinMembership />
         <About />
         <Highlights onOpenVideo={openVideo} />
         <Events />

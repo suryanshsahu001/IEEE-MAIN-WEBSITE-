@@ -23,6 +23,7 @@ export default function Navbar({ onOpenChapters }) {
 
   const navLinks = [
     { name: 'HOME', href: '#home' },
+    { name: 'WORKSHOP', href: '#workshop' },
     { name: 'CALL FOR CHAIRS', href: '#call-for-chairs' },
     { name: 'ABOUT', href: '#about' },
     { name: 'EVENTS', href: '#events' },
