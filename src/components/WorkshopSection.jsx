@@ -184,10 +184,10 @@ export default function WorkshopSection() {
               </div>
             </div>
 
-            {/* Right Column: Poster Image Preview + Big Register Button */}
-            <div className="lg:col-span-5 flex flex-col items-center">
-              <div className="w-full max-w-md bg-zinc-950 border-2 border-zinc-800 hover:border-amber-500/50 rounded-2xl p-3 sm:p-4 shadow-2xl transition-all duration-300 group">
-                <div className="relative rounded-xl overflow-hidden mb-4 bg-zinc-900 aspect-[3/4] max-h-[420px] flex items-center justify-center">
+            {/* Right Column: Poster Image Preview + Compact Mobile / Full Desktop Register Button */}
+            <div className="lg:col-span-5 flex flex-col items-center w-full">
+              <div className="w-full max-w-sm lg:max-w-md bg-zinc-950/90 border-2 border-zinc-800 hover:border-amber-500/50 rounded-2xl p-3 sm:p-4 shadow-xl transition-all duration-300 group">
+                <div className="relative rounded-xl overflow-hidden mb-3 bg-zinc-900 aspect-[16/10] sm:aspect-[4/3] lg:aspect-[3/4] max-h-[220px] sm:max-h-[320px] lg:max-h-[420px] flex items-center justify-center">
                   <picture className="w-full h-full">
                     <source type="image/webp" srcSet="./workshop-poster.webp" />
                     <img
@@ -198,31 +198,31 @@ export default function WorkshopSection() {
                     />
                   </picture>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute bottom-3 left-3 right-3 text-left">
-                    <span className="text-[10px] font-mono font-bold tracking-widest uppercase px-2.5 py-1 rounded bg-amber-500 text-black shadow">
+                  <div className="absolute bottom-2 left-2 sm:bottom-3 sm:left-3 right-2 sm:right-3 text-left">
+                    <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-wider uppercase px-2 py-0.5 sm:px-2.5 sm:py-1 rounded bg-amber-500 text-black shadow">
                       Turn Ideas into Real Systems
                     </span>
                   </div>
                 </div>
 
-                {/* Big Direct Registration Button */}
+                {/* Direct Registration Button (Sleek and compact on mobile) */}
                 <a
                   href={formUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl font-mono font-black text-sm uppercase tracking-widest text-zinc-950 shadow-2xl transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] group cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 sm:gap-3 px-4 py-2.5 sm:py-3.5 lg:py-4 rounded-xl font-mono font-black text-xs sm:text-sm uppercase tracking-wider sm:tracking-widest text-zinc-950 shadow-lg sm:shadow-2xl transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] group cursor-pointer"
                   style={{
                     background:
                       "linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)",
-                    boxShadow: "0 10px 30px rgba(245, 158, 11, 0.4)",
+                    boxShadow: "0 8px 24px rgba(245, 158, 11, 0.35)",
                   }}
                 >
                   <span>REGISTER FOR WORKSHOP</span>
-                  <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
 
-                <p className="text-[11px] font-mono text-center text-zinc-400 mt-2.5">
-                  ⚡ Official Registration via Google Forms · Open to all students
+                <p className="text-[10px] sm:text-[11px] font-mono text-center text-zinc-400 mt-2">
+                  ⚡ Official Registration via Google Forms
                 </p>
               </div>
             </div>

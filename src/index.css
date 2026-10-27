@@ -26,3 +26,50 @@
     }
   }
 }
+
+/* ── HIGH PERFORMANCE & MOBILE LAG-FREE OPTIMIZATIONS ── */
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Offload off-screen sections from paint loop on mobile for butter-smooth 60/120fps scrolling */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
+}
+
+/* Top critical sections should render immediately without layout jump */
+#home,
+#workshop,
+#call-for-chairs {
+  content-visibility: visible;
+  contain-intrinsic-size: none;
+}
+
+/* Hardware accelerated layer promotions for fast rendering */
+img,
+video,
+picture {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
