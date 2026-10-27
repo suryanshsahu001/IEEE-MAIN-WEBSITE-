@@ -8,26 +8,25 @@ function RunningVideo({ src, poster, className }) {
     const video = videoRef.current;
     if (!video) return;
 
-    // Set DOM properties directly to ensure mobile browsers permit autoplay
     video.muted = true;
     video.defaultMuted = true;
 
-    const playVideo = () => {
-      const promise = video.play();
-      if (promise !== undefined) {
-        promise.catch(() => {
-          // Handled gracefully if browser policy requires interaction
-        });
-      }
-    };
+    // Only decode & play when actively in viewport, pause when scrolled away to eliminate lag
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.15 }
+    );
 
-    playVideo();
-    video.addEventListener('loadeddata', playVideo);
-    video.addEventListener('canplay', playVideo);
+    observer.observe(video);
 
     return () => {
-      video.removeEventListener('loadeddata', playVideo);
-      video.removeEventListener('canplay', playVideo);
+      observer.disconnect();
     };
   }, [src]);
 
@@ -36,12 +35,11 @@ function RunningVideo({ src, poster, className }) {
       ref={videoRef}
       src={src}
       poster={poster}
-      autoPlay
       loop
       muted
       playsInline
       webkit-playsinline="true"
-      preload="metadata"
+      preload="none"
       className={className}
     />
   );

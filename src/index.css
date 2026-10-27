@@ -62,6 +62,19 @@ picture {
   backface-visibility: hidden;
 }
 
+/* Eliminate tap delays and scroll chaining */
+button,
+a,
+input,
+select {
+  touch-action: manipulation;
+}
+
+/* Ensure smooth GPU compositing on cards */
+.group {
+  will-change: auto;
+}
+
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -1,15 +1,14 @@
 import {
   Calendar,
   Clock,
+  MapPin,
   Sparkles,
   ExternalLink,
   Cpu,
-  Boxes,
   Layers,
   Wrench,
-  Users,
-  Presentation,
   CheckCircle2,
+  Phone,
   ArrowRight,
   Flame,
 } from "lucide-react";
@@ -17,233 +16,228 @@ import {
 export default function WorkshopSection() {
   const formUrl = "https://forms.gle/LfyyuNGA7iBc9aL36";
 
-  const highlights = [
+  const eventPillars = [
     {
       icon: Cpu,
-      title: "Real-World Industrial Applications",
-      desc: "Learn principles applied in automated modern manufacturing.",
-    },
-    {
-      icon: Wrench,
-      title: "Hands-on Hardware Building",
-      desc: "Assemble physical robotic manipulator mechanisms from scratch.",
-    },
-    {
-      icon: Boxes,
-      title: "3D Modelling & Simulation",
-      desc: "Fusion 360 CAD modeling, kinematics, and digital motion simulation.",
+      title: "CAD Design",
+      desc: "Fusion 360 3D Modeling & Mechanisms",
     },
     {
       icon: Layers,
-      title: "Digital Twin Integration",
-      desc: "Simulate and benchmark virtual model against physical prototype.",
+      title: "Simulation",
+      desc: "Kinematics & Digital Twin Integration",
     },
     {
-      icon: Users,
-      title: "Team-Based Learning",
-      desc: "Collaborative peer engineering with dedicated mentorship.",
-    },
-    {
-      icon: Presentation,
-      title: "Present & Showcase",
-      desc: "Demonstrate working robots, motion paths, and project outcomes.",
+      icon: Wrench,
+      title: "Hardware Assembly",
+      desc: "Physical Assembly, Calibration & Testing",
     },
   ];
 
   return (
     <section
       id="workshop"
-      className="relative bg-[#0c0d10] text-white py-14 sm:py-20 overflow-hidden border-b border-zinc-800 font-sans"
+      className="relative bg-[#0d0d0d] text-white py-8 sm:py-14 lg:py-18 overflow-hidden border-b border-zinc-800 font-sans"
     >
-      {/* Background radial ambient lights */}
+      {/* Background ambient lighting - Signature IEEE Crimson & Burgundy glow */}
       <div
-        className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full pointer-events-none opacity-20 blur-[120px]"
-        style={{ background: "radial-gradient(circle, #f59e0b 0%, #A51C30 60%, transparent 80%)" }}
+        className="absolute top-0 right-1/4 w-[450px] h-[450px] rounded-full pointer-events-none opacity-20 blur-[120px]"
+        style={{
+          background: "radial-gradient(circle, #A51C30 0%, #700f1e 60%, transparent 80%)",
+        }}
       />
       <div
-        className="absolute bottom-0 left-10 w-96 h-96 rounded-full pointer-events-none opacity-15 blur-[100px]"
-        style={{ background: "radial-gradient(circle, #A51C30 0%, transparent 70%)" }}
+        className="absolute bottom-0 left-10 w-80 h-80 rounded-full pointer-events-none opacity-15 blur-[100px]"
+        style={{ background: "radial-gradient(circle, #801020 0%, transparent 70%)" }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-10 lg:px-16 relative z-10">
         {/* Main Master Card */}
-        <div className="relative bg-gradient-to-br from-zinc-900/95 via-zinc-900/80 to-black/95 border-2 border-zinc-800 hover:border-amber-500/40 transition-all duration-300 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl overflow-hidden backdrop-blur-md">
-          {/* Top highlight gradient strip */}
+        <div className="relative bg-gradient-to-br from-zinc-900/95 via-zinc-900/85 to-black/95 border-2 border-zinc-800 hover:border-[#A51C30]/50 transition-all duration-300 rounded-2xl sm:rounded-3xl p-4 sm:p-8 lg:p-10 shadow-2xl overflow-hidden backdrop-blur-md">
+          {/* Top highlight gradient strip in IEEE Crimson Theme */}
           <div
-            className="absolute top-0 left-0 right-0 h-1.5"
+            className="absolute top-0 left-0 right-0 h-1 sm:h-1.5"
             style={{
               background:
-                "linear-gradient(90deg, #A51C30 0%, #f59e0b 50%, #A51C30 100%)",
+                "linear-gradient(90deg, #A51C30 0%, #e11d48 50%, #A51C30 100%)",
             }}
           />
 
-          {/* Top Badge & Ribbon */}
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-[0.2em] uppercase px-3.5 py-1 rounded-full text-amber-300 bg-amber-500/10 border border-amber-500/30 shadow-sm">
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+          {/* Top Organization Badges & Headers */}
+          <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 mb-4 sm:mb-6 pb-3 border-b border-zinc-800/80">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2.5">
+              <span
+                className="inline-flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[11px] font-mono font-bold tracking-[0.18em] uppercase px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-white shadow-sm"
+                style={{ background: "#A51C30" }}
+              >
+                <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-red-200" />
                 HANDS-ON WORKSHOP
               </span>
 
-              <span className="inline-flex items-center gap-1 text-[11px] font-mono font-bold tracking-wider uppercase px-3 py-1 rounded-full text-rose-300 bg-rose-500/10 border border-rose-500/25">
-                <Flame className="w-3.5 h-3.5 text-rose-400" />
+              <span className="inline-flex items-center gap-1 text-[9px] sm:text-[11px] font-mono font-bold tracking-wider uppercase px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-rose-300 bg-rose-500/10 border border-rose-500/25">
+                <Flame className="w-3 h-3 text-rose-400" />
                 LIMITED SEATS
               </span>
 
-              <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider hidden sm:inline-block">
-                IEEE SB ADYPU
+              <span className="text-[10px] sm:text-[11px] font-mono text-zinc-400 uppercase tracking-wider hidden md:inline-block">
+                ADYPU School of Engineering · IEEE Maharashtra Section
               </span>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-400 text-zinc-950 font-black text-[11px] font-mono tracking-wider uppercase shadow-md">
-              <Clock className="w-3.5 h-3.5" />
-              <span>FIRST-COME FIRST-SERVED REGISTRATION</span>
+            <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-zinc-800/90 text-zinc-200 border border-zinc-700 font-mono font-bold text-[9px] sm:text-[11px] tracking-wider uppercase shadow-md">
+              <Sparkles className="w-3 h-3 text-[#e11d48]" />
+              <span>IEEE YP &amp; IEEE FOUNDATION</span>
             </div>
           </div>
 
-          {/* Two-Column Grid: Left Content, Right Poster / Action */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Two-Column Grid: Content (Left) & Poster/CTA (Right) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-10 items-center">
             {/* Left Column */}
             <div className="lg:col-span-7">
-              <div className="text-amber-400 font-mono font-extrabold text-sm sm:text-base uppercase tracking-widest mb-1.5 flex items-center gap-2">
-                <span>2-DAY IMMERSIVE TECHNICAL WORKSHOP</span>
+              {/* Catchphrase */}
+              <div
+                className="font-mono font-black text-xs sm:text-base uppercase tracking-widest mb-1"
+                style={{ color: "#A51C30" }}
+              >
+                DESIGN IT. SIMULATE IT. BUILD IT.
               </div>
 
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight leading-[1.05] mb-4">
-                INDUSTRIAL <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-rose-500">MANIPULATOR</span> DESIGN
+              {/* Title */}
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight leading-[1.1] mb-2 sm:mb-3">
+                2-DAY HANDS-ON WORKSHOP ON{" "}
+                <span style={{ color: "#A51C30" }}>
+                  INDUSTRIAL MANIPULATOR
+                </span>{" "}
+                DESIGN
               </h2>
 
-              <p className="text-sm sm:text-base font-mono text-zinc-300 font-semibold tracking-wide uppercase mb-4 flex items-center gap-2">
-                <span className="text-amber-400">DESIGN IT.</span>
-                <span className="text-orange-400">SIMULATE IT.</span>
-                <span className="text-rose-400">BUILD IT.</span>
-                <span className="text-white">MAKE IT MOVE.</span>
+              {/* Sub-tagline */}
+              <p className="text-xs sm:text-sm font-mono text-zinc-300 font-semibold tracking-wide uppercase mb-3 sm:mb-4 flex flex-wrap items-center gap-2">
+                <span className="px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-200 border border-zinc-700/60">CAD Design</span>
+                <span className="text-zinc-500">/</span>
+                <span className="px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-200 border border-zinc-700/60">Simulation</span>
+                <span className="text-zinc-500">/</span>
+                <span className="px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-200 border border-zinc-700/60">Hardware Assembly</span>
               </p>
 
-              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6 max-w-2xl">
-                Experience robotics from concept to creation. Assemble physical industrial robotic arms, master 3D CAD modeling in Fusion 360, configure digital twins, and test precision kinematic motions in a competitive, team-based environment.
-              </p>
-
-              {/* 2-Day Timeline Preview Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                <div className="bg-zinc-950/70 border border-zinc-800 rounded-2xl p-4 relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-1 h-full bg-amber-500" />
-                  <div className="text-[10px] font-mono font-bold uppercase tracking-widest text-amber-400 mb-1">
-                    DAY 1 · Understand • Design • Simulate
-                  </div>
-                  <ul className="text-xs text-zinc-300 space-y-1.5 font-medium">
-                    <li className="flex items-start gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
-                      <span>Intro to Industrial Manipulators &amp; Kinematics</span>
-                    </li>
-                    <li className="flex items-start gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
-                      <span>Fusion 360 3D CAD Modelling &amp; Movement</span>
-                    </li>
-                    <li className="flex items-start gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
-                      <span>Digital Twin Activity &amp; Virtual Simulation</span>
-                    </li>
-                  </ul>
+              {/* Key Event Details Box (Date, Time, Venue) */}
+              <div className="bg-zinc-950/80 border border-zinc-800/90 rounded-xl p-3 sm:p-4 mb-4 space-y-2 text-xs sm:text-sm">
+                <div className="flex items-center gap-2.5 text-zinc-200">
+                  <Calendar className="w-4 h-4 text-[#A51C30] shrink-0" />
+                  <span>
+                    <strong className="text-white font-mono uppercase tracking-wider text-[11px] sm:text-xs text-red-300 mr-1.5">
+                      Date:
+                    </strong>
+                    3rd and 4th November
+                  </span>
                 </div>
 
-                <div className="bg-zinc-950/70 border border-zinc-800 rounded-2xl p-4 relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-1 h-full bg-rose-500" />
-                  <div className="text-[10px] font-mono font-bold uppercase tracking-widest text-rose-400 mb-1">
-                    DAY 2 · Build • Test • Showcase
-                  </div>
-                  <ul className="text-xs text-zinc-300 space-y-1.5 font-medium">
-                    <li className="flex items-start gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-rose-400 shrink-0 mt-0.5" />
-                      <span>Hardware Assembly &amp; Servo Calibration</span>
-                    </li>
-                    <li className="flex items-start gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-rose-400 shrink-0 mt-0.5" />
-                      <span>Embedded Control, Logic &amp; Integration</span>
-                    </li>
-                    <li className="flex items-start gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-rose-400 shrink-0 mt-0.5" />
-                      <span>Physical vs Digital Twin Testing &amp; Showcase</span>
-                    </li>
-                  </ul>
+                <div className="flex items-center gap-2.5 text-zinc-200">
+                  <Clock className="w-4 h-4 text-[#e11d48] shrink-0" />
+                  <span>
+                    <strong className="text-white font-mono uppercase tracking-wider text-[11px] sm:text-xs text-rose-300 mr-1.5">
+                      Time:
+                    </strong>
+                    10:00 AM onwards
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2.5 text-zinc-200">
+                  <MapPin className="w-4 h-4 text-[#A51C30] shrink-0" />
+                  <span>
+                    <strong className="text-white font-mono uppercase tracking-wider text-[11px] sm:text-xs text-red-300 mr-1.5">
+                      Venue:
+                    </strong>
+                    Computer Lab-201, ULC1, ADYPU
+                  </span>
                 </div>
               </div>
 
-              {/* Ideal for tag */}
-              <div className="flex flex-wrap items-center gap-2 text-xs text-zinc-400">
-                <span className="font-mono font-bold uppercase text-zinc-300">Ideal For:</span>
-                <span className="px-2.5 py-1 rounded-md bg-zinc-800/80 text-zinc-300 font-mono text-[11px]">
-                  Robotics &amp; Automation
+              {/* Pillars Preview Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-4">
+                {eventPillars.map((p, i) => {
+                  const Icon = p.icon;
+                  return (
+                    <div
+                      key={i}
+                      className="bg-zinc-950/60 border border-zinc-800/70 rounded-xl p-2.5 sm:p-3 flex sm:flex-col items-center sm:items-start gap-2.5 sm:gap-1.5 hover:border-zinc-700 transition-colors"
+                    >
+                      <Icon className="w-4 h-4 text-[#A51C30] shrink-0" />
+                      <div>
+                        <div className="text-[11px] sm:text-xs font-bold text-white uppercase">
+                          {p.title}
+                        </div>
+                        <div className="text-[10px] text-zinc-400 leading-tight">
+                          {p.desc}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Student Coordinators */}
+              <div className="p-2.5 sm:p-3 bg-zinc-950/60 border border-zinc-800/80 rounded-xl flex flex-wrap items-center justify-between gap-2 text-[11px] text-zinc-400 font-mono">
+                <span className="font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
+                  <Phone className="w-3.5 h-3.5 text-[#A51C30]" />
+                  Student Coordinators:
                 </span>
-                <span className="px-2.5 py-1 rounded-md bg-zinc-800/80 text-zinc-300 font-mono text-[11px]">
-                  Mechatronics
-                </span>
-                <span className="px-2.5 py-1 rounded-md bg-zinc-800/80 text-zinc-300 font-mono text-[11px]">
-                  CSE / AI &amp; DS / Mechanical
-                </span>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-zinc-300">
+                  <a href="tel:+918329852743" className="hover:text-red-400 transition-colors">
+                    Prathamesh Sakhare: <span className="text-white font-semibold">+91 8329852743</span>
+                  </a>
+                  <span className="text-zinc-600 hidden sm:inline">|</span>
+                  <a href="tel:+919665202509" className="hover:text-red-400 transition-colors">
+                    Aryan Vaidya: <span className="text-white font-semibold">+91 9665202509</span>
+                  </a>
+                </div>
               </div>
             </div>
 
-            {/* Right Column: Poster Image Preview + Compact Mobile / Full Desktop Register Button */}
+            {/* Right Column: Poster Preview + Direct Registration Button (Crimson Theme) */}
             <div className="lg:col-span-5 flex flex-col items-center w-full">
-              <div className="w-full max-w-sm lg:max-w-md bg-zinc-950/90 border-2 border-zinc-800 hover:border-amber-500/50 rounded-2xl p-3 sm:p-4 shadow-xl transition-all duration-300 group">
-                <div className="relative rounded-xl overflow-hidden mb-3 bg-zinc-900 aspect-[16/10] sm:aspect-[4/3] lg:aspect-[3/4] max-h-[220px] sm:max-h-[320px] lg:max-h-[420px] flex items-center justify-center">
+              <div className="w-full max-w-sm lg:max-w-md bg-zinc-950/90 border border-zinc-800 hover:border-[#A51C30]/60 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-xl transition-all duration-300 group">
+                <div className="relative rounded-lg sm:rounded-xl overflow-hidden mb-2.5 sm:mb-3 bg-zinc-900 aspect-[3/4] max-h-[220px] sm:max-h-[340px] lg:max-h-[420px] flex items-center justify-center">
                   <picture className="w-full h-full">
                     <source type="image/webp" srcSet="./workshop-poster.webp" />
                     <img
                       src="./workshop-poster.jpg"
                       alt="Industrial Manipulator Design Workshop Poster"
-                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                     />
                   </picture>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute bottom-2 left-2 sm:bottom-3 sm:left-3 right-2 sm:right-3 text-left">
-                    <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-wider uppercase px-2 py-0.5 sm:px-2.5 sm:py-1 rounded bg-amber-500 text-black shadow">
-                      Turn Ideas into Real Systems
+                  <div className="absolute bottom-2 left-2 right-2 text-left">
+                    <span
+                      className="text-[9px] font-mono font-bold tracking-wider uppercase px-2 py-0.5 rounded text-white shadow"
+                      style={{ background: "#A51C30" }}
+                    >
+                      Official Workshop Poster
                     </span>
                   </div>
                 </div>
 
-                {/* Direct Registration Button (Sleek and compact on mobile) */}
+                {/* Direct Registration Button styled in IEEE Crimson gradient */}
                 <a
                   href={formUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 sm:gap-3 px-4 py-2.5 sm:py-3.5 lg:py-4 rounded-xl font-mono font-black text-xs sm:text-sm uppercase tracking-wider sm:tracking-widest text-zinc-950 shadow-lg sm:shadow-2xl transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] group cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:py-3.5 rounded-lg sm:rounded-xl font-mono font-bold text-xs sm:text-sm uppercase tracking-wider text-white shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] group cursor-pointer"
                   style={{
-                    background:
-                      "linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)",
-                    boxShadow: "0 8px 24px rgba(245, 158, 11, 0.35)",
+                    background: "linear-gradient(135deg, #A51C30 0%, #801020 100%)",
+                    boxShadow: "0 8px 25px rgba(165, 28, 48, 0.4)",
                   }}
                 >
                   <span>REGISTER FOR WORKSHOP</span>
-                  <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
 
-                <p className="text-[10px] sm:text-[11px] font-mono text-center text-zinc-400 mt-2">
-                  ⚡ Official Registration via Google Forms
+                <p className="text-[9px] sm:text-[11px] font-mono text-center text-zinc-400 mt-1.5 sm:mt-2">
+                  ⚡ Official Registration via Google Forms · Open to all students
                 </p>
               </div>
             </div>
-          </div>
-
-          {/* Highlights Mini Grid Bottom */}
-          <div className="mt-10 pt-8 border-t border-zinc-800/80 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-            {highlights.map((h, i) => {
-              const Icon = h.icon;
-              return (
-                <div
-                  key={i}
-                  className="bg-zinc-950/50 border border-zinc-800/60 rounded-xl p-3 flex flex-col justify-between"
-                >
-                  <Icon className="w-5 h-5 text-amber-400 mb-2" />
-                  <div className="text-[11px] font-bold text-zinc-200 uppercase leading-snug">
-                    {h.title}
-                  </div>
-                </div>
-              );
-            })}
           </div>
         </div>
       </div>

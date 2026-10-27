@@ -3,8 +3,8 @@ export const callForChairsConfig = {
   title: "Call for Chairs",
   organization: "IEEE Student Branch, ADYPU",
   badge: "LEADERSHIP CALL 2026",
-  deadlineISO: "2026-10-27T23:59:59+05:30",
-  deadlineFormatted: "27 October 2026",
+  deadlineISO: "2026-11-05T23:59:59+05:30",
+  deadlineFormatted: "5 November 2026",
   deadlineTime: "11:59 PM IST",
   eligibilityShort: "IEEE members only",
   eligibilityNotice:
