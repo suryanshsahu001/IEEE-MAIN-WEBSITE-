@@ -78,7 +78,24 @@ export const chapters = [
   },
 ];
 
-export const events = [];
+export const events = [
+  {
+    id: "industrial-manipulator-workshop-2026",
+    title: "2-Day Hands-on Workshop on Industrial Manipulator Design",
+    category: "Technical Workshop",
+    date: "3rd & 4th November 2026",
+    status: "upcoming",
+    image: "./workshop-poster.jpg",
+    description:
+      "A 2-day immersive hands-on technical workshop covering CAD Design, Kinematics Simulation, and Hardware Assembly. Design it. Simulate it. Build it. Make it move.",
+    speaker: "IEEE SB ADYPU",
+    speakerTitle: "School of Engineering & IEEE Maharashtra Section",
+    venue: "Computer Lab-201, ULC1, ADYPU",
+    capacity: "Limited Seats · First-Come First-Served",
+    registrationOpen: true,
+    registrationUrl: "https://forms.gle/LfyyuNGA7iBc9aL36",
+  },
+];
 
 export const gallery = [
   {

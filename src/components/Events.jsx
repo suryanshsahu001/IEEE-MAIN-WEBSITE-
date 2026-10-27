@@ -108,11 +108,12 @@ export default function Events() {
                       </div>
                       {event.registrationOpen && (
                         <a
-                          href="https://docs.google.com/forms/d/e/1FAIpQLScLbWDK-yv6k8avB69VknoTwUq7y2hUxL5unjteCaASlu4aMw/viewform"
+                          href={event.registrationUrl || "https://forms.gle/LfyyuNGA7iBc9aL36"}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-xs font-mono font-bold tracking-widest uppercase whitespace-nowrap hover:underline"
-                          style={{ color: "#A51C30" }}
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-1 text-xs font-mono font-bold tracking-widest uppercase whitespace-nowrap hover:underline px-3 py-1.5 rounded-lg text-white"
+                          style={{ background: "#A51C30" }}
                         >
                           Register <ArrowUpRight className="w-3.5 h-3.5" />
                         </a>
@@ -175,10 +176,11 @@ export default function Events() {
               </p>
               {selectedEvent.registrationOpen && (
                 <a
-                  href="https://docs.google.com/forms/d/e/1FAIpQLScLbWDK-yv6k8avB69VknoTwUq7y2hUxL5unjteCaASlu4aMw/viewform"
+                  href={selectedEvent.registrationUrl || "https://forms.gle/LfyyuNGA7iBc9aL36"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-zinc-900 text-white font-mono font-bold text-sm tracking-widest uppercase shadow-md hover:bg-zinc-800 transition-colors"
+                  className="inline-flex items-center gap-2 px-8 py-4 text-white font-mono font-bold text-sm tracking-widest uppercase shadow-md transition-colors"
+                  style={{ background: "#A51C30" }}
                 >
                   Register Now <ArrowUpRight className="w-4 h-4" />
                 </a>
