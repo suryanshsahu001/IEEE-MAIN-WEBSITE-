@@ -24,7 +24,6 @@ export default function Navbar({ onOpenChapters }) {
   const navLinks = [
     { name: 'HOME', href: '#home' },
     { name: 'WORKSHOP', href: '#workshop' },
-    { name: 'CALL FOR CHAIRS', href: '#call-for-chairs' },
     { name: 'ABOUT', href: '#about' },
     { name: 'EVENTS', href: '#events' },
     { name: 'GALLERY', href: '#gallery' },
@@ -128,17 +127,6 @@ export default function Navbar({ onOpenChapters }) {
               
               {moreMenuOpen && (
                 <div className="absolute top-full right-0 mt-0 w-56 bg-white border border-zinc-200 shadow-xl py-2 animate-fadeIn z-50">
-                  <button 
-                    onClick={() => {
-                      setMoreMenuOpen(false);
-                      if (window.dispatchEvent) {
-                        window.dispatchEvent(new CustomEvent('open-call-for-chairs'));
-                      }
-                    }}
-                    className="w-full text-left block px-4 py-2 text-[11px] font-mono font-bold tracking-[0.18em] text-zinc-600 hover:text-[#A51C30] hover:bg-zinc-50 transition-colors"
-                  >
-                    CALL FOR CHAIRS
-                  </button>
                   <a 
                     href="https://forms.gle/VKpRn85RU4tz7vsc8" 
                     target="_blank" 
@@ -192,18 +180,6 @@ export default function Navbar({ onOpenChapters }) {
 
             {/* MORE section */}
             <p className="text-[9px] font-mono font-bold tracking-[0.2em] text-zinc-400 uppercase pt-4 pb-1">More</p>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                if (window.dispatchEvent) {
-                  window.dispatchEvent(new CustomEvent('open-call-for-chairs'));
-                }
-              }}
-              className="w-full flex items-center justify-between py-3 border-b border-zinc-100 text-[11px] font-mono font-bold tracking-[0.18em] text-zinc-600 hover:text-zinc-900 transition-colors"
-            >
-              CALL FOR CHAIRS
-              <span style={{ color: '#A51C30' }}>→</span>
-            </button>
             <a
               href="https://forms.gle/VKpRn85RU4tz7vsc8"
               target="_blank"
