@@ -85,7 +85,7 @@ export const events = [
     category: "Technical Workshop",
     date: "3rd & 4th November 2026",
     status: "upcoming",
-    image: "./workshop-poster.jpg",
+    image: "./workshop-thumbnail.jpg",
     description:
       "A 2-day immersive hands-on technical workshop covering CAD Design, Kinematics Simulation, and Hardware Assembly. Design it. Simulate it. Build it. Make it move.",
     speaker: "IEEE SB ADYPU",
