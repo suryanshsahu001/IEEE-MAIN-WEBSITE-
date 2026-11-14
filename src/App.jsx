@@ -36,8 +36,8 @@ export default function App() {
       <Navbar onOpenChapters={() => setChaptersOpen(true)} />
       <main>
         <Hero onOpenVideo={openVideo} />
-        <WorkshopSection />
         <CallForChairsCard onExplore={() => setCallForChairsOpen(true)} />
+        <WorkshopSection />
         <About />
         <Highlights onOpenVideo={openVideo} />
         <Events />

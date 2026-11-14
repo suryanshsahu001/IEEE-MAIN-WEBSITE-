@@ -74,9 +74,9 @@ export default function WorkshopSection() {
                 HANDS-ON WORKSHOP
               </span>
 
-              <span className="inline-flex items-center gap-1 text-[9px] sm:text-[11px] font-mono font-bold tracking-wider uppercase px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-rose-300 bg-rose-500/10 border border-rose-500/25">
-                <Flame className="w-3 h-3 text-rose-400" />
-                LIMITED SEATS
+              <span className="inline-flex items-center gap-1 text-[9px] sm:text-[11px] font-mono font-bold tracking-wider uppercase px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-zinc-300 bg-zinc-800/80 border border-zinc-700">
+                <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                WORKSHOP CONCLUDED
               </span>
 
               <span className="text-[10px] sm:text-[11px] font-mono text-zinc-400 uppercase tracking-wider hidden md:inline-block">
@@ -218,23 +218,16 @@ export default function WorkshopSection() {
                   </div>
                 </div>
 
-                {/* Direct Registration Button styled in IEEE Crimson gradient */}
-                <a
-                  href={formUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:py-3.5 rounded-lg sm:rounded-xl font-mono font-bold text-xs sm:text-sm uppercase tracking-wider text-white shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] group cursor-pointer"
-                  style={{
-                    background: "linear-gradient(135deg, #A51C30 0%, #801020 100%)",
-                    boxShadow: "0 8px 25px rgba(165, 28, 48, 0.4)",
-                  }}
+                {/* Registration Status Indicator (Concluded) */}
+                <div
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:py-3.5 rounded-lg sm:rounded-xl font-mono font-bold text-xs sm:text-sm uppercase tracking-wider text-zinc-300 bg-zinc-800/80 border border-zinc-700/80 cursor-default"
                 >
-                  <span>REGISTER FOR WORKSHOP</span>
-                  <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <span>REGISTRATION CONCLUDED</span>
+                </div>
 
                 <p className="text-[9px] sm:text-[11px] font-mono text-center text-zinc-400 mt-1.5 sm:mt-2">
-                  ⚡ Official Registration via Google Forms · Open to all students
+                  Event concluded on 3rd & 4th November 2026
                 </p>
               </div>
             </div>
