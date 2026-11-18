@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Signal Run – IEEE Student Branch</title>
+<style>
+:root{--bg:#eef3f7;--card:#fff;--ink:#0b2a40;--mute:#52697a;--sig:#00629b;--noise:#d9480f;--grid:#dde7ee;--line:#9fb5c4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1822;--card:#102433;--ink:#e6f1f8;--mute:#8fa7b8;--sig:#4db3ea;--noise:#ff8a4c;--grid:#17303f;--line:#2f5166}}
+:root[data-theme="dark"]{--bg:#0a1822;--card:#102433;--ink:#e6f1f8;--mute:#8fa7b8;--sig:#4db3ea;--noise:#ff8a4c;--grid:#17303f;--line:#2f5166}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;display:grid;place-items:center;padding:16px}
+main{width:100%;max-width:720px;background:var(--card);border:2px solid var(--sig);border-radius:10px;padding:20px}
+h1{margin:0 0 4px;font-size:1.6rem;letter-spacing:-.01em}
+p{margin:0}
+.sub{color:var(--mute);margin-bottom:14px;max-width:60ch}
+canvas{display:block;width:100%;aspect-ratio:640/220;border-radius:6px;border:1px solid var(--line);outline-offset:3px;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+canvas:focus-visible{outline:3px solid var(--sig)}
+.row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:12px;font-size:.9rem;color:var(--mute)}
+#fact{margin-top:12px;min-height:3em;font-size:.95rem}
+</style>
+</head>
+<body>
+<main>
+  <h1>Signal Run</h1>
+  <p class="sub">You are a clean signal. Jump over noise spikes, duck under interference, and keep the transmission alive.</p>
+  <canvas id="c" tabindex="0" role="img" aria-label="Signal Run game. Press Space to jump, Down arrow to duck."></canvas>
+  <div class="row"><span>Click the game, then press Space or ↑ to jump, ↓ to duck</span><span>On phones: tap to jump, hold the lower area to duck</span></div>
+  <p id="fact" aria-live="polite">IEEE fact: you will see one here after each run.</p>
+</main>
+<script>
+(function(){
+var cv=document.getElementById('c'),cx=cv.getContext('2d'),factEl=document.getElementById('fact');
+var W=640,H=220,G=176,PX=64;
+var FACTS=[
+"IEEE was formed in 1963 by merging the AIEE and the IRE.",
+"IEEE 802.11 is the standard family behind Wi‑Fi.",
+"IEEE 802.3 defines Ethernet, the wired backbone of most networks.",
+"IEEE 754 defines how computers store floating-point numbers.",
+"IEEE is the world’s largest technical professional organization.",
+"IEEE Xplore is the digital library for IEEE research papers and standards."
+];
+var C={},best=0,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+try{best=+localStorage.getItem('signalRunBest')||0}catch(e){}
+function css(){var s=getComputedStyle(document.documentElement);['bg','ink','mute','sig','noise','grid','line'].forEach(function(n){C[n]=s.getPropertyValue('--'+n).trim()})}
+var s={mode:'idle',y:0,vy:0,duck:false,obs:[],speed:260,score:0,next:0,off:0,fi:0};
+function fit(){var d=Math.min(devicePixelRatio||1,2),w=cv.clientWidth||W;cv.width=w*d;cv.height=w*H/W*d;cx.setTransform(cv.width/W,0,0,cv.width/W,0,0);css();draw()}
+function reset(){s.y=0;s.vy=0;s.duck=false;s.obs=[];s.speed=260;s.score=0;s.next=260}
+function jump(){if(s.y===0)s.vy=760}
+function spawn(){
+  var fly=s.score>150&&Math.random()<.3;
+  if(fly)s.obs.push({x:W+20,t:'f',w:34,h:14});
+  else{var n=1+(Math.random()*3|0),h=24+(Math.random()*14|0);s.obs.push({x:W+20,t:'s',n:n,w:n*14,h:h})}
+  s.next=300+Math.random()*220+s.speed*.25;
+}
+function step(dt){
+  s.speed=Math.min(620,260+s.score*.35);
+  s.score+=s.speed*dt/10;
+  s.off=(s.off+s.speed*dt)%32;
+  if(s.y>0||s.vy>0){s.vy-=(s.duck?4800:2400)*dt;s.y+=s.vy*dt;if(s.y<=0){s.y=0;s.vy=0}}
+  s.next-=s.speed*dt;if(s.next<=0)spawn();
+  var h=s.duck&&s.y===0?14:26,p={x:PX+3,y:G-s.y-h+3,w:20,h:h-6};
+  for(var i=s.obs.length-1;i>=0;i--){
+    var o=s.obs[i];o.x-=s.speed*dt;
+    if(o.x<-60){s.obs.splice(i,1);continue}
+    var r=o.t==='f'?{x:o.x,y:G-40,w:o.w,h:o.h}:{x:o.x+4,y:G-o.h+4,w:o.w-8,h:o.h-4};
+    if(p.x<r.x+r.w&&p.x+p.w>r.x&&p.y<r.y+r.h&&p.y+p.h>r.y){end();return}
+  }
+}
+function end(){
+  s.mode='over';
+  var sc=Math.floor(s.score);
+  if(sc>best){best=sc;try{localStorage.setItem('signalRunBest',best)}catch(e){}}
+  factEl.textContent='IEEE fact: '+FACTS[s.fi++%FACTS.length];
+  cancelAnimationFrame(raf);draw();
+}
+var raf=0,last=0;
+function loop(t){
+  var dt=Math.min(.033,(t-last)/1000);last=t;
+  step(dt);
+  if(s.mode==='play'){draw();raf=requestAnimationFrame(loop)}
+}
+function run(){s.mode='play';last=performance.now();raf=requestAnimationFrame(loop)}
+function pause(){if(s.mode==='play'){s.mode='paused';cancelAnimationFrame(raf);draw()}}
+function act(){
+  if(s.mode==='idle'||s.mode==='over'){reset();run()}
+  else if(s.mode==='paused')run();
+  else jump();
+}
+function txt(t,x,y,size,col,al){cx.fillStyle=col;cx.font='600 '+size+'px system-ui,sans-serif';cx.textAlign=al||'center';cx.fillText(t,x,y)}
+function draw(){
+  cx.fillStyle=C.bg;cx.fillRect(0,0,W,H);
+  cx.strokeStyle=C.grid;cx.lineWidth=1;cx.beginPath();
+  for(var x=-s.off;x<W;x+=32){cx.moveTo(x,0);cx.lineTo(x,H)}
+  for(var y=G%32;y<H;y+=32){cx.moveTo(0,y);cx.lineTo(W,y)}
+  cx.stroke();
+  cx.strokeStyle=C.line;cx.lineWidth=2;cx.beginPath();cx.moveTo(0,G);cx.lineTo(W,G);cx.stroke();
+  s.obs.forEach(function(o){
+    cx.strokeStyle=cx.fillStyle=C.noise;cx.lineWidth=3;cx.lineJoin='round';
+    if(o.t==='s'){for(var i=0;i<o.n;i++){var bx=o.x+i*14;cx.beginPath();cx.moveTo(bx,G);cx.lineTo(bx+7,G-o.h);cx.lineTo(bx+14,G);cx.closePath();cx.fill()}}
+    else{cx.beginPath();cx.moveTo(o.x,G-26);for(var j=0;j<4;j++){cx.lineTo(o.x+j*8.5+4,G-40+(j%2?14:0));cx.lineTo(o.x+(j+1)*8.5,G-26-(j%2?0:0))}cx.stroke()}
+  });
+  var h=s.duck&&s.y===0?14:26,py=G-s.y-h;
+  if(s.mode==='play'&&!reduce){for(var k=1;k<=3;k++){cx.globalAlpha=.18/k;cx.fillStyle=C.sig;cx.beginPath();cx.ellipse(PX+13-k*10,py+h/2,13,h/2,0,0,7);cx.fill()}cx.globalAlpha=1}
+  cx.fillStyle=C.sig;cx.beginPath();cx.ellipse(PX+13,py+h/2,13,h/2,0,0,7);cx.fill();
+  cx.fillStyle='#fff';cx.fillRect(PX+8,py+h/2-1.5,10,3);
+  txt(String(Math.floor(s.score)).padStart(5,'0'),W-14,26,18,C.ink,'right');
+  txt('Best '+String(best).padStart(5,'0'),14,26,14,C.mute,'left');
+  if(s.mode==='idle')msg('Ready to transmit','Press Space or tap to start');
+  if(s.mode==='over')msg('Signal lost','Press Space or tap to retry');
+  if(s.mode==='paused')msg('Paused','Press Space or tap to resume');
+}
+function msg(a,b){cx.globalAlpha=.88;cx.fillStyle=C.bg;cx.fillRect(W/2-170,70,340,70);cx.globalAlpha=1;txt(a,W/2,100,22,C.ink);txt(b,W/2,126,15,C.mute)}
+cv.addEventListener('keydown',function(e){
+  var k=e.key;
+  if(k===' '||k==='ArrowUp'||k==='w'){e.preventDefault();if(!e.repeat)act()}
+  else if(k==='ArrowDown'||k==='s'){e.preventDefault();s.duck=true}
+});
+cv.addEventListener('keyup',function(e){if(e.key==='ArrowDown'||e.key==='s')s.duck=false});
+cv.addEventListener('blur',function(){s.duck=false;pause()});
+cv.addEventListener('pointerdown',function(e){
+  cv.focus();
+  var low=(e.offsetY/cv.clientHeight)>.62;
+  if(s.mode==='play'&&low)s.duck=true;else act();
+});
+['pointerup','pointercancel','pointerleave'].forEach(function(n){cv.addEventListener(n,function(){s.duck=false})});
+document.addEventListener('visibilitychange',function(){if(document.hidden)pause()});
+if('IntersectionObserver' in window)new IntersectionObserver(function(en){if(!en[0].isIntersecting)pause()}).observe(cv);
+addEventListener('resize',fit);
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){css();draw()});
+fit();
+})();
+</script>
+</body>
+</html>

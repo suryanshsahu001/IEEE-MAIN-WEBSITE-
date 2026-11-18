@@ -137,20 +137,31 @@ export default function CallForChairsCard({ onExplore }) {
     >
       {/* ── Animated colour orbs ── */}
       <div
-        className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none opacity-40"
-        style={{ background: "radial-gradient(circle, #A51C30 0%, transparent 70%)", animation: "cfc-orb-move-1 12s ease-in-out infinite" }}
+        className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full blur-[100px] pointer-events-none opacity-35"
+        style={{
+          background: "radial-gradient(circle, #A51C30 0%, transparent 70%)",
+          transform: "translate3d(0, 0, 0)",
+          willChange: "transform",
+          animation: "cfc-orb-move-1 14s ease-in-out infinite",
+        }}
       />
       <div
-        className="absolute bottom-[-15%] right-[-5%] w-[450px] h-[450px] rounded-full blur-[100px] pointer-events-none opacity-30"
-        style={{ background: "radial-gradient(circle, #e11d48 0%, transparent 70%)", animation: "cfc-orb-move-2 10s ease-in-out infinite" }}
+        className="absolute bottom-[-15%] right-[-5%] w-[450px] h-[450px] rounded-full blur-[90px] pointer-events-none opacity-25"
+        style={{
+          background: "radial-gradient(circle, #e11d48 0%, transparent 70%)",
+          transform: "translate3d(0, 0, 0)",
+          willChange: "transform",
+          animation: "cfc-orb-move-2 12s ease-in-out infinite",
+        }}
       />
       <div
-        className="absolute top-[30%] right-[20%] w-[350px] h-[350px] rounded-full blur-[90px] pointer-events-none opacity-20"
-        style={{ background: "radial-gradient(circle, #7c3aed 0%, transparent 70%)", animation: "cfc-orb-move-3 14s ease-in-out infinite" }}
-      />
-      <div
-        className="absolute bottom-[20%] left-[15%] w-[300px] h-[300px] rounded-full blur-[80px] pointer-events-none opacity-15"
-        style={{ background: "radial-gradient(circle, #db2777 0%, transparent 70%)", animation: "cfc-orb-move-2 11s 2s ease-in-out infinite" }}
+        className="absolute top-[30%] right-[20%] w-[320px] h-[320px] rounded-full blur-[80px] pointer-events-none opacity-15"
+        style={{
+          background: "radial-gradient(circle, #7c3aed 0%, transparent 70%)",
+          transform: "translate3d(0, 0, 0)",
+          willChange: "transform",
+          animation: "cfc-orb-move-3 16s ease-in-out infinite",
+        }}
       />
 
       {/* ── Decorative animated lines ── */}

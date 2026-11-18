@@ -16,6 +16,8 @@ const VideoModal = lazy(() => import("./components/VideoModal.jsx"));
 const Chapters = lazy(() => import("./components/Chapters.jsx"));
 const CallForChairsModal = lazy(() => import("./components/CallForChairsModal.jsx"));
 import CallForChairsCard from "./components/CallForChairsCard.jsx";
+import IeeeQuiz from "./components/IeeeQuiz.jsx";
+import GameArena from "./components/GameArena.jsx";
 
 export default function App() {
   const [video, setVideo] = useState(null);
@@ -46,6 +48,8 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <IeeeQuiz />
+      <GameArena />
       <Suspense fallback={null}>
         <VideoModal video={video} onClose={() => setVideo(null)} />
         {chaptersOpen && <Chapters onClose={() => setChaptersOpen(false)} />}
