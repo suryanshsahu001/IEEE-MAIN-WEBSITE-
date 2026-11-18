@@ -130,8 +130,10 @@ export default function IeeeQuiz() {
         className="ieeq-fab"
         onClick={openQuiz}
         aria-haspopup="dialog"
+        aria-label="Quick quiz"
       >
-        &#9889; Quick quiz
+        <span className="ieeq-icon">&#9889;</span>
+        <span className="ieeq-text">Quick quiz</span>
       </button>
 
       {open && (

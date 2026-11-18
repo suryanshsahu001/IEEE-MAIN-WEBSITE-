@@ -49,7 +49,8 @@ export default function GameArena() {
         aria-haspopup="dialog"
         aria-label="Open Game Arena"
       >
-        <span>🎮</span> Game Arena
+        <span className="game-arena-icon">🎮</span>
+        <span className="game-arena-text">Game Arena</span>
       </button>
 
       {/* Modal Popup with dynamic iframe loading */}

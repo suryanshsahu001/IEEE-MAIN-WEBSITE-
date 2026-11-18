@@ -138,8 +138,18 @@
   .game-arena-btn {
     left: 14px;
     bottom: 14px;
-    padding: 10px 14px;
-    font-size: 0.85rem;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  .game-arena-text {
+    display: none;
+  }
+  .game-arena-icon {
+    font-size: 1.25rem;
+    line-height: 1;
   }
   .game-arena-iframe-wrapper {
     height: min(440px, 70vh);
