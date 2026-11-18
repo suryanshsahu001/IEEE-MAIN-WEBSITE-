@@ -3,16 +3,17 @@ export const callForChairsConfig = {
   title: "Call for Chairs",
   organization: "IEEE Student Branch, ADYPU",
   badge: "LEADERSHIP CALL 2026",
-  deadlineISO: "2026-11-16T23:59:59+05:30",
-  deadlineFormatted: "16 November 2026",
+  deadlineISO: "2026-11-20T23:59:59+05:30",
+  deadlineFormatted: "20 November 2026",
   deadlineTime: "11:59 PM IST",
   eligibilityShort: "IEEE members only",
   eligibilityNotice:
     "This opportunity is exclusively for students with a valid IEEE membership. Applicants without an active membership are not eligible to apply.",
   cardDescription:
     "Step forward to lead, innovate, and contribute to the growth of the IEEE Student Branch at ADYPU. Explore leadership opportunities, understand the available roles, and submit your application before the deadline.",
-  recruitmentFormUrl: "https://forms.gle/VKpRn85RU4tz7vsc8",
-  callForChairsFormUrl: "https://forms.gle/VKpRn85RU4tz7vsc8", // configurable URL
+  posterImage: "./call-for-chairs-poster.jpg",
+  recruitmentFormUrl: "https://forms.gle/Nb2Pk9gUQRqSA8WE6",
+  callForChairsFormUrl: "https://forms.gle/Nb2Pk9gUQRqSA8WE6", // configurable URL
   // Power Automate HTTP Webhook URL:
   powerAutomateWebhookUrl: "https://defaultd1b4b416ddaa4673832736e1d6b764.0a.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/18/workflows/8660ed713fb24f1e83a6fd6cbc05a175/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ZHu5Z9i6bw4Ykm4EgjPl5aQDkS-CNq6UIP99eLOFmHc",
 };

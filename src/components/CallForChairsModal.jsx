@@ -64,8 +64,7 @@ export default function CallForChairsModal({
 
   const handleApplyClick = (position) => {
     setSelectedRole(position);
-    setFormError("");
-    setApplicationModalOpen(true);
+    window.open(callForChairsConfig.recruitmentFormUrl, "_blank", "noopener,noreferrer");
   };
 
   const handleApplicationSubmit = async (e) => {
@@ -822,19 +821,21 @@ export default function CallForChairsModal({
                 href={callForChairsConfig.recruitmentFormUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 rounded-xl font-mono font-bold text-xs uppercase tracking-wider bg-zinc-800 text-zinc-200 hover:text-white hover:bg-zinc-700 transition-colors"
+                className="px-6 py-3 rounded-xl font-mono font-bold text-xs uppercase tracking-wider bg-zinc-800 text-zinc-200 hover:text-white hover:bg-zinc-700 transition-colors inline-flex items-center gap-2"
               >
-                1. Open Recruitment Form
+                <span>1. Open Recruitment Form</span>
+                <ExternalLink className="w-3.5 h-3.5" />
               </a>
-              <button
-                onClick={() =>
-                  handleApplyClick(selectedRole || mainExecutivePositions[0])
-                }
-                className="px-6 py-3 rounded-xl font-mono font-bold text-xs uppercase tracking-wider text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
+              <a
+                href={callForChairsConfig.recruitmentFormUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 rounded-xl font-mono font-bold text-xs uppercase tracking-wider text-white shadow-lg transition-transform hover:scale-105 active:scale-95 inline-flex items-center gap-2"
                 style={{ background: "#A51C30" }}
               >
-                2. Continue to Apply for {selectedRole?.title || "Leadership"}
-              </button>
+                <span>2. Continue to Apply for {selectedRole?.title || "Positions"}</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
         </div>

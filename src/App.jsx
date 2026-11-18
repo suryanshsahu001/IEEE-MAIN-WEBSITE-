@@ -37,7 +37,6 @@ export default function App() {
       <main>
         <Hero onOpenVideo={openVideo} />
         <CallForChairsCard onExplore={() => setCallForChairsOpen(true)} />
-        <WorkshopSection />
         <About />
         <Highlights onOpenVideo={openVideo} />
         <Events />
